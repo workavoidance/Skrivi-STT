@@ -12,9 +12,9 @@ Free code signing provided by SignPath.io, certificate by SignPath Foundation.
 ## Project
 
 - **Project:** Skrivi
-- **Repository:** <https://github.com/workavoidance/Skrivi>
+- **Repository:** <https://github.com/workavoidance/Skrivi-STT>
 - **Licence:** [MIT](LICENSE)
-- **Official releases:** <https://github.com/workavoidance/Skrivi/releases>
+- **Official releases:** <https://github.com/workavoidance/Skrivi-STT/releases>
 
 Skrivi's application source, build scripts, installer definition, and GitHub
 Actions workflows are maintained in the public repository. Third-party

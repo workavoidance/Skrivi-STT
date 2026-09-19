@@ -33,12 +33,12 @@ bilingual website download. The remaining Phase 6 reliability checks and Phase
 7 manual accessibility checks remain deferred and unchecked below.
 
 The manual high-DPI, high-contrast, multi-display, and screen-reader checks for
-issue [#8](https://github.com/workavoidance/Skrivi/issues/8) are intentionally
+issue [#8](https://github.com/workavoidance/Skrivi-STT/issues/8) are intentionally
 deferred while issue #6 is built. They remain required in
 [`UI_TEST_CHECKLIST.md`](UI_TEST_CHECKLIST.md) and do not block development.
 
 The v0.2 tracking issue is
-[#10](https://github.com/workavoidance/Skrivi/issues/10).
+[#10](https://github.com/workavoidance/Skrivi-STT/issues/10).
 
 ## Completed foundation
 
@@ -64,7 +64,7 @@ The v0.2 tracking issue is
 
 ## Phase 1: fast development and preview loop
 
-Tracked by [#11](https://github.com/workavoidance/Skrivi/issues/11).
+Tracked by [#11](https://github.com/workavoidance/Skrivi-STT/issues/11).
 
 - [x] Create a focused GitHub issue with acceptance criteria for the development
   workflow.
@@ -84,7 +84,7 @@ Tracked by [#11](https://github.com/workavoidance/Skrivi/issues/11).
 
 ## Phase 2: versioned settings foundation
 
-Tracked by [#5](https://github.com/workavoidance/Skrivi/issues/5).
+Tracked by [#5](https://github.com/workavoidance/Skrivi-STT/issues/5).
 
 - [x] Define a UI-independent settings model with a schema version.
 - [x] Store settings in the appropriate per-user Windows application-data
@@ -100,8 +100,8 @@ Tracked by [#5](https://github.com/workavoidance/Skrivi/issues/5).
 
 ## Phase 3: accessible settings interface
 
-Tracked by [#9](https://github.com/workavoidance/Skrivi/issues/9) and
-[#8](https://github.com/workavoidance/Skrivi/issues/8).
+Tracked by [#9](https://github.com/workavoidance/Skrivi-STT/issues/9) and
+[#8](https://github.com/workavoidance/Skrivi-STT/issues/8).
 
 - [x] Add the PySide6 system tray and settings window without changing the
   proven dictation pipeline.
@@ -114,7 +114,7 @@ Tracked by [#9](https://github.com/workavoidance/Skrivi/issues/9) and
 
 ## Phase 4: live language, microphone, and hotkey configuration
 
-Tracked by [#6](https://github.com/workavoidance/Skrivi/issues/6).
+Tracked by [#6](https://github.com/workavoidance/Skrivi-STT/issues/6).
 
 - [x] Offer Automatic, Norwegian, and English language modes, with Automatic
   restricted to those two languages.
@@ -128,7 +128,7 @@ Tracked by [#6](https://github.com/workavoidance/Skrivi/issues/6).
 
 ## Phase 5: local model manager
 
-Tracked by [#7](https://github.com/workavoidance/Skrivi/issues/7).
+Tracked by [#7](https://github.com/workavoidance/Skrivi-STT/issues/7).
 
 - [x] Ship a local model catalogue containing identifiers, download sizes, CPU
   guidance, and checksums.
@@ -146,7 +146,7 @@ Tracked by [#7](https://github.com/workavoidance/Skrivi/issues/7).
 
 ## Phase 6: reliability and privacy hardening
 
-Tracked by [#4](https://github.com/workavoidance/Skrivi/issues/4).
+Tracked by [#4](https://github.com/workavoidance/Skrivi-STT/issues/4).
 
 - [x] Handle microphone removal and default-device changes.
 - [x] Add cancellation and an accidental long-recording limit.
@@ -177,10 +177,10 @@ Tracked by [#4](https://github.com/workavoidance/Skrivi/issues/4).
 ## Phase 8: v0.2 release candidate
 
 - [ ] Complete every acceptance criterion in tracking issue
-  [#10](https://github.com/workavoidance/Skrivi/issues/10).
+  [#10](https://github.com/workavoidance/Skrivi-STT/issues/10).
 - [x] Complete the Bragi-to-Skrivi application, executable, package, storage,
   model-manifest, website, documentation, and repository rename tracked by
-  [#25](https://github.com/workavoidance/Skrivi/issues/25).
+  [#25](https://github.com/workavoidance/Skrivi-STT/issues/25).
 - [x] Build a conventional per-user Windows installer that needs no
   administrator rights and preserves settings and downloaded models.
 - [x] Add Start menu and uninstall entries, with an optional desktop shortcut.
