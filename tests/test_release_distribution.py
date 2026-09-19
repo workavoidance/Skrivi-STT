@@ -31,7 +31,9 @@ def test_alpha_version_is_consistent_across_package_and_installer() -> None:
 
 
 def test_website_offers_the_accepted_store_release_and_current_installer() -> None:
-    website = (ROOT / "website" / "index.html").read_text(encoding="utf-8")
+    website = (ROOT / "website" / "dictation" / "index.html").read_text(
+        encoding="utf-8"
+    )
     testing = (ROOT / "website" / "alpha" / "index.html").read_text(encoding="utf-8")
 
     assert website.count(PUBLIC_INSTALLER_URL) == 2

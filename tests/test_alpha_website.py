@@ -6,7 +6,6 @@ ROOT = Path(__file__).resolve().parents[1]
 ALPHA_ROOT = ROOT / "website" / "alpha"
 ALPHA_PAGE = ALPHA_ROOT / "index.html"
 ALPHA_SCRIPT = ALPHA_ROOT / "alpha.js"
-MAIN_SCRIPT = ROOT / "website" / "script.js"
 
 
 def test_alpha_page_has_current_install_feedback_and_school_paths() -> None:
@@ -16,7 +15,7 @@ def test_alpha_page_has_current_install_feedback_and_school_paths() -> None:
     assert "apps.microsoft.com/detail/9P42NBXD8W36" in page
     assert "cid=skrivi-website-testing" in page
     assert 'href="../feedback/"' in page
-    assert 'href="../#schools"' in page
+    assert 'href="../schools/#dictation"' in page
     assert "SCHOOL_EXPLAINER_NB.md" in page
     assert "SCHOOL_EXPLAINER.md" in page
 
@@ -55,13 +54,13 @@ def test_alpha_guide_includes_stable_visual_settings_walkthrough() -> None:
 
 
 def test_main_site_links_to_alpha_guide() -> None:
-    script = MAIN_SCRIPT.read_text(encoding="utf-8")
     page = (ROOT / "website" / "index.html").read_text(encoding="utf-8")
+    help_page = (ROOT / "website" / "help" / "index.html").read_text(encoding="utf-8")
 
-    assert "alpha/" in script
-    assert "Test Skrivi" in script
+    assert "help/" in page
+    assert "../alpha/#install" in help_page
     assert "Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe" in page
     assert "apps.microsoft.com/detail/9P42NBXD8W36" in page
     assert "cid=skrivi-website-home" in page
-    assert "Installer fra Microsoft Store" in page
-    assert "Get it from Microsoft Store" in page
+    assert "Installer Diktering fra Microsoft Store" in page
+    assert "Get Dictation from Microsoft Store" in page
