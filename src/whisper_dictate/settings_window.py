@@ -69,11 +69,15 @@ INTERFACE_LANGUAGE_CHOICES = (
     ("Norwegian Bokmål", InterfaceLanguage.NORWEGIAN_BOKMAL),
 )
 
-PRIVACY_URL = "https://github.com/workavoidance/Skrivi/blob/main/docs/PRIVACY.md"
-PRIVACY_URL_NB = "https://github.com/workavoidance/Skrivi/blob/main/docs/PRIVACY_NB.md"
-SOURCE_URL = "https://github.com/workavoidance/Skrivi"
+PRIVACY_URL = "https://github.com/workavoidance/Skrivi-STT/blob/main/docs/PRIVACY.md"
+PRIVACY_URL_NB = (
+    "https://github.com/workavoidance/Skrivi-STT/blob/main/docs/PRIVACY_NB.md"
+)
+SOURCE_URL = "https://github.com/workavoidance/Skrivi-STT"
 WEBSITE_URL = "https://skrivi.no/"
-NOTICES_URL = "https://github.com/workavoidance/Skrivi/blob/main/THIRD_PARTY_NOTICES.md"
+NOTICES_URL = (
+    "https://github.com/workavoidance/Skrivi-STT/blob/main/THIRD_PARTY_NOTICES.md"
+)
 
 
 def _set_ui_role(widget: QWidget, role: str) -> QWidget:

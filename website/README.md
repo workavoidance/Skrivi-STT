@@ -8,11 +8,13 @@ This folder contains the public Skrivi website at https://skrivi.no.
 - `/dictation/`: Skrivi Diktering / Skrivi Dictation, the existing Windows app.
   Its Store listing and installed name remain Skrivi. Downloads, release notes
   and technical details belong here.
-- `/read-aloud/`: Skrivi Opplesing / Skrivi Read Aloud, in development. No public
-  download, supported voice/language list or release date is promised yet.
+- `/read-aloud/`: Skrivi Opplesing / Skrivi Read Aloud, a separate Windows x64 reader.
+  Links to the full 0.2.1 setup executable in `workavoidance/Skrivi-TTS`, not the
+  update-only ZIP or Dictation installer. Installed name: Skrivi TTS.
 - `/schools/`: shared principles, current Dictation documents and a clearly
-  labelled planned Read Aloud data flow. Existing documents cover Dictation only.
-- `/help/`: app-specific help routes and development status.
+  labelled Read Aloud data flow and its own technical documentation. The existing
+  bilingual school pack covers Dictation only; Read Aloud's technical docs are English.
+- `/help/`: app-specific installation, feedback and release-note links.
 - `/alpha/` and `/feedback/`: existing Dictation guides and feedback, kept at
   their original URLs. The home anchors `#download`, `#how`, `#schools` and
   `#technical` still lead to relevant content.
@@ -22,9 +24,10 @@ English choice in internal links as `?lang=en`, including anchors. It also
 switches document destinations, titles, descriptions and accessible labels.
 No cookies or browser storage are used for language selection.
 
-When Read Aloud ships, give it its own Store ID, installer, release notes,
-help guide, campaign IDs and reviewed privacy/data-flow documents. Do not reuse
-Dictation downloads or imply its technical documentation covers both apps.
+Read Aloud has no Microsoft Store listing yet. Keep its download, source and
+feedback links separate from Dictation. The EXE bundles the published 0.2.1 app,
+engines and voices; no cloud service or background update check is introduced.
+Verify the exact release asset before updating version-pinned download links.
 
 It is intentionally a simple static site: plain HTML, CSS and a small language-switching script. There is no framework, build step, database, analytics package, account system or external font dependency.
 

@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TAG = "v0.2.0-alpha.4"
 INSTALLER = f"Skrivi-{TAG}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
-    f"https://github.com/workavoidance/Skrivi/releases/download/{TAG}/{INSTALLER}"
+    f"https://github.com/workavoidance/Skrivi-STT/releases/download/{TAG}/{INSTALLER}"
 )
 STORE_URL = "https://apps.microsoft.com/detail/9P42NBXD8W36"
 
@@ -44,9 +44,7 @@ def test_website_offers_the_accepted_store_release_and_current_installer() -> No
 
 def test_readme_links_directly_to_current_alpha_installer() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    release_url = (
-        f"https://github.com/workavoidance/Skrivi/releases/download/{TAG}/{INSTALLER}"
-    )
+    release_url = f"https://github.com/workavoidance/Skrivi-STT/releases/download/{TAG}/{INSTALLER}"
 
     assert release_url in readme
     assert "install the standard 64-bit Python" not in readme.casefold()
