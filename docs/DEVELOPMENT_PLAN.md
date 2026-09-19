@@ -196,6 +196,41 @@ Tracked by [#4](https://github.com/workavoidance/Skrivi-STT/issues/4).
 - [ ] Update the changelog, limitations, and privacy documentation.
 - [ ] Tag and publish a clearly labelled alpha release.
 
+## Planned: Skrivi ecosystem and visual identity review
+
+Added: 2026-09-19. Planning only; implementation and release scheduling remain
+to be decided.
+
+Skrivi now also has a text-to-speech application. Review the speech-to-text
+application's identity and presentation so dictation feels like a natural
+part of the same Skrivi ecosystem, while users can easily distinguish speaking
+to write from listening to text.
+
+- [ ] Compare the current STT and TTS applications side by side and identify
+  shared visual conventions worth adopting.
+- [ ] Explore a clearly recognisable microphone icon for the local dictation
+  application, complementing the TTS application's speaker icon. Retain the
+  existing orange colours and coordinate shape, stroke weight, and proportions.
+- [ ] Review the executable, desktop shortcut, Start menu, taskbar, tray, and
+  installer icons as one consistent set. Check legibility at small sizes,
+  high DPI, and in light, dark, and high-contrast environments.
+- [ ] Review product names, window titles, tray tooltips, and short descriptions
+  so the shared Skrivi identity and each application's purpose are clear.
+  Consider plain-language dictation/read-aloud labels in English and Norwegian
+  rather than relying only on STT/TTS abbreviations.
+- [ ] Review settings layout, typography, spacing, buttons, status indicators,
+  and terminology for a coherent family appearance. Preserve accessible native
+  Windows behaviour and distinguish recording from speech playback without
+  relying on colour alone.
+- [ ] Review About/help text, first-run guidance, website/download descriptions,
+  and screenshots so they explain where dictation fits in the ecosystem and
+  help users find the companion application.
+- [ ] Review coexistence when both applications are installed: recognisable
+  tray entries, clear shortcut guidance, and avoidance of hotkey conflicts.
+- [ ] Record the agreed shared conventions and application-specific differences
+  in the brand guidelines before implementation. Preserve the existing local,
+  private dictation workflow and users' settings and downloaded models.
+
 ## Later credibility gates
 
 These are recorded now so current decisions do not undermine them. They are not
