@@ -3,34 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Hjelp oss å teste Skrivi. En enkel guide til installasjon, utprøving og tilbakemelding for tidlige testfamilier.">
+  <meta name="description" content="Hjelp oss å teste Skrivi. En enkel guide til installasjon, utprøving og tilbakemelding for tidlige testfamilier." data-description-nb="Hjelp oss å teste Skrivi. En enkel guide til installasjon, utprøving og tilbakemelding for tidlige testfamilier." data-description-en="A guide to installing, trying and giving feedback on Skrivi Dictation.">
   <meta name="theme-color" content="#faf7f2">
-  <title>Test Skrivi — alpha</title>
+  <title  data-nb="Test Skrivi Diktering — alpha" data-en="Test Skrivi Dictation — alpha">Test Skrivi Diktering — alpha</title>
   <link rel="icon" href="../assets/skrivi-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="alpha.css">
   <script src="alpha.js" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="../" aria-label="Skrivi">
-      <img class="wordmark" src="../assets/skrivi-wordmark.svg" alt="">
-    </a>
-    <nav class="header-actions" aria-label="Hovedmeny" data-aria-nb="Hovedmeny" data-aria-en="Main navigation">
-      <a href="../#schools" data-nb="For skoler" data-en="For schools">For skoler</a>
-      <a href="../feedback/" data-nb="Tilbakemelding" data-en="Feedback">Tilbakemelding</a>
-      <button class="language-switch" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
-    </nav>
-  </header>
+<a href="#main" class="skip-link" data-nb="Hopp til innhold" data-en="Skip to content">Hopp til innhold</a>
+<header class="site-header">
+<a class="brand" href="../" aria-label="Skrivi"><img class="wordmark" src="../assets/skrivi-wordmark.svg" alt=""></a>
+<nav class="header-actions" aria-label="Hovedmeny" data-aria-nb="Hovedmeny" data-aria-en="Main navigation">
+<a href="../dictation/" data-nb="Diktering" data-en="Dictation">Diktering</a>
+<a href="../read-aloud/" data-nb="Opplesing" data-en="Read aloud">Opplesing</a>
+<a href="../schools/" data-nb="For skoler" data-en="For schools">For skoler</a>
+<a href="../help/" data-nb="Hjelp" data-en="Help">Hjelp</a>
+<button class="language-switch" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
+</nav></header>
 
-  <main id="top">
+  <main id="main">
     <section class="alpha-hero section-shell">
-      <div class="eyebrow" data-nb="Alpha-testing" data-en="Alpha testing">Alpha-testing</div>
+      <div class="eyebrow" data-nb="Skrivi Diktering · alpha-testing" data-en="Skrivi Dictation · alpha testing">Skrivi Diktering · alpha-testing</div>
       <h1 data-nb="Hjelp oss å finne ut om Skrivi faktisk er bedre." data-en="Help us find out whether Skrivi is actually better.">Hjelp oss å finne ut om Skrivi faktisk er bedre.</h1>
       <p class="hero-copy" data-nb="Skrivi er et lite, gratis tale-til-tekst-verktøy laget for å få egne ord raskt ned på siden. Nå trenger vi noen få familier som vil prøve det i virkeligheten og fortelle oss hva som fungerer, og hva som ikke gjør det." data-en="Skrivi is a small, free speech-to-text tool designed to get your own words onto the page quickly. We now need a small number of families willing to try it in real life and tell us what works, and what does not.">Skrivi er et lite, gratis tale-til-tekst-verktøy laget for å få egne ord raskt ned på siden. Nå trenger vi noen få familier som vil prøve det i virkeligheten og fortelle oss hva som fungerer, og hva som ikke gjør det.</p>
       <div class="hero-actions">
-        <a class="button button-primary" href="https://apps.microsoft.com/detail/9P42NBXD8W36?cid=skrivi-website-testing" data-nb="Installer fra Microsoft Store" data-en="Get it from Microsoft Store">Installer fra Microsoft Store</a>
-        <a class="button button-secondary" href="https://github.com/workavoidance/Skrivi/releases/download/v0.2.0-alpha.4/Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe" data-nb="Last ned Windows-installasjon" data-en="Download Windows installer">Last ned Windows-installasjon</a>
+        <a class="button button-primary" href="https://apps.microsoft.com/detail/9P42NBXD8W36?cid=skrivi-website-testing" data-nb="Installer Diktering fra Microsoft Store" data-en="Get Dictation from Microsoft Store">Installer Diktering fra Microsoft Store</a>
+        <a class="button button-secondary" href="https://github.com/workavoidance/Skrivi/releases/download/v0.2.0-alpha.4/Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe" data-nb="Last ned Diktering for Windows" data-en="Download Dictation for Windows">Last ned Diktering for Windows</a>
         <a class="hero-text-link" href="#install" data-nb="Se installasjonsguiden ↓" data-en="See the install guide ↓">Se installasjonsguiden ↓</a>
       </div>
       <div class="alpha-status">
@@ -196,7 +197,7 @@
           <p data-nb="Hovedsiden forklarer lokal behandling, personvern, åpen kildekode og hva Skrivi gjør og ikke gjør. Vi har også mer detaljert skole-, personvern-, sikkerhets- og arkitekturdokumentasjon." data-en="The main site explains local processing, privacy, open source and what Skrivi does and does not do. We also publish more detailed school, privacy, security and architecture documentation.">Hovedsiden forklarer lokal behandling, personvern, åpen kildekode og hva Skrivi gjør og ikke gjør. Vi har også mer detaljert skole-, personvern-, sikkerhets- og arkitekturdokumentasjon.</p>
         </div>
         <div class="school-actions">
-          <a class="button button-paper" href="../#schools" data-nb="Informasjon for skoler" data-en="Information for schools">Informasjon for skoler</a>
+          <a class="button button-paper" href="../schools/#dictation" data-nb="Informasjon for skoler" data-en="Information for schools">Informasjon for skoler</a>
           <a class="school-text-link" href="https://github.com/workavoidance/Skrivi/blob/main/docs/SCHOOL_EXPLAINER_NB.md" data-href-nb="https://github.com/workavoidance/Skrivi/blob/main/docs/SCHOOL_EXPLAINER_NB.md" data-href-en="https://github.com/workavoidance/Skrivi/blob/main/docs/SCHOOL_EXPLAINER.md" target="_blank" rel="noreferrer" data-nb="Åpne den detaljerte skoleforklaringen ↗" data-en="Open the detailed school explainer ↗">Åpne den detaljerte skoleforklaringen ↗</a>
         </div>
       </div>
@@ -218,15 +219,8 @@
     </section>
   </main>
 
-  <footer class="site-footer section-shell">
-    <a class="footer-brand" href="../" aria-label="Skrivi">
-      <img class="wordmark" src="../assets/skrivi-wordmark.svg" alt="">
-    </a>
-    <div class="footer-links">
-      <a href="../" data-nb="Forside" data-en="Home">Forside</a>
-      <a href="../feedback/" data-nb="Tilbakemelding" data-en="Feedback">Tilbakemelding</a>
-      <a href="https://github.com/workavoidance/Skrivi" target="_blank" rel="noreferrer">GitHub</a>
-    </div>
-  </footer>
+<footer class="site-footer section-shell">
+<a class="footer-brand" href="../" aria-label="Skrivi"><img class="wordmark" src="../assets/skrivi-wordmark.svg" alt=""></a>
+<div class="footer-links"><a href="../help/" data-nb="Hjelp" data-en="Help">Hjelp</a><a href="../schools/" data-nb="For skoler" data-en="For schools">For skoler</a><a href="../feedback/" data-nb="Tilbakemelding" data-en="Feedback">Tilbakemelding</a><a href="https://github.com/workavoidance/Skrivi">GitHub</a></div></footer>
 </body>
 </html>

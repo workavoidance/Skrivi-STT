@@ -12,7 +12,7 @@ def test_website_wordmark_uses_one_vector_asset() -> None:
         encoding="utf-8"
     )
 
-    wordmark = '<img class="wordmark" src="assets/skrivi-wordmark.svg" alt="">'
+    wordmark = '<img class="wordmark" src="./assets/skrivi-wordmark.svg" alt="">'
     assert html.count(wordmark) == 2
     assert ".wordmark::before" not in css
     assert ".wordmark::after" not in css

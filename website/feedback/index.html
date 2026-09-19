@@ -3,29 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Gi tilbakemelding på Skrivi: rapporter feil, transkripsjonsproblemer eller foreslå forbedringer.">
+  <meta name="description" content="Gi tilbakemelding på Skrivi: rapporter feil, transkripsjonsproblemer eller foreslå forbedringer." data-description-nb="Gi tilbakemelding på Skrivi: rapporter feil, transkripsjonsproblemer eller foreslå forbedringer." data-description-en="Give feedback on Skrivi Dictation: report bugs, transcription problems or suggest improvements.">
   <meta name="theme-color" content="#faf7f2">
-  <title>Skrivi — tilbakemelding</title>
+  <title  data-nb="Skrivi Diktering — tilbakemelding" data-en="Skrivi Dictation — feedback">Skrivi Diktering — tilbakemelding</title>
   <link rel="icon" href="../assets/skrivi-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="feedback.css">
-  <script src="feedback.js" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="../" aria-label="Skrivi">
-      <img class="wordmark" src="../assets/skrivi-wordmark.svg" alt="">
-    </a>
-    <nav class="header-actions" aria-label="Hovedmeny" data-aria-nb="Hovedmeny" data-aria-en="Main navigation">
-      <a href="../" data-nb="Forsiden" data-en="Home">Forsiden</a>
-      <a href="../#schools" data-nb="For skoler" data-en="For schools">For skoler</a>
-      <button class="language-switch" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
-    </nav>
-  </header>
+<a href="#main" class="skip-link" data-nb="Hopp til innhold" data-en="Skip to content">Hopp til innhold</a>
+<header class="site-header">
+<a class="brand" href="../" aria-label="Skrivi"><img class="wordmark" src="../assets/skrivi-wordmark.svg" alt=""></a>
+<nav class="header-actions" aria-label="Hovedmeny" data-aria-nb="Hovedmeny" data-aria-en="Main navigation">
+<a href="../dictation/" data-nb="Diktering" data-en="Dictation">Diktering</a>
+<a href="../read-aloud/" data-nb="Opplesing" data-en="Read aloud">Opplesing</a>
+<a href="../schools/" data-nb="For skoler" data-en="For schools">For skoler</a>
+<a href="../help/" data-nb="Hjelp" data-en="Help">Hjelp</a>
+<button class="language-switch" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
+</nav></header>
 
-  <main>
+  <main id="main">
     <section class="feedback-hero section-shell">
-      <p class="kicker" data-nb="Tilbakemelding" data-en="Feedback">Tilbakemelding</p>
+      <p class="kicker" data-nb="Skrivi Diktering · tilbakemelding" data-en="Skrivi Dictation · feedback">Skrivi Diktering · tilbakemelding</p>
       <h1 data-nb="Hjelp oss å gjøre Skrivi bedre." data-en="Help us make Skrivi better.">Hjelp oss å gjøre Skrivi bedre.</h1>
       <p class="feedback-lede" data-nb="Fant du en feil, ble transkripsjonen feil, eller har du en idé? Velg det som passer best. Tilbakemeldingen håndteres på GitHub og er adskilt fra selve Skrivi-appen." data-en="Found a bug, got a poor transcription, or have an idea? Choose the option that fits best. Feedback is handled on GitHub and is separate from the Skrivi app itself.">Fant du en feil, ble transkripsjonen feil, eller har du en idé? Velg det som passer best. Tilbakemeldingen håndteres på GitHub og er adskilt fra selve Skrivi-appen.</p>
     </section>
@@ -86,14 +86,8 @@
     </section>
   </main>
 
-  <footer class="site-footer section-shell">
-    <a class="footer-brand" href="../" aria-label="Skrivi">
-      <img class="wordmark" src="../assets/skrivi-wordmark.svg" alt="">
-    </a>
-    <div class="footer-links">
-      <a href="../" data-nb="Forsiden" data-en="Home">Forsiden</a>
-      <a href="https://github.com/workavoidance/Skrivi" target="_blank" rel="noreferrer">GitHub</a>
-    </div>
-  </footer>
+<footer class="site-footer section-shell">
+<a class="footer-brand" href="../" aria-label="Skrivi"><img class="wordmark" src="../assets/skrivi-wordmark.svg" alt=""></a>
+<div class="footer-links"><a href="../help/" data-nb="Hjelp" data-en="Help">Hjelp</a><a href="../schools/" data-nb="For skoler" data-en="For schools">For skoler</a><a href="../feedback/" data-nb="Tilbakemelding" data-en="Feedback">Tilbakemelding</a><a href="https://github.com/workavoidance/Skrivi">GitHub</a></div></footer>
 </body>
 </html>
