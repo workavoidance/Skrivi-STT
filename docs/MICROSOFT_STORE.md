@@ -26,6 +26,7 @@ publication.
 
 Microsoft signs the package after certification. The unsigned `.msix` is a
 maintainer submission asset, not the installer offered on the public website.
+Do not publish the unsigned package as a normal PC installation download.
 Use the signed `.exe` to try the GitHub test release on a PC. The Store version
 advances independently of GitHub publication and may still be older.
 
