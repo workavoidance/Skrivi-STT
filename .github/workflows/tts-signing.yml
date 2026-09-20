@@ -1,13 +1,18 @@
 name: Sign Skrivi TTS using existing Certum publisher
 on:
   workflow_dispatch:
+    inputs:
+      source_ref:
+        description: TTS source commit to build
+        required: true
+        default: 26e38f8fb5fee035866d18110017750cc5089523
 permissions:
   contents: read
 jobs:
   tts:
-    uses: workavoidance/Skrivi-TTS/.github/workflows/signed-release.yml@dd4721c17ec253b6dfcf8c3a86fa675bc03a6a92
+    uses: workavoidance/Skrivi-TTS/.github/workflows/signed-release.yml@26e38f8fb5fee035866d18110017750cc5089523
     with:
-      source_ref: dd4721c17ec253b6dfcf8c3a86fa675bc03a6a92
+      source_ref: ${{ inputs.source_ref }}
     secrets:
       CERTUM_USERNAME: ${{ secrets.CERTUM_USERNAME }}
       CERTUM_OTP_URI: ${{ secrets.CERTUM_OTP_URI }}
