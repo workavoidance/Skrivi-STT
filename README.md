@@ -1,8 +1,7 @@
 # Skrivi Snakk
 
 Development source includes the [shared Skrivi interface](docs/SHARED_UX.md), with
-a dictation practice window and reorganized Settings. These changes are awaiting
-the next signed release; the 0.3.0 downloads below retain their released interface.
+a dictation practice window and reorganized Settings. These changes are included in the signed 0.3.2 test release below.
 
 Part of the [Skrivi](https://skrivi.no/) family, alongside
 [Skrivi Lytt](https://github.com/workavoidance/Skrivi-TTS) for listening to text.
@@ -13,8 +12,8 @@ When using both, keep **Right Ctrl** or **Left Ctrl + Windows** for dictation.
 Lytt defaults to **Ctrl + Alt + Space**; avoid **Left Ctrl + Left Alt** for
 dictation because it overlaps the reader shortcut.
 
-**Release status:** Snakk 0.3.0 is a signed **test release**, alongside
-[Lytt 0.4.1](https://github.com/workavoidance/Skrivi-TTS/releases/tag/v0.4.1).
+**Release status:** Snakk 0.3.2 is a signed **test release**, alongside
+[Lytt 0.4.3](https://github.com/workavoidance/Skrivi-TTS/releases/tag/v0.4.3).
 The apps have independent version numbers and share the same release convention.
 The existing Store listing may still show an older version named **Skrivi**.
 Settings, models, executable filenames and Store identity are unchanged.
@@ -69,7 +68,7 @@ any additional rewriting or filler-word removal.
 
 ## Install Skrivi Snakk
 
-1. [Download the Skrivi Snakk 0.3.0 signed test installer for Windows 11](https://github.com/workavoidance/Skrivi-STT/releases/download/v0.3.0/Skrivi-v0.3.0-windows-x64-setup.exe).
+1. [Download the Skrivi Snakk 0.3.2 signed test installer for Windows 11](https://github.com/workavoidance/Skrivi-STT/releases/download/v0.3.2/Skrivi-Snakk-0.3.2-windows-x64-setup.exe).
 2. Open the downloaded installer. Its verified publisher is **Open Source Developer
    Jonathan Wright**. Windows may still show a SmartScreen reputation warning.
 3. Complete the short installer and start **Skrivi Snakk** from the Start menu.
@@ -86,7 +85,7 @@ connection and no speech is sent to a cloud service.
 
 The installer needs no administrator permission and provides standard Start
 menu and uninstall entries. Advanced users can instead download the portable
-ZIP from the [release page](https://github.com/workavoidance/Skrivi-STT/releases/tag/v0.3.0)
+ZIP from the [release page](https://github.com/workavoidance/Skrivi-STT/releases/tag/v0.3.2)
 or follow [the development guide](docs/DEVELOPMENT.md) to run from source.
 
 ## Build the portable executable

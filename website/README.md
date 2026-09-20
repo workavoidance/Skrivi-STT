@@ -6,10 +6,10 @@ This folder contains the public Skrivi website at https://skrivi.no.
 
 - `/`: shared brand and two-app chooser.
 - `/dictation/`: Skrivi Snakk, the existing speech-to-text Windows app.
-  The 0.3.0 installer uses Skrivi Snakk; the live Store listing may still be older. Downloads, release notes
+  The 0.3.2 installer uses Skrivi Snakk; the live Store listing may still be older. Downloads, release notes
   and technical details belong here.
 - `/read-aloud/`: Skrivi Lytt, a separate text-to-speech Windows x64 reader.
-  Links to the full 0.4.1 setup executable in `workavoidance/Skrivi-TTS`, not the
+  Links to the full 0.4.3 setup executable in `workavoidance/Skrivi-TTS`, not the
   update-only ZIP or Snakk installer. Installed name: Skrivi Lytt.
 - `/schools/`: shared principles, current Snakk documents and a clearly
   labelled Lytt data flow and its own technical documentation. The existing
@@ -29,10 +29,10 @@ translate their explanations, not their names. Existing routes, repository names
 installer filenames and installed-app identities remain unchanged. Both products
 use Test release (testutgave), independent version numbers and signed GitHub
 installers. Store submission packages are for the maintainer; publication there
-is a separate process. Lytt 0.4.1 includes local screen-region OCR.
+is a separate process. Lytt 0.4.3 includes local screen-region OCR.
 
 Lytt has no Microsoft Store listing yet. Keep its download, source and
-feedback links separate from Snakk. The EXE bundles the published 0.4.1 app,
+feedback links separate from Snakk. The EXE bundles the published 0.4.3 app,
 engines and voices; no cloud service or background update check is introduced.
 Verify the exact release asset before updating version-pinned download links.
 
