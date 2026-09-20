@@ -78,7 +78,8 @@ def test_product_names_are_consistent_in_both_languages() -> None:
             assert old_name not in text, (path, old_name)
         for name in ("Snakk", "Lytt"):
             assert any(
-                tag == "a" and attrs.get("data-nb") == name
+                tag == "a"
+                and attrs.get("data-nb") == name
                 and attrs.get("data-en") == name
                 for tag, attrs in page.elements
             ), (path, name)
