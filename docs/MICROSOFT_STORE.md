@@ -12,19 +12,22 @@ Setup installer and portable archive remain the primary GitHub release assets.
 A failure or delay in Store packaging or certification must not block their
 publication.
 
-## First submission
+## Submit the current test release
 
 1. Let the release workflow build the unsigned `.msix` artifact.
-2. Download the `Skrivi-<version>-Microsoft-Store` artifact from the workflow
-   run.
+2. Download `Skrivi-v0.3.0-windows-x64.msix` and its `.sha256` from the
+   [0.3.0 release](https://github.com/workavoidance/Skrivi-STT/releases/tag/v0.3.0).
+   The `Skrivi-<version>-Microsoft-Store` workflow artifact is also available.
 3. In Partner Center, open Skrivi Snakk and start an MSIX submission.
 4. Complete pricing, availability, properties, age ratings, Store listings and
    submission options.
-5. Upload the `.msix` from the workflow artifact and submit it for
+5. Upload the `.msix` and submit it for
    certification.
 
-Microsoft signs the package after certification. Do not publish the unsigned
-workflow artifact as a direct download: it is intended only for Partner Center.
+Microsoft signs the package after certification. The unsigned `.msix` is a
+maintainer submission asset, not the installer offered on the public website.
+Use the signed `.exe` to try the GitHub test release on a PC. The Store version
+advances independently of GitHub publication and may still be older.
 
 Before each public submission, verify microphone capture, global push-to-talk,
 text insertion, model download, settings persistence and automatic startup from
