@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TAG = "v0.3.0"
-SITE_TAG = "v0.2.0-alpha.4"
+SITE_TAG = "v0.3.0"
 INSTALLER = f"Skrivi-{TAG}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
     f"https://github.com/workavoidance/Skrivi-STT/releases/download/{SITE_TAG}/"
