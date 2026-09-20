@@ -68,3 +68,21 @@ def test_read_aloud_links_to_full_setup_not_store_or_update_zip() -> None:
     assert "ikke kodesignert" in page
     assert "Ctrl + Alt + Space" in page
     assert "https://github.com/workavoidance/Skrivi-TTS/issues" in page
+
+
+def test_product_names_are_consistent_in_both_languages() -> None:
+    for path in ROOT.rglob("*.html"):
+        page = Page(path)
+        text = path.read_text(encoding="utf-8")
+        for old_name in ("Diktering", "Opplesing", "Dictation", "Read Aloud"):
+            assert old_name not in text, (path, old_name)
+        for name in ("Snakk", "Lytt"):
+            assert any(
+                tag == "a"
+                and attrs.get("data-nb") == name
+                and attrs.get("data-en") == name
+                for tag, attrs in page.elements
+            ), (path, name)
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    for name in ("Skrivi Snakk", "Skrivi Lytt"):
+        assert f'data-nb="{name}" data-en="{name}"' in home

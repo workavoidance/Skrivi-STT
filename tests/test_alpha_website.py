@@ -62,5 +62,5 @@ def test_main_site_links_to_alpha_guide() -> None:
     assert "Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe" in page
     assert "apps.microsoft.com/detail/9P42NBXD8W36" in page
     assert "cid=skrivi-website-home" in page
-    assert "Installer Diktering fra Microsoft Store" in page
-    assert "Get Dictation from Microsoft Store" in page
+    assert "Installer Snakk fra Microsoft Store" in page
+    assert "Get Snakk from Microsoft Store" in page
