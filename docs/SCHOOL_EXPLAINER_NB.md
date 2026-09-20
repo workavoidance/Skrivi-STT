@@ -2,6 +2,10 @@
 
 **Språk:** Norsk | [English](SCHOOL_EXPLAINER.md)
 
+Start med [Skrivi for skoler: Snakk og Lytt](SCHOOL_GUIDE_NB.md) for felles
+introduksjon og vurderingsskjema for begge appene. Dette eldre, Snakk-spesifikke
+drøftingsdokumentet er et tillegg, ikke et eget godkjenningsløp.
+
 > **Utkast til samtale med skoler.** Skrivi Snakk er foreløpig alfa-programvare.
 > Dette dokumentet forklarer den tiltenkte utformingen og bruken som et
 > tilgjengelighetsverktøy. Det hevder ikke at Skrivi Snakk er formelt godkjent av
