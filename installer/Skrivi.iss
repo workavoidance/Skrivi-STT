@@ -5,6 +5,10 @@
 #define MyProjectRoot GetEnv("SKRIVI_PROJECT_ROOT")
 
 [Setup]
+#ifdef SignedBuild
+SignTool=skrivi
+SignedUninstaller=yes
+#endif
 AppId={{B17E37FA-9342-4B72-96C4-76F57498A44E}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}

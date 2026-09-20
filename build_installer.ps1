@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.2.0-alpha.4",
+    [string]$Version = "0.3.0",
     [string]$BuildId = "",
     [string]$SigningThumbprint = "",
     [switch]$Development
@@ -92,7 +92,16 @@ $env:SKRIVI_INSTALLER_SOURCE = $ApplicationDir
 $env:SKRIVI_INSTALLER_OUTPUT = $InstallerOutput
 $env:SKRIVI_PROJECT_ROOT = $PSScriptRoot
 
-& $InnoCompiler "installer\Skrivi.iss"
+$InnoArgs = @()
+if ($SigningThumbprint) {
+    if ($SigningThumbprint -notmatch '^[0-9a-fA-F]{40}$') { throw 'Invalid signing certificate thumbprint.' }
+    $SdkSignTool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\signtool.exe" |
+        Sort-Object FullName -Descending | Select-Object -First 1
+    if (-not $SdkSignTool) { throw 'Windows SDK SignTool was not found.' }
+    $SignCommand = '$q' + $SdkSignTool.FullName + '$q sign /sha1 ' + $SigningThumbprint + ' /fd SHA256 /tr http://time.certum.pl /td SHA256 $f'
+    $InnoArgs = @('/DSignedBuild=1', "/Sskrivi=$SignCommand")
+}
+& $InnoCompiler @InnoArgs "installer\Skrivi.iss"
 if ($LASTEXITCODE -ne 0) { throw "The installer build failed." }
 
 $OutputName = "Skrivi-$Version-windows-x64-setup.exe"

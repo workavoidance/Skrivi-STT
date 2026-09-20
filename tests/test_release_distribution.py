@@ -4,10 +4,12 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = "v0.2.0-alpha.4"
+TAG = "v0.3.0"
+SITE_TAG = "v0.2.0-alpha.4"
 INSTALLER = f"Skrivi-{TAG}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
-    f"https://github.com/workavoidance/Skrivi-STT/releases/download/{TAG}/{INSTALLER}"
+    f"https://github.com/workavoidance/Skrivi-STT/releases/download/{SITE_TAG}/"
+    f"Skrivi-{SITE_TAG}-windows-x64-setup.exe"
 )
 STORE_URL = "https://apps.microsoft.com/detail/9P42NBXD8W36"
 
@@ -22,12 +24,10 @@ def test_alpha_version_is_consistent_across_package_and_installer() -> None:
         encoding="utf-8"
     )
 
-    assert project["project"]["version"] == "0.2.0a4"
-    assert '__version__ = "0.2.0a4"' in package
-    assert '[string]$Version = "0.2.0-alpha.4"' in installer
-    assert '-Version "0.2.0-alpha.4-pr.${{ github.event.pull_request.number }}"' in (
-        preview
-    )
+    assert project["project"]["version"] == "0.3.0"
+    assert '__version__ = "0.3.0"' in package
+    assert '[string]$Version = "0.3.0"' in installer
+    assert '-Version "0.3.0-pr.${{ github.event.pull_request.number }}"' in (preview)
 
 
 def test_website_offers_the_accepted_store_release_and_current_installer() -> None:
@@ -63,7 +63,9 @@ def test_tagged_release_uses_curated_notes_and_marks_alpha_as_prerelease() -> No
     assert '$ErrorActionPreference = "SilentlyContinue"' in workflow
     assert '".github/workflows/release.yml"' not in workflow
     assert notes.is_file()
-    assert "not code-signed" in notes.read_text(encoding="utf-8")
+    assert "signed" in notes.read_text(encoding="utf-8")
+    assert '$tag.StartsWith("v0.")' in workflow
+    assert "publish-store-package:" in workflow
 
 
 def test_release_version_file_matches_the_public_download() -> None:
