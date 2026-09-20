@@ -18,6 +18,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   build:
@@ -210,3 +211,15 @@ jobs:
           "$hash *$($package.Name)" | Set-Content "$($package.FullName).sha256"
           & gh release upload $tag $package.FullName "$($package.FullName).sha256"
           if ($LASTEXITCODE -ne 0) { throw "Store package upload failed." }
+
+  submit-to-microsoft-store:
+    needs: [build, store-package, publish-store-package]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.publish)
+    uses: ./.github/workflows/store-submit.yml
+    with:
+      submit: true
+    secrets:
+      AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
+      AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
+      AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      SELLER_ID: ${{ secrets.SELLER_ID }}

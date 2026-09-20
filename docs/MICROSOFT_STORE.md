@@ -45,3 +45,33 @@ secrets and must never be committed to this repository.
 The public Store page will use:
 
 `https://apps.microsoft.com/detail/9P42NBXD8W36`
+
+## Automated updates
+
+The `Microsoft Store submission` workflow uses these repository Actions secrets:
+`AZURE_AD_TENANT_ID`, `AZURE_AD_APPLICATION_CLIENT_ID`,
+`AZURE_AD_APPLICATION_SECRET`, and `SELLER_ID`. The Entra application must have
+Manager (Windows) access in Partner Center. Save the secret expiry date and
+replace the GitHub secret before it expires. Never include keys in screenshots.
+
+Run `Microsoft Store submission` manually to check authentication, package
+identity and whether a published or pending submission exists. This manual run
+is read-only. It checks that SELLER_ID is present; it does not independently
+validate that value with the MSIX API.
+
+After a publishing run of `Windows release` succeeds, the reusable workflow
+submits that run's MSIX for certification using Microsoft's CLI. Non-publishing
+builds do not submit. Only main can submit. Store submissions are serialized,
+and Store failures do not retract the signed GitHub release.
+
+The first submission must be completed in Partner Center. Automatic updates
+require a published submission and stop if there is any pending draft or review,
+because the CLI would otherwise replace a draft. Resolve existing submissions in
+Partner Center before the next release. The CLI preserves the previously
+published listing and delivery settings; certification and final publication
+remain controlled by Microsoft and those settings. A successful upload does not
+mean certification has finished.
+
+References:
+- https://learn.microsoft.com/en-us/windows/apps/publish/msstore-dev-cli/github-actions
+- https://learn.microsoft.com/en-us/windows/apps/publish/msstore-dev-cli/commands
