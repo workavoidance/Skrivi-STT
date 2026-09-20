@@ -1,0 +1,48 @@
+name: Certum signing test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [test/certum-signing]
+    paths: [.github/workflows/certum-signing-test.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  sign-test:
+    if: github.repository == 'workavoidance/Skrivi-STT' && (github.ref == 'refs/heads/test/certum-signing' || github.ref == 'refs/heads/main')
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Compile harmless signing probe
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          'public class SigningProbe { public static void Main() { System.Console.WriteLine("Skrivi signing verification only"); } }' | Set-Content probe.cs
+          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /out:SigningProbe.exe probe.cs
+          if ($LASTEXITCODE -ne 0) { throw 'Probe compilation failed.' }
+      - name: Connect to Certum cloud certificate
+        uses: dismine/windows-app-signing-setup-action@89ae3b032d4bc7a5b98d1a42a34e61ecb6faad64
+        with:
+          certum-username: ${{ secrets.CERTUM_USERNAME }}
+          certum-otp-uri: ${{ secrets.CERTUM_OTP_URI }}
+          certum-key-id: ${{ secrets.CERTUM_KEY_ID }}
+          capture-diagnostics: 'false'
+      - name: Sign, timestamp, and verify probe
+        shell: powershell
+        env:
+          CERTUM_KEY_ID: ${{ secrets.CERTUM_KEY_ID }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\signtool.exe" | Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $tool) { throw 'SignTool not found.' }
+          & $tool.FullName sign /sha1 $env:CERTUM_KEY_ID /fd SHA256 /tr http://time.certum.pl /td SHA256 SigningProbe.exe
+          if ($LASTEXITCODE -ne 0) { throw 'Signing failed.' }
+          & $tool.FullName verify /pa /all /v SigningProbe.exe
+          if ($LASTEXITCODE -ne 0) { throw 'Signature verification failed.' }
+          $signature = Get-AuthenticodeSignature SigningProbe.exe
+          if ($signature.Status -ne 'Valid') { throw "Signature status: $($signature.Status)" }
+          if ($signature.SignerCertificate.Thumbprint -ne $env:CERTUM_KEY_ID.Replace(' ', '')) { throw 'Unexpected signer.' }
+          if (-not $signature.TimeStamperCertificate) { throw 'Timestamp missing.' }
+          "Verified: $($signature.SignerCertificate.Subject). Timestamp present. No release published." | Out-File $env:GITHUB_STEP_SUMMARY -Append
