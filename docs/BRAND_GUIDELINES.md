@@ -3,6 +3,25 @@
 > **Status:** Active brand direction, September 2026. Skrivi is the current
 > product name. These principles should remain stable as the product develops.
 
+## Skrivi family conventions (20 September 2026)
+
+Skrivi now includes dictation (STT) and read-aloud (TTS). Keep the family wordmark
+for the umbrella brand. Product icons describe the action: an orange microphone
+for dictation and an orange speaker for read-aloud, using #F05A24, rounded ends,
+transparent backgrounds and a comparable visual weight.
+
+Use “Skrivi · Dictation” / “Skrivi · Diktering” in the dictation interface.
+Windows installation labels use “Skrivi Dictation”; persistent IDs, paths and
+Skrivi.exe stay stable for upgrades. The companion is Skrivi TTS / read-aloud.
+Keep the shared warm surfaces, rounded cards, spacing, typography and orange
+accents already used by both apps. Windows accessibility colours take precedence.
+Recording and playback must have text labels, not colour-only meanings.
+
+Dictation is hold-to-talk; read-aloud is a start/stop action. Recommend Right Ctrl
+or Left Ctrl + Windows alongside the reader's Ctrl + Alt + Space. Do not present
+Left Ctrl + Left Alt as a suitable shared-use default. Each app retains its own
+settings, models and lifecycle; a family identity does not imply a combined app.
+
 ## 1. Brand idea
 
 Skrivi helps students get their thoughts onto the page.

@@ -1,4 +1,12 @@
-# Skrivi
+# Skrivi · Dictation
+
+The microphone in the Skrivi family: speak to write with this app, or use
+[**Skrivi TTS · Read aloud**](https://github.com/workavoidance/Skrivi-TTS)
+to listen to text. The apps share an orange visual identity and work independently.
+
+When using both, keep **Right Ctrl** or **Left Ctrl + Windows** for dictation.
+The reader defaults to **Ctrl + Alt + Space**; avoid **Left Ctrl + Left Alt**
+for dictation because it overlaps the reader shortcut.
 
 Skrivi is a private, local push-to-talk dictation app for Windows 11.
 Hold **Right Ctrl**, speak, and release the key. The complete transcription is

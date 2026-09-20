@@ -1,4 +1,4 @@
-#define MyAppName "Skrivi"
+#define MyAppName "Skrivi Dictation"
 #define MyAppVersion GetEnv("SKRIVI_INSTALLER_VERSION")
 #define MySourceDir GetEnv("SKRIVI_INSTALLER_SOURCE")
 #define MyOutputDir GetEnv("SKRIVI_INSTALLER_OUTPUT")
@@ -37,6 +37,8 @@ UsedUserAreasWarning=no
 Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional shortcuts:"; Flags: unchecked
 
 [InstallDelete]
+Type: files; Name: "{group}\Skrivi.lnk"
+Type: files; Name: "{autodesktop}\Skrivi.lnk"
 Type: filesandordirs; Name: "{app}\runtime"
 
 [Files]
@@ -47,12 +49,12 @@ Source: "{#MyProjectRoot}\CHANGELOG.md"; DestDir: "{app}\documentation"; Flags: 
 Source: "{#MyProjectRoot}\THIRD_PARTY_NOTICES.md"; DestDir: "{app}\documentation"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\Skrivi"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"
+Name: "{group}\Skrivi Dictation"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"
 Name: "{group}\Uninstall Skrivi"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\Skrivi"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{autodesktop}\Skrivi Dictation"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\Skrivi.exe"; Description: "Launch Skrivi"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Skrivi.exe"; Description: "Launch Skrivi Dictation"; Flags: nowait postinstall skipifsilent
 
 [Code]
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);

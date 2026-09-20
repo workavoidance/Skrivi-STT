@@ -18,6 +18,10 @@ class InterfaceLanguage(StrEnum):
 
 
 NORWEGIAN_BOKMAL = {
+    "Skrivi · Dictation": "Skrivi · Diktering",
+    "Explore Skrivi read-aloud": "Utforsk Skrivi høytlesing",
+    "One Skrivi family: use the microphone to dictate, and the speaker in Skrivi TTS to read text aloud. Both apps process speech locally and have separate settings. The companion link opens in your browser.": "Én Skrivi-familie: Bruk mikrofonen til å diktere og høyttaleren i Skrivi TTS til å lese tekst høyt. Begge appene behandler tale lokalt og har egne innstillinger. Lenken til den andre appen åpnes i nettleseren.",
+    "Hold Right Ctrl to dictate, or choose Left Ctrl + Windows on a laptop. Skrivi TTS uses Ctrl + Alt + Space to read selected text. Avoid Left Ctrl + Left Alt for dictation when using the reader: it overlaps its shortcut. F6 through F12 can conflict with shortcuts in other apps.": "Hold høyre Ctrl for å diktere, eller velg venstre Ctrl + Windows på en bærbar PC. Skrivi TTS bruker Ctrl + Alt + mellomrom for å lese valgt tekst. Unngå venstre Ctrl + venstre Alt for diktering når du bruker høytlesing: Snarveiene overlapper. F6 til F12 kan komme i konflikt med snarveier i andre apper.",
     "Automatic (Windows display language)": "Automatisk (Windows-språk)",
     # Language choices identify themselves in every interface language.
     "English": "English",

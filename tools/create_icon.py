@@ -1,101 +1,43 @@
+"""Generate packaged icons from the same microphone renderer as the live UI."""
+
+import sys
+from io import BytesIO
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image
+from PySide6.QtCore import QBuffer, QIODevice
+from PySide6.QtWidgets import QApplication
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "skrivi.ico"
+sys.path.insert(0, str(ROOT / "src"))
+
+from whisper_dictate.application import _skrivi_icon_pixmap  # noqa: E402
+
 STORE_ASSETS = {
-    ROOT / "store" / "assets" / "StoreLogo.png": 50,
-    ROOT / "store" / "assets" / "Square44x44Logo.png": 44,
-    ROOT / "store" / "assets" / "Square150x150Logo.png": 150,
-    ROOT
-    / "store"
-    / "assets"
-    / "Square44x44Logo.targetsize-44_altform-unplated.png": 44,
-    ROOT / "store" / "listing" / "Skrivi-300x300.png": 300,
+    "StoreLogo.png": 50,
+    "Square44x44Logo.png": 44,
+    "Square150x150Logo.png": 150,
+    "Square44x44Logo.targetsize-44_altform-unplated.png": 44,
 }
-SKRIVI_INK = "#181817"
-SKRIVI_ICON_EDGE = "#FFFDF9"
-
-
-def _rounded_line(
-    draw: ImageDraw.ImageDraw,
-    start: tuple[float, float],
-    end: tuple[float, float],
-    *,
-    width: int,
-    color: str,
-) -> None:
-    draw.line((start, end), fill=color, width=width)
-    radius = width / 2
-    for x, y in (start, end):
-        draw.ellipse(
-            (x - radius, y - radius, x + radius, y + radius),
-            fill=color,
-        )
 
 
 def main() -> None:
-    size = 1024
-    image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(image)
-
-    dot_x = size * 0.17
-    dot_y = size * 0.50
-    dot_radius = size * 0.14
-    edge_width = size * 0.045
-    draw.ellipse(
-        (
-            dot_x - dot_radius - edge_width,
-            dot_y - dot_radius - edge_width,
-            dot_x + dot_radius + edge_width,
-            dot_y + dot_radius + edge_width,
-        ),
-        fill=SKRIVI_ICON_EDGE,
-    )
-    draw.ellipse(
-        (
-            dot_x - dot_radius,
-            dot_y - dot_radius,
-            dot_x + dot_radius,
-            dot_y + dot_radius,
-        ),
-        fill=SKRIVI_INK,
-    )
-
-    lines = (
-        ((size * 0.50, size * 0.38), (size * 0.78, size * 0.17)),
-        ((size * 0.52, size * 0.50), (size * 0.94, size * 0.50)),
-        ((size * 0.50, size * 0.62), (size * 0.78, size * 0.83)),
-    )
-    width = round(size * 0.13)
-    outlined_width = width + round(edge_width * 2)
-    for start, end in lines:
-        _rounded_line(
-            draw,
-            start,
-            end,
-            width=outlined_width,
-            color=SKRIVI_ICON_EDGE,
-        )
-    for start, end in lines:
-        _rounded_line(
-            draw,
-            start,
-            end,
-            width=width,
-            color=SKRIVI_INK,
-        )
-
-    icon = image.resize((256, 256), Image.Resampling.LANCZOS)
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    icon.save(
-        OUTPUT,
-        sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (256, 256)],
-    )
-    for path, asset_size in STORE_ASSETS.items():
+    app = QApplication.instance() or QApplication([])
+    buffer = QBuffer()
+    buffer.open(QIODevice.OpenModeFlag.WriteOnly)
+    _skrivi_icon_pixmap(1024).save(buffer, "PNG")
+    image = Image.open(BytesIO(bytes(buffer.data()))).convert("RGBA")
+    output = ROOT / "assets" / "skrivi.ico"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    image.save(output, sizes=[(s, s) for s in (16, 24, 32, 48, 64, 256)])
+    for name, size in STORE_ASSETS.items():
+        path = ROOT / "store" / "assets" / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        image.resize((asset_size, asset_size), Image.Resampling.LANCZOS).save(path)
+        image.resize((size, size), Image.Resampling.LANCZOS).save(path)
+    listing = ROOT / "store" / "listing" / "Skrivi-300x300.png"
+    listing.parent.mkdir(parents=True, exist_ok=True)
+    image.resize((300, 300), Image.Resampling.LANCZOS).save(listing)
+    del app
 
 
 if __name__ == "__main__":

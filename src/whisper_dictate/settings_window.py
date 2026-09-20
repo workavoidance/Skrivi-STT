@@ -73,6 +73,18 @@ PRIVACY_URL = "https://github.com/workavoidance/Skrivi-STT/blob/main/docs/PRIVAC
 PRIVACY_URL_NB = (
     "https://github.com/workavoidance/Skrivi-STT/blob/main/docs/PRIVACY_NB.md"
 )
+COMPANION_URL = "https://github.com/workavoidance/Skrivi-TTS"
+COMPANION_TEXT = (
+    "One Skrivi family: use the microphone to dictate, and the speaker in "
+    "Skrivi TTS to read text aloud. Both apps process speech locally and have "
+    "separate settings. The companion link opens in your browser."
+)
+HOTKEY_GUIDANCE = (
+    "Hold Right Ctrl to dictate, or choose Left Ctrl + Windows on a laptop. "
+    "Skrivi TTS uses Ctrl + Alt + Space to read selected text. Avoid Left Ctrl "
+    "+ Left Alt for dictation when using the reader: it overlaps its shortcut. "
+    "F6 through F12 can conflict with shortcuts in other apps."
+)
 SOURCE_URL = "https://github.com/workavoidance/Skrivi-STT"
 WEBSITE_URL = "https://skrivi.no/"
 NOTICES_URL = (
@@ -335,7 +347,7 @@ class SettingsWindow(QDialog):
         self._settings_warning: str | None = None
         self._status_state = "starting"
         self._selected_hotkey = DEFAULT_HOTKEY
-        self.setWindowTitle(tr("Settings"))
+        self.setWindowTitle(tr("{title} Settings", title=f"Skrivi · {tr('Dictation')}"))
         self.setWindowModality(Qt.WindowModality.NonModal)
         self.setMinimumSize(640, 520)
         self.resize(760, 680)
@@ -352,7 +364,7 @@ class SettingsWindow(QDialog):
         header.setSpacing(16)
         header_copy = QVBoxLayout()
         header_copy.setSpacing(2)
-        self._product_name = _text_label("Skrivi", self, role="eyebrow")
+        self._product_name = _text_label(tr("Skrivi · Dictation"), self, role="eyebrow")
         header_copy.addWidget(self._product_name)
         self._heading = _text_label(tr("Settings"), self, role="windowTitle")
         self._heading.setAccessibleName(tr("Skrivi settings heading"))
@@ -548,11 +560,7 @@ class SettingsWindow(QDialog):
         self._hotkey_label = QLabel(f"{tr('Push-to-talk key')}:", self._dictation_card)
         setup_layout.addRow(self._hotkey_label, hotkey_row)
         self._hotkey_help = _text_label(
-            tr(
-                "Recommended for laptops: Left Ctrl + Windows. Right Ctrl and "
-                "Left Ctrl + Left Alt also work. F6 through F12 can conflict "
-                "with shortcuts in other apps."
-            ),
+            tr(HOTKEY_GUIDANCE),
             self._dictation_card,
             role="secondary",
         )
@@ -744,7 +752,9 @@ class SettingsWindow(QDialog):
         about_header.addWidget(self._about_icon, 0, Qt.AlignmentFlag.AlignTop)
         about_copy = QVBoxLayout()
         about_copy.setSpacing(3)
-        self._about_title = _text_label("Skrivi", page, role="pageTitle")
+        self._about_title = _text_label(
+            tr("Skrivi · Dictation"), page, role="pageTitle"
+        )
         about_copy.addWidget(self._about_title)
         self._about_tagline = _text_label(
             tr("Get your thoughts onto the page."), page, role="secondary"
@@ -775,6 +785,14 @@ class SettingsWindow(QDialog):
         self._about.setAccessibleName(tr("About Skrivi"))
         about_layout.addWidget(self._about)
         layout.addWidget(self._about_card)
+
+        self._companion = _text_label(tr(COMPANION_TEXT), page, role="secondary")
+        layout.addWidget(self._companion)
+        self.companion_button = QPushButton(tr("Explore Skrivi read-aloud"), page)
+        self.companion_button.clicked.connect(
+            lambda: QDesktopServices.openUrl(QUrl(COMPANION_URL))
+        )
+        layout.addWidget(self.companion_button, 0, Qt.AlignmentFlag.AlignLeft)
 
         self._links_card, links_layout = _card(page, quiet=True)
         self._links_title, self._links_description = _add_section_heading(
@@ -826,13 +844,7 @@ class SettingsWindow(QDialog):
             self._hotkey_help.setText(str(error))
             return
         self._hotkey.setText(tr(hotkey_display_name(self._selected_hotkey)))
-        self._hotkey_help.setText(
-            tr(
-                "Recommended for laptops: Left Ctrl + Windows. Right Ctrl and "
-                "Left Ctrl + Left Alt also work. F6 through F12 can conflict "
-                "with shortcuts in other apps."
-            )
-        )
+        self._hotkey_help.setText(tr(HOTKEY_GUIDANCE))
 
     def _set_startup_help(self) -> None:
         if self._startup_available:
@@ -884,7 +896,7 @@ class SettingsWindow(QDialog):
         )
 
     def retranslate_ui(self) -> None:
-        self.setWindowTitle(tr("Settings"))
+        self.setWindowTitle(tr("{title} Settings", title=f"Skrivi · {tr('Dictation')}"))
         self.setAccessibleName(tr("Skrivi settings"))
         self.setAccessibleDescription(
             tr("Configure Skrivi and review its local privacy behaviour.")
@@ -992,6 +1004,8 @@ class SettingsWindow(QDialog):
         self.privacy_details_button.setText(f"&{tr('Read full privacy details')}")
         self.privacy_details_button.setAccessibleName(tr("Open privacy documentation"))
 
+        self._product_name.setText(tr("Skrivi · Dictation"))
+        self._about_title.setText(tr("Skrivi · Dictation"))
         self._about_icon.setAccessibleName(tr("Skrivi logo"))
         self._about_tagline.setText(tr("Get your thoughts onto the page."))
         self._about_version.setAccessibleName(tr("Skrivi version"))
@@ -1003,6 +1017,8 @@ class SettingsWindow(QDialog):
             )
         )
         self._about.setAccessibleName(tr("About Skrivi"))
+        self._companion.setText(tr(COMPANION_TEXT))
+        self.companion_button.setText(tr("Explore Skrivi read-aloud"))
         self._links_title.setText(tr("Learn more"))
         self._links_description.setText(tr("Open documentation in your web browser."))
         self.website_button.setText(f"&{tr('Website')}")
