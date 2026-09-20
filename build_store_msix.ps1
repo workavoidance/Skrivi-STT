@@ -80,7 +80,7 @@ if (-not $makeAppxPath) {
     throw "MakeAppx.exe was not found. Install the Windows SDK and try again."
 }
 
-$outputPath = Join-Path $OutputDirectory "Skrivi-$Version-windows-x64.msix"
+$outputPath = Join-Path $OutputDirectory "Skrivi-Snakk-$($Version -replace '^v', '')-windows-x64.msix"
 & $makeAppxPath pack /d $packageRoot /p $outputPath /o
 if ($LASTEXITCODE -ne 0) {
     throw "Microsoft Store package creation failed."

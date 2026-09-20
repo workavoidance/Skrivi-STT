@@ -4,9 +4,9 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = "v0.3.0"
+TAG = "v0.3.1"
 SITE_TAG = "v0.3.0"
-INSTALLER = f"Skrivi-{TAG}-windows-x64-setup.exe"
+INSTALLER = f"Skrivi-{SITE_TAG}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
     f"https://github.com/workavoidance/Skrivi-STT/releases/download/{SITE_TAG}/"
     f"Skrivi-{SITE_TAG}-windows-x64-setup.exe"
@@ -24,10 +24,10 @@ def test_alpha_version_is_consistent_across_package_and_installer() -> None:
         encoding="utf-8"
     )
 
-    assert project["project"]["version"] == "0.3.0"
-    assert '__version__ = "0.3.0"' in package
-    assert '[string]$Version = "0.3.0"' in installer
-    assert '-Version "0.3.0-pr.${{ github.event.pull_request.number }}"' in (preview)
+    assert project["project"]["version"] == "0.3.1"
+    assert '__version__ = "0.3.1"' in package
+    assert '[string]$Version = "0.3.1"' in installer
+    assert '-Version "0.3.1-pr.${{ github.event.pull_request.number }}"' in (preview)
 
 
 def test_website_offers_the_accepted_store_release_and_current_installer() -> None:
@@ -46,7 +46,7 @@ def test_website_offers_the_accepted_store_release_and_current_installer() -> No
 
 def test_readme_links_directly_to_current_alpha_installer() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    release_url = f"https://github.com/workavoidance/Skrivi-STT/releases/download/{TAG}/{INSTALLER}"
+    release_url = f"https://github.com/workavoidance/Skrivi-STT/releases/download/{SITE_TAG}/{INSTALLER}"
 
     assert release_url in readme
     assert "install the standard 64-bit Python" not in readme.casefold()

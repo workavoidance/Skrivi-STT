@@ -33,6 +33,7 @@ jobs:
           if ($tag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$') {
             throw "release/VERSION must contain a tag such as v0.3.0."
           }
+          "number=$($tag.TrimStart('v'))" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - uses: actions/setup-python@v5
         with:
@@ -92,22 +93,22 @@ jobs:
           New-Item -ItemType Directory -Path $releaseDir -Force | Out-Null
           Copy-Item dist\Skrivi.exe $releaseDir\
           Copy-Item README.md, LICENSE, CHANGELOG.md, THIRD_PARTY_NOTICES.md $releaseDir\
-          $archive = "Skrivi-$tag-windows-x64.zip"
+          $archive = "Skrivi-Snakk-$($tag.TrimStart('v'))-windows-x64.zip"
           Compress-Archive -Path "$releaseDir\*" -DestinationPath $archive
           $hash = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLower()
           "$hash *$archive" | Set-Content "$archive.sha256"
           $installer = Get-Item "dist\installer\Skrivi-*-windows-x64-setup.exe"
-          $publishedInstaller = "Skrivi-$tag-windows-x64-setup.exe"
+          $publishedInstaller = "Skrivi-Snakk-$($tag.TrimStart('v'))-windows-x64-setup.exe"
           Copy-Item $installer.FullName $publishedInstaller
           $installerHash = (Get-FileHash $publishedInstaller -Algorithm SHA256).Hash.ToLower()
           "$installerHash *$publishedInstaller" | Set-Content "$publishedInstaller.sha256"
       - uses: actions/upload-artifact@v4
         with:
-          name: Skrivi-${{ steps.version.outputs.tag }}-windows-x64
+          name: Skrivi-Snakk-${{ steps.version.outputs.number }}-windows-x64
           if-no-files-found: error
           path: |
-            Skrivi-${{ steps.version.outputs.tag }}-windows-x64.zip
-            Skrivi-${{ steps.version.outputs.tag }}-windows-x64.zip.sha256
+            Skrivi-Snakk-${{ steps.version.outputs.number }}-windows-x64.zip
+            Skrivi-Snakk-${{ steps.version.outputs.number }}-windows-x64.zip.sha256
             Skrivi-*-windows-x64-setup.exe
             Skrivi-*-windows-x64-setup.exe.sha256
       - name: Publish GitHub release
@@ -118,10 +119,10 @@ jobs:
         run: |
           $tag = "${{ steps.version.outputs.tag }}"
           $assets = @(
-            "Skrivi-$tag-windows-x64.zip",
-            "Skrivi-$tag-windows-x64.zip.sha256",
-            "Skrivi-$tag-windows-x64-setup.exe",
-            "Skrivi-$tag-windows-x64-setup.exe.sha256"
+            "Skrivi-Snakk-$($tag.TrimStart('v'))-windows-x64.zip",
+            "Skrivi-Snakk-$($tag.TrimStart('v'))-windows-x64.zip.sha256",
+            "Skrivi-Snakk-$($tag.TrimStart('v'))-windows-x64-setup.exe",
+            "Skrivi-Snakk-$($tag.TrimStart('v'))-windows-x64-setup.exe.sha256"
           )
           $notesFile = "docs/releases/$tag.md"
           $notesArgs = @("--generate-notes")
@@ -164,6 +165,7 @@ jobs:
           if ($tag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$') {
             throw "release/VERSION must contain a tag such as v0.3.0."
           }
+          "number=$($tag.TrimStart('v'))" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - uses: actions/setup-python@v5
         with:
