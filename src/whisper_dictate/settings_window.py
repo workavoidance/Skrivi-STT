@@ -303,7 +303,7 @@ class HotkeyCaptureButton(QPushButton):
 
 
 class SettingsWindow(QDialog):
-    """Keyboard-operable settings that can update a running Skrivi instance."""
+    """Keyboard-operable settings that can update a running Skrivi Snakk instance."""
 
     settings_saved = Signal(object)
     hotkey_capture_started = Signal()
@@ -313,7 +313,7 @@ class SettingsWindow(QDialog):
         self,
         store: SettingsStore,
         *,
-        title: str = "Skrivi",
+        title: str = "Skrivi Snakk",
         save_settings: Callable[[UserSettings], None] | None = None,
         microphone_provider: Callable[[], list[MicrophoneDevice]] | None = None,
         can_change_input: Callable[[], bool] | None = None,
@@ -339,9 +339,9 @@ class SettingsWindow(QDialog):
         self.setWindowModality(Qt.WindowModality.NonModal)
         self.setMinimumSize(640, 520)
         self.resize(760, 680)
-        self.setAccessibleName(tr("Skrivi settings"))
+        self.setAccessibleName(tr("Skrivi Snakk settings"))
         self.setAccessibleDescription(
-            tr("Configure Skrivi and review its local privacy behaviour.")
+            tr("Configure Skrivi Snakk and review its local privacy behaviour.")
         )
 
         root = QVBoxLayout(self)
@@ -352,13 +352,13 @@ class SettingsWindow(QDialog):
         header.setSpacing(16)
         header_copy = QVBoxLayout()
         header_copy.setSpacing(2)
-        self._product_name = _text_label("Skrivi", self, role="eyebrow")
+        self._product_name = _text_label("Skrivi Snakk", self, role="eyebrow")
         header_copy.addWidget(self._product_name)
         self._heading = _text_label(tr("Settings"), self, role="windowTitle")
-        self._heading.setAccessibleName(tr("Skrivi settings heading"))
+        self._heading.setAccessibleName(tr("Skrivi Snakk settings heading"))
         header_copy.addWidget(self._heading)
         self._header_description = _text_label(
-            tr("Choose how Skrivi listens, looks and starts."),
+            tr("Choose how Skrivi Snakk listens, looks and starts."),
             self,
             role="secondary",
         )
@@ -366,7 +366,7 @@ class SettingsWindow(QDialog):
         header.addLayout(header_copy, 1)
         self._header_icon = QLabel(self)
         self._header_icon.setPixmap(QApplication.windowIcon().pixmap(46, 46))
-        self._header_icon.setAccessibleName(tr("Skrivi logo"))
+        self._header_icon.setAccessibleName(tr("Skrivi Snakk logo"))
         header.addWidget(self._header_icon, 0, Qt.AlignmentFlag.AlignTop)
         root.addLayout(header)
 
@@ -469,7 +469,7 @@ class SettingsWindow(QDialog):
         self._dictation_title, self._dictation_description = _add_section_heading(
             dictation_layout,
             tr("Dictation"),
-            tr("Choose what Skrivi listens for and how you start speaking."),
+            tr("Choose what Skrivi Snakk listens for and how you start speaking."),
         )
         setup_layout = QFormLayout()
         setup_layout.setContentsMargins(0, 6, 0, 0)
@@ -574,7 +574,7 @@ class SettingsWindow(QDialog):
         self._application_title, self._application_description = _add_section_heading(
             application_layout,
             tr("Application"),
-            tr("Choose how Skrivi looks and behaves when Windows starts."),
+            tr("Choose how Skrivi Snakk looks and behaves when Windows starts."),
         )
         application_form = QFormLayout()
         application_form.setContentsMargins(0, 6, 0, 2)
@@ -611,17 +611,17 @@ class SettingsWindow(QDialog):
         self.overlay_checkbox.setAccessibleName(tr("Show dictation status overlay"))
         self.overlay_checkbox.setAccessibleDescription(
             tr(
-                "Show a non-activating message while Skrivi loads, listens and "
+                "Show a non-activating message while Skrivi Snakk loads, listens and "
                 "transcribes."
             )
         )
         application_layout.addWidget(self.overlay_checkbox)
 
         self.startup_checkbox = QCheckBox(
-            f"&{tr('Start Skrivi automatically when I sign in')}",
+            f"&{tr('Start Skrivi Snakk automatically when I sign in')}",
             self._application_card,
         )
-        self.startup_checkbox.setAccessibleName(tr("Start Skrivi automatically"))
+        self.startup_checkbox.setAccessibleName(tr("Start Skrivi Snakk automatically"))
         self.startup_checkbox.setEnabled(self._startup_available)
         application_layout.addWidget(self.startup_checkbox)
         self._startup_help = _text_label(
@@ -655,14 +655,14 @@ class SettingsWindow(QDialog):
         layout.addWidget(self._privacy_title)
         self._privacy = _text_label(
             tr(
-                "Skrivi is designed to turn your speech into text without creating "
-                "an account or sending your dictation to us."
+                "Skrivi Snakk is designed to turn your speech into text "
+                "without creating an account or sending your dictation to us."
             ),
             page,
             role="secondary",
             selectable=True,
         )
-        self._privacy.setAccessibleName(tr("Skrivi privacy summary"))
+        self._privacy.setAccessibleName(tr("Skrivi Snakk privacy summary"))
         layout.addWidget(self._privacy)
 
         facts = QGridLayout()
@@ -675,8 +675,8 @@ class SettingsWindow(QDialog):
                 "on this computer.",
             ),
             (
-                "Nothing saved by Skrivi",
-                "Skrivi does not keep a history of recordings or dictated text.",
+                "Nothing saved by Skrivi Snakk",
+                "Skrivi Snakk does not keep a history of recordings or dictated text.",
             ),
             (
                 "No account or clipboard",
@@ -740,11 +740,11 @@ class SettingsWindow(QDialog):
         about_header.setSpacing(16)
         self._about_icon = QLabel(page)
         self._about_icon.setPixmap(QApplication.windowIcon().pixmap(60, 60))
-        self._about_icon.setAccessibleName(tr("Skrivi logo"))
+        self._about_icon.setAccessibleName(tr("Skrivi Snakk logo"))
         about_header.addWidget(self._about_icon, 0, Qt.AlignmentFlag.AlignTop)
         about_copy = QVBoxLayout()
         about_copy.setSpacing(3)
-        self._about_title = _text_label("Skrivi", page, role="pageTitle")
+        self._about_title = _text_label("Skrivi Snakk", page, role="pageTitle")
         about_copy.addWidget(self._about_title)
         self._about_tagline = _text_label(
             tr("Get your thoughts onto the page."), page, role="secondary"
@@ -754,7 +754,7 @@ class SettingsWindow(QDialog):
             self._title, page, role="statusBadge", selectable=True
         )
         self._about_version.setWordWrap(False)
-        self._about_version.setAccessibleName(tr("Skrivi version"))
+        self._about_version.setAccessibleName(tr("Skrivi Snakk version"))
         about_copy.addWidget(self._about_version, 0, Qt.AlignmentFlag.AlignLeft)
         about_header.addLayout(about_copy, 1)
         layout.addLayout(about_header)
@@ -765,14 +765,15 @@ class SettingsWindow(QDialog):
         )
         self._about = _text_label(
             tr(
-                "Skrivi is a small speech-to-text tool. It transcribes your own words "
-                "locally and does not generate answers or rewrite what you say."
+                "Skrivi Snakk is a small speech-to-text tool. "
+                "It transcribes your own words locally and does not generate answers "
+                "or rewrite what you say."
             ),
             self._about_card,
             role="secondary",
             selectable=True,
         )
-        self._about.setAccessibleName(tr("About Skrivi"))
+        self._about.setAccessibleName(tr("About Skrivi Snakk"))
         about_layout.addWidget(self._about)
         layout.addWidget(self._about_card)
 
@@ -785,12 +786,12 @@ class SettingsWindow(QDialog):
         links = QHBoxLayout()
         links.setSpacing(8)
         self.website_button = QPushButton(f"&{tr('Website')}", self._links_card)
-        self.website_button.setAccessibleName(tr("Open Skrivi website"))
+        self.website_button.setAccessibleName(tr("Open Skrivi Snakk website"))
         self.website_button.clicked.connect(
             lambda: QDesktopServices.openUrl(QUrl(WEBSITE_URL))
         )
         self.source_button = QPushButton(f"&{tr('Source code')}", self._links_card)
-        self.source_button.setAccessibleName(tr("Open Skrivi source code"))
+        self.source_button.setAccessibleName(tr("Open Skrivi Snakk source code"))
         self.source_button.clicked.connect(
             lambda: QDesktopServices.openUrl(QUrl(SOURCE_URL))
         )
@@ -838,13 +839,13 @@ class SettingsWindow(QDialog):
         if self._startup_available:
             self._startup_help.setText(
                 tr(
-                    "Skrivi starts quietly in the system tray. You can also "
+                    "Skrivi Snakk starts quietly in the system tray. You can also "
                     "manage startup apps in Windows Settings."
                 )
             )
         else:
             self._startup_help.setText(
-                tr("Automatic startup is unavailable in this Skrivi build.")
+                tr("Automatic startup is unavailable in this Skrivi Snakk build.")
             )
 
     def _select_language(self, language: LanguageMode) -> None:
@@ -885,16 +886,16 @@ class SettingsWindow(QDialog):
 
     def retranslate_ui(self) -> None:
         self.setWindowTitle(tr("Settings"))
-        self.setAccessibleName(tr("Skrivi settings"))
+        self.setAccessibleName(tr("Skrivi Snakk settings"))
         self.setAccessibleDescription(
-            tr("Configure Skrivi and review its local privacy behaviour.")
+            tr("Configure Skrivi Snakk and review its local privacy behaviour.")
         )
         self._heading.setText(tr("Settings"))
-        self._heading.setAccessibleName(tr("Skrivi settings heading"))
+        self._heading.setAccessibleName(tr("Skrivi Snakk settings heading"))
         self._header_description.setText(
-            tr("Choose how Skrivi listens, looks and starts.")
+            tr("Choose how Skrivi Snakk listens, looks and starts.")
         )
-        self._header_icon.setAccessibleName(tr("Skrivi logo"))
+        self._header_icon.setAccessibleName(tr("Skrivi Snakk logo"))
         self._warning.setAccessibleName(tr("Settings warning"))
         self._warning.setText(
             tr(self._settings_warning) if self._settings_warning else ""
@@ -922,7 +923,7 @@ class SettingsWindow(QDialog):
         self._status_dot.setAccessibleName(tr("Status symbol"))
         self._dictation_title.setText(tr("Dictation"))
         self._dictation_description.setText(
-            tr("Choose what Skrivi listens for and how you start speaking.")
+            tr("Choose what Skrivi Snakk listens for and how you start speaking.")
         )
         self._replace_choices(self.language_combo, LANGUAGE_CHOICES)
         self.language_combo.setAccessibleName(tr("Dictation language"))
@@ -934,7 +935,7 @@ class SettingsWindow(QDialog):
         self.manage_models_button.setAccessibleName(tr("Manage speech models"))
         self._application_title.setText(tr("Application"))
         self._application_description.setText(
-            tr("Choose how Skrivi looks and behaves when Windows starts.")
+            tr("Choose how Skrivi Snakk looks and behaves when Windows starts.")
         )
         self._replace_choices(self.interface_language_combo, INTERFACE_LANGUAGE_CHOICES)
         self.interface_language_combo.setAccessibleName(tr("Interface language"))
@@ -960,25 +961,25 @@ class SettingsWindow(QDialog):
         self.overlay_checkbox.setAccessibleName(tr("Show dictation status overlay"))
         self.overlay_checkbox.setAccessibleDescription(
             tr(
-                "Show a non-activating message while Skrivi loads, listens and "
+                "Show a non-activating message while Skrivi Snakk loads, listens and "
                 "transcribes."
             )
         )
         self.startup_checkbox.setText(
-            f"&{tr('Start Skrivi automatically when I sign in')}"
+            f"&{tr('Start Skrivi Snakk automatically when I sign in')}"
         )
-        self.startup_checkbox.setAccessibleName(tr("Start Skrivi automatically"))
+        self.startup_checkbox.setAccessibleName(tr("Start Skrivi Snakk automatically"))
         self._startup_help.setAccessibleName(tr("Automatic startup guidance"))
         self._set_startup_help()
 
         self._privacy_title.setText(tr("Your words stay yours."))
         self._privacy.setText(
             tr(
-                "Skrivi is designed to turn your speech into text without creating "
-                "an account or sending your dictation to us."
+                "Skrivi Snakk is designed to turn your speech into text "
+                "without creating an account or sending your dictation to us."
             )
         )
-        self._privacy.setAccessibleName(tr("Skrivi privacy summary"))
+        self._privacy.setAccessibleName(tr("Skrivi Snakk privacy summary"))
         for title_label, body_label, title, body in self._privacy_facts:
             title_label.setText(tr(title))
             body_label.setText(tr(body))
@@ -992,23 +993,24 @@ class SettingsWindow(QDialog):
         self.privacy_details_button.setText(f"&{tr('Read full privacy details')}")
         self.privacy_details_button.setAccessibleName(tr("Open privacy documentation"))
 
-        self._about_icon.setAccessibleName(tr("Skrivi logo"))
+        self._about_icon.setAccessibleName(tr("Skrivi Snakk logo"))
         self._about_tagline.setText(tr("Get your thoughts onto the page."))
-        self._about_version.setAccessibleName(tr("Skrivi version"))
+        self._about_version.setAccessibleName(tr("Skrivi Snakk version"))
         self._about_section_title.setText(tr("Free, local and open source"))
         self._about.setText(
             tr(
-                "Skrivi is a small speech-to-text tool. It transcribes your own words "
-                "locally and does not generate answers or rewrite what you say."
+                "Skrivi Snakk is a small speech-to-text tool. "
+                "It transcribes your own words locally and does not generate answers "
+                "or rewrite what you say."
             )
         )
-        self._about.setAccessibleName(tr("About Skrivi"))
+        self._about.setAccessibleName(tr("About Skrivi Snakk"))
         self._links_title.setText(tr("Learn more"))
         self._links_description.setText(tr("Open documentation in your web browser."))
         self.website_button.setText(f"&{tr('Website')}")
-        self.website_button.setAccessibleName(tr("Open Skrivi website"))
+        self.website_button.setAccessibleName(tr("Open Skrivi Snakk website"))
         self.source_button.setText(f"&{tr('Source code')}")
-        self.source_button.setAccessibleName(tr("Open Skrivi source code"))
+        self.source_button.setAccessibleName(tr("Open Skrivi Snakk source code"))
         self.notices_button.setText(f"&{tr('Third-party licences')}")
         self.notices_button.setAccessibleName(tr("Open third-party licence notices"))
         self._refresh_microphones()
@@ -1131,7 +1133,7 @@ class SettingsWindow(QDialog):
                 tr("Settings could not be applied"),
                 tr(str(error))
                 or tr(
-                    "Skrivi could not apply settings safely. Previous settings "
+                    "Skrivi Snakk could not apply settings safely. Previous settings "
                     "remain active."
                 ),
             )

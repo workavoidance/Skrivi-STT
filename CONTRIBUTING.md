@@ -1,4 +1,4 @@
-# Contributing to Skrivi
+# Contributing to Skrivi Snakk
 
 Thanks for helping improve private, local dictation on Windows.
 

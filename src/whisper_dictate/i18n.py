@@ -26,28 +26,28 @@ NORWEGIAN_BOKMAL = {
     "Interface language updates immediately.": (
         "Grensesnittspråket oppdateres umiddelbart."
     ),
-    "Configure Skrivi and review its local privacy behaviour.": (
-        "Konfigurer Skrivi og les om hvordan personvernet ivaretas lokalt."
+    "Configure Skrivi Snakk and review its local privacy behaviour.": (
+        "Konfigurer Skrivi Snakk og les om hvordan personvernet ivaretas lokalt."
     ),
     "Windows Default": "Windows-standard",
     "Right Ctrl": "Høyre Ctrl",
     "Left Ctrl + Windows": "Venstre Ctrl + Windows",
     "Left Ctrl + Left Alt": "Venstre Ctrl + Venstre Alt",
     "Settings": "Innstillinger",
-    "Choose how Skrivi listens, looks and starts.": (
-        "Velg hvordan Skrivi lytter, ser ut og starter."
+    "Choose how Skrivi Snakk listens, looks and starts.": (
+        "Velg hvordan Skrivi Snakk lytter, ser ut og starter."
     ),
-    "Skrivi logo": "Skrivi-logo",
+    "Skrivi Snakk logo": "Skrivi Snakk-logo",
     "Ctrl+S saves changes": "Ctrl+S lagrer endringene",
     "{title} Settings": "Innstillinger for {title}",
-    "Skrivi settings": "Skrivi-innstillinger",
-    "Skrivi settings heading": "Overskrift for Skrivi-innstillinger",
+    "Skrivi Snakk settings": "Skrivi Snakk-innstillinger",
+    "Skrivi Snakk settings heading": "Overskrift for Skrivi Snakk-innstillinger",
     "Settings warning": "Advarsel om innstillinger",
     "Settings sections": "Deler av innstillingene",
     "General": "Generelt",
     "Models": "Modeller",
     "Privacy": "Personvern",
-    "About": "Om Skrivi",
+    "About": "Om Skrivi Snakk",
     "Save": "Lagre",
     "Cancel": "Avbryt",
     "Save settings": "Lagre innstillinger",
@@ -57,8 +57,8 @@ NORWEGIAN_BOKMAL = {
     "Starting": "Starter",
     "Current dictation status": "Gjeldende status for diktering",
     "Dictation": "Diktering",
-    "Choose what Skrivi listens for and how you start speaking.": (
-        "Velg hva Skrivi skal lytte etter, og hvordan du starter dikteringen."
+    "Choose what Skrivi Snakk listens for and how you start speaking.": (
+        "Velg hva Skrivi Snakk skal lytte etter, og hvordan du starter dikteringen."
     ),
     "Dictation setup": "Oppsett for diktering",
     "Dictation language": "Dikteringsspråk",
@@ -109,40 +109,40 @@ NORWEGIAN_BOKMAL = {
     "Push-to-talk key guidance": "Veiledning for dikteringstast",
     "Appearance": "Utseende",
     "Application": "Programmet",
-    "Choose how Skrivi looks and behaves when Windows starts.": (
-        "Velg hvordan Skrivi ser ut og oppfører seg når Windows starter."
+    "Choose how Skrivi Snakk looks and behaves when Windows starts.": (
+        "Velg hvordan Skrivi Snakk ser ut og oppfører seg når Windows starter."
     ),
     "Show the compact status overlay while dictating": (
         "Vis det kompakte statusfeltet under diktering"
     ),
     "Show dictation status overlay": "Vis statusfelt for diktering",
-    "Show a non-activating message while Skrivi loads, listens and transcribes.": (
-        "Vis en melding uten å ta fokus mens Skrivi laster, lytter og transkriberer."
+    "Show a non-activating message while Skrivi Snakk loads, listens and transcribes.": (
+        "Vis en melding uten å ta fokus mens Skrivi Snakk laster, lytter og transkriberer."
     ),
     "Startup": "Oppstart",
-    "Start Skrivi automatically when I sign in": (
-        "Start Skrivi automatisk når jeg logger på"
+    "Start Skrivi Snakk automatically when I sign in": (
+        "Start Skrivi Snakk automatisk når jeg logger på"
     ),
-    "Start Skrivi automatically": "Start Skrivi automatisk",
+    "Start Skrivi Snakk automatically": "Start Skrivi Snakk automatisk",
     "Automatic startup guidance": "Veiledning for automatisk oppstart",
-    "Skrivi starts quietly in the system tray. You can also manage startup apps in Windows Settings.": (
-        "Skrivi starter stille i systemstatusfeltet. Du kan også administrere "
+    "Skrivi Snakk starts quietly in the system tray. You can also manage startup apps in Windows Settings.": (
+        "Skrivi Snakk starter stille i systemstatusfeltet. Du kan også administrere "
         "oppstartsapper i Windows-innstillingene."
     ),
-    "Automatic startup is available in packaged Skrivi builds.": (
-        "Automatisk oppstart er tilgjengelig i pakkede Skrivi-versjoner."
+    "Automatic startup is available in packaged Skrivi Snakk builds.": (
+        "Automatisk oppstart er tilgjengelig i pakkede Skrivi Snakk-versjoner."
     ),
-    "Automatic startup is unavailable in this Skrivi build.": (
-        "Automatisk oppstart er ikke tilgjengelig i denne Skrivi-versjonen."
+    "Automatic startup is unavailable in this Skrivi Snakk build.": (
+        "Automatisk oppstart er ikke tilgjengelig i denne Skrivi Snakk-versjonen."
     ),
-    "Skrivi could not read Windows startup settings.": (
-        "Skrivi kunne ikke lese oppstartsinnstillingene i Windows."
+    "Skrivi Snakk could not read Windows startup settings.": (
+        "Skrivi Snakk kunne ikke lese oppstartsinnstillingene i Windows."
     ),
-    "Skrivi could not change Windows startup settings.": (
-        "Skrivi kunne ikke endre oppstartsinnstillingene i Windows."
+    "Skrivi Snakk could not change Windows startup settings.": (
+        "Skrivi Snakk kunne ikke endre oppstartsinnstillingene i Windows."
     ),
-    "Windows has disabled Skrivi at startup. Enable it in Windows Startup settings, then try again.": (
-        "Windows har deaktivert Skrivi ved oppstart. Aktiver Skrivi under "
+    "Windows has disabled Skrivi Snakk at startup. Enable it in Windows Startup settings, then try again.": (
+        "Windows har deaktivert Skrivi Snakk ved oppstart. Aktiver Skrivi Snakk under "
         "Oppstartsapper i Windows-innstillingene, og prøv igjen."
     ),
     "Automatic startup is disabled by your organisation's Windows policy.": (
@@ -151,27 +151,27 @@ NORWEGIAN_BOKMAL = {
     "Automatic startup is required by your organisation's Windows policy.": (
         "Automatisk oppstart kreves av organisasjonens Windows-policy."
     ),
-    "Windows did not enable Skrivi at startup.": (
-        "Windows aktiverte ikke Skrivi ved oppstart."
+    "Windows did not enable Skrivi Snakk at startup.": (
+        "Windows aktiverte ikke Skrivi Snakk ved oppstart."
     ),
-    "Speech is processed locally on this PC. Skrivi does not save your recordings or transcripts, does not use the clipboard for dictated text, and needs no account. After the selected speech model has been downloaded, normal dictation does not require internet access.": (
-        "Tale behandles lokalt på denne PC-en. Skrivi lagrer ikke opptak eller "
+    "Speech is processed locally on this PC. Skrivi Snakk does not save your recordings or transcripts, does not use the clipboard for dictated text, and needs no account. After the selected speech model has been downloaded, normal dictation does not require internet access.": (
+        "Tale behandles lokalt på denne PC-en. Skrivi Snakk lagrer ikke opptak eller "
         "transkripsjoner, bruker ikke utklippstavlen for diktert tekst og krever "
         "ingen konto. Etter at den valgte talemodellen er lastet ned, krever "
         "vanlig diktering ingen internettilgang."
     ),
-    "Skrivi privacy summary": "Sammendrag av personvernet i Skrivi",
+    "Skrivi Snakk privacy summary": "Sammendrag av personvernet i Skrivi Snakk",
     "Your words stay yours.": "Ordene dine forblir dine.",
-    "Skrivi is designed to turn your speech into text without creating an account or sending your dictation to us.": (
-        "Skrivi er laget for å gjøre tale om til tekst uten konto og uten å sende dikteringen til oss."
+    "Skrivi Snakk is designed to turn your speech into text without creating an account or sending your dictation to us.": (
+        "Skrivi Snakk er laget for å gjøre tale om til tekst uten konto og uten å sende dikteringen til oss."
     ),
     "Processed on this PC": "Behandles på denne PC-en",
     "Your recording is transcribed locally by the speech model installed on this computer.": (
         "Opptaket transkriberes lokalt av talemodellen som er installert på denne datamaskinen."
     ),
-    "Nothing saved by Skrivi": "Ingenting lagres av Skrivi",
-    "Skrivi does not keep a history of recordings or dictated text.": (
-        "Skrivi lagrer ingen historikk over opptak eller diktert tekst."
+    "Nothing saved by Skrivi Snakk": "Ingenting lagres av Skrivi Snakk",
+    "Skrivi Snakk does not keep a history of recordings or dictated text.": (
+        "Skrivi Snakk lagrer ingen historikk over opptak eller diktert tekst."
     ),
     "No account or clipboard": "Ingen konto eller utklippstavle",
     "You do not sign in, and dictated text is inserted without using the Windows clipboard.": (
@@ -187,25 +187,25 @@ NORWEGIAN_BOKMAL = {
     ),
     "Read full privacy details": "Les alle personverndetaljene",
     "Open privacy documentation": "Åpne personverndokumentasjonen",
-    "Skrivi is free and open-source local speech-to-text software.\n\nThe interface uses PySide6 and Qt under their open-source licences. See THIRD_PARTY_NOTICES.md included with Skrivi for copyright and licence information.": (
-        "Skrivi er gratis lokal tale-til-tekst-programvare med åpen kildekode.\n\n"
+    "Skrivi Snakk is free and open-source local speech-to-text software.\n\nThe interface uses PySide6 and Qt under their open-source licences. See THIRD_PARTY_NOTICES.md included with Skrivi Snakk for copyright and licence information.": (
+        "Skrivi Snakk er gratis lokal tale-til-tekst-programvare med åpen kildekode.\n\n"
         "Grensesnittet bruker PySide6 og Qt under deres åpne lisenser. Se "
-        "THIRD_PARTY_NOTICES.md som følger med Skrivi, for informasjon om "
+        "THIRD_PARTY_NOTICES.md som følger med Skrivi Snakk, for informasjon om "
         "opphavsrett og lisenser."
     ),
-    "About Skrivi": "Om Skrivi",
+    "About Skrivi Snakk": "Om Skrivi Snakk",
     "Get your thoughts onto the page.": "Få tankene dine ned på siden.",
-    "Skrivi version": "Skrivi-versjon",
+    "Skrivi Snakk version": "Skrivi Snakk-versjon",
     "Free, local and open source": "Gratis, lokal og med åpen kildekode",
-    "Skrivi is a small speech-to-text tool. It transcribes your own words locally and does not generate answers or rewrite what you say.": (
-        "Skrivi er et lite tale-til-tekst-verktøy. Det transkriberer ordene dine lokalt og verken lager svar eller omskriver det du sier."
+    "Skrivi Snakk is a small speech-to-text tool. It transcribes your own words locally and does not generate answers or rewrite what you say.": (
+        "Skrivi Snakk er et lite tale-til-tekst-verktøy. Det transkriberer ordene dine lokalt og verken lager svar eller omskriver det du sier."
     ),
     "Learn more": "Finn ut mer",
     "Open documentation in your web browser.": "Åpne dokumentasjon i nettleseren.",
     "Website": "Nettsted",
-    "Open Skrivi website": "Åpne Skrivi-nettstedet",
+    "Open Skrivi Snakk website": "Åpne Skrivi Snakk-nettstedet",
     "Source code": "Kildekode",
-    "Open Skrivi source code": "Åpne kildekoden til Skrivi",
+    "Open Skrivi Snakk source code": "Åpne kildekoden til Skrivi Snakk",
     "Third-party licences": "Tredjepartslisenser",
     "Open third-party licence notices": "Åpne lisensmerknader for tredjeparter",
     "Microphones could not be listed. Check Windows Sound settings or use Windows Default.": (
@@ -218,13 +218,13 @@ NORWEGIAN_BOKMAL = {
         "Windows-standard før du lagrer."
     ),
     "Settings could not be applied": "Innstillingene kunne ikke tas i bruk",
-    "Skrivi could not apply settings safely. Previous settings remain active.": (
-        "Skrivi kunne ikke bruke innstillingene på en trygg måte. De forrige "
+    "Skrivi Snakk could not apply settings safely. Previous settings remain active.": (
+        "Skrivi Snakk kunne ikke bruke innstillingene på en trygg måte. De forrige "
         "innstillingene er fortsatt aktive."
     ),
-    "Skrivi tray menu": "Skrivi-meny i systemstatusfeltet",
+    "Skrivi Snakk tray menu": "Skrivi Snakk-meny i systemstatusfeltet",
     "Status: {text}": "Status: {text}",
-    "Open Skrivi settings": "Åpne Skrivi-innstillingene",
+    "Open Skrivi Snakk settings": "Åpne Skrivi Snakk-innstillingene",
     "Retry speech model": "Prøv talemodellen på nytt",
     "Try loading the selected local speech model again": (
         "Prøv å laste den valgte lokale talemodellen på nytt"
@@ -241,9 +241,9 @@ NORWEGIAN_BOKMAL = {
     "No speech detected": "Ingen tale oppdaget",
     "Speech model unavailable": "Talemodellen er ikke tilgjengelig",
     "Something went wrong": "Noe gikk galt",
-    "Skrivi dictation status": "Status for Skrivi-diktering",
-    "Shows whether Skrivi is loading, listening, or transcribing.": (
-        "Viser om Skrivi laster, lytter eller transkriberer."
+    "Skrivi Snakk dictation status": "Status for Skrivi Snakk-diktering",
+    "Shows whether Skrivi Snakk is loading, listening, or transcribing.": (
+        "Viser om Skrivi Snakk laster, lytter eller transkriberer."
     ),
     "Status symbol": "Statussymbol",
     "Dictation status message": "Statusmelding for diktering",
@@ -252,8 +252,8 @@ NORWEGIAN_BOKMAL = {
         "systemstatusfeltet, eller åpne Innstillinger → Modeller."
     ),
     "Retrying local speech model…": "Prøver lokal talemodell på nytt …",
-    "The microphone could not start. Check Skrivi Settings.": (
-        "Mikrofonen kunne ikke starte. Kontroller Skrivi-innstillingene."
+    "The microphone could not start. Check Skrivi Snakk Settings.": (
+        "Mikrofonen kunne ikke starte. Kontroller Skrivi Snakk-innstillingene."
     ),
     "Selected microphone unavailable. Using Windows Default temporarily. Release your dictation key, or press Esc to cancel.": (
         "Den valgte mikrofonen er ikke tilgjengelig. Bruker Windows-standard "
@@ -280,12 +280,12 @@ NORWEGIAN_BOKMAL = {
     "Settings contain unsupported values; safe defaults are in use.": (
         "Innstillingene inneholder verdier som ikke støttes. Trygge standardverdier brukes."
     ),
-    "Settings were written by a newer Skrivi version; safe defaults are in use.": (
-        "Innstillingene ble skrevet av en nyere Skrivi-versjon. Trygge standardverdier brukes."
+    "Settings were written by a newer Skrivi Snakk version; safe defaults are in use.": (
+        "Innstillingene ble skrevet av en nyere Skrivi Snakk-versjon. Trygge standardverdier brukes."
     ),
-    "Skrivi could not save settings safely": "Skrivi kunne ikke lagre innstillingene trygt",
-    "Skrivi is already running.": "Skrivi kjører allerede.",
-    "Skrivi runs on Windows 11.": "Skrivi kjører på Windows 11.",
+    "Skrivi Snakk could not save settings safely": "Skrivi Snakk kunne ikke lagre innstillingene trygt",
+    "Skrivi Snakk is already running.": "Skrivi Snakk kjører allerede.",
+    "Skrivi Snakk runs on Windows 11.": "Skrivi Snakk kjører på Windows 11.",
     "Local speech models": "Lokale talemodeller",
     "Speech models": "Talemodeller",
     "Choose the balance between speed and accuracy. Models are stored on this PC and work offline after download.": (
@@ -316,11 +316,11 @@ NORWEGIAN_BOKMAL = {
     "Remove selected model": "Fjern valgt modell",
     "Import folder…": "Importer mappe …",
     "Already have a model?": "Har du allerede en modell?",
-    "Import a verified Skrivi model folder copied from another computer.": (
-        "Importer en verifisert Skrivi-modellmappe som er kopiert fra en annen datamaskin."
+    "Import a verified Skrivi Snakk model folder copied from another computer.": (
+        "Importer en verifisert Skrivi Snakk-modellmappe som er kopiert fra en annen datamaskin."
     ),
     "Choose model folder…": "Velg modellmappe …",
-    "Import a Skrivi model folder": "Importer en Skrivi-modellmappe",
+    "Import a Skrivi Snakk model folder": "Importer en Skrivi Snakk-modellmappe",
     "Cancel download": "Avbryt nedlasting",
     "Cancel model download": "Avbryt modellnedlasting",
     "Model actions are disabled in interface preview mode.": (
@@ -377,7 +377,7 @@ NORWEGIAN_BOKMAL = {
     "Remove {name} from this PC? It can be downloaded again later.": (
         "Vil du fjerne {name} fra denne PC-en? Den kan lastes ned igjen senere."
     ),
-    "Choose a Skrivi model folder": "Velg en Skrivi-modellmappe",
+    "Choose a Skrivi Snakk model folder": "Velg en Skrivi Snakk-modellmappe",
     "{name} is intended for PCs with at least {minimum} GB of RAM. This PC reports {actual:.1f} GB.": (
         "{name} er beregnet for PC-er med minst {minimum} GB minne. Denne PC-en "
         "rapporterer {actual:.1f} GB."
@@ -386,8 +386,8 @@ NORWEGIAN_BOKMAL = {
         "{name} vil sannsynligvis transkribere sakte på en prosessor. Small er "
         "den anbefalte modellen for vanlige PC-er."
     ),
-    "That model is not in Skrivi's catalogue.": (
-        "Denne modellen finnes ikke i Skrivis katalog."
+    "That model is not in Skrivi Snakk's catalogue.": (
+        "Denne modellen finnes ikke i Skrivi Snakks katalog."
     ),
     "{name} is incomplete. Download or import it again.": (
         "{name} er ufullstendig. Last ned eller importer modellen på nytt."
@@ -399,8 +399,8 @@ NORWEGIAN_BOKMAL = {
     "{name} is not completely installed on this PC.": (
         "{name} er ikke fullstendig installert på denne PC-en."
     ),
-    "Skrivi is shutting down. No new model operation can start.": (
-        "Skrivi avsluttes. Ingen ny modellhandling kan startes."
+    "Skrivi Snakk is shutting down. No new model operation can start.": (
+        "Skrivi Snakk avsluttes. Ingen ny modellhandling kan startes."
     ),
     "Finish the current model operation before starting another.": (
         "Fullfør den gjeldende modellhandlingen før du starter en ny."
@@ -418,11 +418,11 @@ NORWEGIAN_BOKMAL = {
     "{name} could not be downloaded. Check the internet connection and try again.": (
         "{name} kunne ikke lastes ned. Kontroller internettforbindelsen og prøv igjen."
     ),
-    "That folder is not a complete Skrivi model export.": (
-        "Denne mappen er ikke en fullstendig Skrivi-modelleksport."
+    "That folder is not a complete Skrivi Snakk model export.": (
+        "Denne mappen er ikke en fullstendig Skrivi Snakk-modelleksport."
     ),
-    "That model does not match Skrivi's trusted catalogue.": (
-        "Denne modellen samsvarer ikke med Skrivis godkjente katalog."
+    "That model does not match Skrivi Snakk's trusted catalogue.": (
+        "Denne modellen samsvarer ikke med Skrivi Snakks godkjente katalog."
     ),
     "Checking imported {name} files…": "Kontrollerer importerte {name}-filer …",
     "Model import cancelled.": "Modellimporten ble avbrutt.",
@@ -466,8 +466,8 @@ NORWEGIAN_BOKMAL = {
     "Finish the current recording before changing the microphone or push-to-talk key.": (
         "Fullfør det gjeldende opptaket før du endrer mikrofon eller dikteringstast."
     ),
-    "Wait until Skrivi is ready before changing the speech model.": (
-        "Vent til Skrivi er klar før du endrer talemodellen."
+    "Wait until Skrivi Snakk is ready before changing the speech model.": (
+        "Vent til Skrivi Snakk er klar før du endrer talemodellen."
     ),
     "{name} could not be loaded. The previous model is still active.": (
         "{name} kunne ikke lastes. Den forrige modellen er fortsatt aktiv."

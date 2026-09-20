@@ -28,5 +28,5 @@ body:
   - type: input
     id: version
     attributes:
-      label: Skrivi version (optional)
+      label: Skrivi Snakk version (optional)
       placeholder: e.g. v0.2.0-alpha.2

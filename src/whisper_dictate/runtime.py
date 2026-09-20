@@ -10,6 +10,8 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 APP_NAME = "Skrivi"
+# Display branding must never change existing settings and model directories.
+DISPLAY_NAME = "Skrivi Snakk"
 LEGACY_APP_NAME = "Bragi"
 BUILD_INFO_FILENAME = "BUILD_INFO.json"
 BUILD_INFO_ERRORS = (OSError, ValueError, KeyError, TypeError)
@@ -24,8 +26,8 @@ class BuildIdentity:
     @property
     def title(self) -> str:
         if self.development:
-            return f"{APP_NAME} DEV {self.identifier}"
-        return APP_NAME
+            return f"{DISPLAY_NAME} DEV {self.identifier}"
+        return DISPLAY_NAME
 
 
 def _environment(environment: Mapping[str, str] | None) -> Mapping[str, str]:

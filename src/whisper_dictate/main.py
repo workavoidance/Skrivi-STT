@@ -59,7 +59,7 @@ def _close_mutexes(mutexes) -> None:
 
 
 def _arguments(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Skrivi local dictation")
+    parser = argparse.ArgumentParser(description="Skrivi Snakk local dictation")
     parser.add_argument(
         "--development",
         action="store_true",
@@ -76,7 +76,7 @@ def _arguments(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> None:
     args = _arguments(argv)
     if os.name != "nt":
-        print(tr("Skrivi runs on Windows 11."), file=sys.stderr)
+        print(tr("Skrivi Snakk runs on Windows 11."), file=sys.stderr)
         raise SystemExit(1)
 
     identity = detect_build_identity(force_development=args.development)
@@ -104,7 +104,7 @@ def main(argv: list[str] | None = None) -> None:
     if already_exists:
         ctypes.windll.user32.MessageBoxW(
             None,
-            tr("Skrivi is already running."),
+            tr("Skrivi Snakk is already running."),
             identity.title,
             0x40,
         )

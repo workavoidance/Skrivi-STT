@@ -11,14 +11,14 @@ could continue. Nothing below is considered complete by deferral. Run and
 record the full checklist before the v0.2 release candidate, and before closing
 issue #8.
 
-## Bragi-to-Skrivi upgrade
+## Bragi-to-Skrivi Snakk upgrade
 
 - Before starting the renamed branch, confirm the current Bragi development
   build still shows the expected saved language, microphone, hotkey, overlay,
   and active model.
 - Stop Bragi completely, switch to the rename branch, and start `dev.bat`.
 - Confirm the tray, Settings window, accessibility labels, and status overlay
-  show Skrivi, not Bragi or Whisper Dictate.
+  show Skrivi Snakk, not Bragi or Whisper Dictate.
 - Confirm the previous settings are still selected and the installed models are
   immediately available without another download or file copy.
 - Confirm `%APPDATA%\Skrivi` and `%LOCALAPPDATA%\Skrivi` now contain the moved
@@ -30,15 +30,15 @@ issue #8.
 
 ## Core workflow
 
-- Start Skrivi and confirm the tray status changes from loading to ready without
+- Start Skrivi Snakk and confirm the tray status changes from loading to ready without
   freezing its menu.
 - Hold Right Ctrl, speak, release it, and confirm the text is inserted exactly
   as before the interface change.
 - Confirm recording and transcription continue while the Settings window is
   open.
 - Exit from the tray during idle, then repeat during recording.
-- Exit while Skrivi is transcribing and confirm no text is inserted afterward.
-- Start a non-default model download, exit Skrivi, and confirm the process closes
+- Exit while Skrivi Snakk is transcribing and confirm no text is inserted afterward.
+- Start a non-default model download, exit Skrivi Snakk, and confirm the process closes
   without hanging. Restart and confirm the cancelled model is not installed and
   can be downloaded normally.
 - In Settings, confirm the language choices are Automatic, Norwegian, and
@@ -46,11 +46,11 @@ issue #8.
   and that the next recording uses each new choice without a restart.
 - Select an available microphone, save, and dictate without restarting. Then
   disconnect it and confirm the next dictation temporarily uses Windows Default.
-  Reconnect it and confirm Skrivi automatically returns to the selection.
+  Reconnect it and confirm Skrivi Snakk automatically returns to the selection.
 - With Windows Default selected, change the default input in Windows Sound
   settings and confirm the next dictation uses the new default without restarting.
 - Disconnect a microphone during a recording and confirm that recording is
-  discarded, Skrivi returns to Ready, and the next dictation can start normally.
+  discarded, Skrivi Snakk returns to Ready, and the next dictation can start normally.
 - Change the push-to-talk key, confirm the old key no longer records, and confirm
   the new key records exactly once per press. Restore Right Ctrl afterward.
 - Select Left Ctrl + Windows and Left Ctrl + Left Alt in either press order.
@@ -71,26 +71,26 @@ issue #8.
 - Interrupt a non-default model download by exiting Skrivi. Restart and confirm
   the partial model is not offered as installed and can be downloaded again.
 - Copy an installed non-active model folder to another location, remove it in
-  Skrivi, import the copied folder, and confirm it passes verification.
+  Skrivi Snakk, import the copied folder, and confirm it passes verification.
 - Disconnect the network, restart Windows, switch between two installed models,
   and dictate successfully with both.
 - Make the selected model temporarily unavailable before startup and confirm
   the tray offers **Retry speech model**. Restore the model, retry, and confirm
-  Skrivi reaches Ready without restarting. Confirm repeated clicks do not start
+  Skrivi Snakk reaches Ready without restarting. Confirm repeated clicks do not start
   overlapping loads.
 - After a simulated transcription failure, confirm the recording is discarded,
-  Skrivi returns to Ready, and the next normal dictation succeeds.
+  Skrivi Snakk returns to Ready, and the next normal dictation succeeds.
 
 ## Installer and automatic startup
 
 - Download the installer preview and confirm Windows identifies it as an
   unsigned development build before proceeding.
-- Install without administrator approval. Confirm Skrivi appears in the Start
+- Install without administrator approval. Confirm Skrivi Snakk appears in the Start
   menu, Apps list, and standard uninstall list.
-- Confirm Skrivi starts after installation and reaches Ready.
-- Enable **Start Skrivi automatically when I sign in**, save, restart Windows,
+- Confirm Skrivi Snakk starts after installation and reaches Ready.
+- Enable **Start Skrivi Snakk automatically when I sign in**, save, restart Windows,
   and confirm exactly one tray instance starts.
-- Disable the setting, restart Windows, and confirm Skrivi does not start.
+- Disable the setting, restart Windows, and confirm Skrivi Snakk does not start.
 - Install a newer preview over the existing copy. Confirm settings, installed
   models, and the automatic-startup choice remain intact.
 - Uninstall Skrivi. Confirm the application and shortcuts are removed while
@@ -115,7 +115,7 @@ issue #8.
 ## English and Norwegian interface
 
 - With the interface language set to Automatic, change the Windows display
-  language between English and Norwegian where practical, restart Skrivi, and
+  language between English and Norwegian where practical, restart Skrivi Snakk, and
   confirm the matching interface is selected.
 - Switch between English and Norsk bokmål in Settings. Confirm the open Settings
   window, tray, overlay, model status, and accessibility labels update

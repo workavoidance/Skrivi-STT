@@ -1,4 +1,4 @@
-#define MyAppName "Skrivi"
+#define MyAppName "Skrivi Snakk"
 #define MyAppVersion GetEnv("SKRIVI_INSTALLER_VERSION")
 #define MySourceDir GetEnv("SKRIVI_INSTALLER_SOURCE")
 #define MyOutputDir GetEnv("SKRIVI_INSTALLER_OUTPUT")
@@ -47,14 +47,59 @@ Source: "{#MyProjectRoot}\CHANGELOG.md"; DestDir: "{app}\documentation"; Flags: 
 Source: "{#MyProjectRoot}\THIRD_PARTY_NOTICES.md"; DestDir: "{app}\documentation"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\Skrivi"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"
-Name: "{group}\Uninstall Skrivi"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\Skrivi"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{group}\Skrivi Snakk"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"
+Name: "{group}\Uninstall Skrivi Snakk"; Filename: "{uninstallexe}"
+Name: "{autodesktop}\Skrivi Snakk"; Filename: "{app}\Skrivi.exe"; WorkingDir: "{app}"; Check: WantDesktopShortcut
 
 [Run]
-Filename: "{app}\Skrivi.exe"; Description: "Launch Skrivi"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Skrivi.exe"; Description: "Launch Skrivi Snakk"; Flags: nowait postinstall skipifsilent
 
 [Code]
+function WantDesktopShortcut: Boolean;
+var
+  Shell, Link: Variant;
+  OldPath: String;
+begin
+  Result := WizardIsTaskSelected('desktopicon');
+  OldPath := ExpandConstant('{autodesktop}\Skrivi.lnk');
+  if Result or not FileExists(OldPath) then Exit;
+  try
+    Shell := CreateOleObject('WScript.Shell');
+    Link := Shell.CreateShortcut(OldPath);
+    Result := CompareText(Link.TargetPath, ExpandConstant('{app}\Skrivi.exe')) = 0;
+  except
+    Result := False;
+  end;
+end;
+
+procedure RenameOwnedShortcut(OldPath, NewPath, ExpectedTarget: String);
+var
+  Shell, Link: Variant;
+begin
+  if not FileExists(OldPath) then Exit;
+  try
+    Shell := CreateOleObject('WScript.Shell');
+    Link := Shell.CreateShortcut(OldPath);
+    if CompareText(Link.TargetPath, ExpectedTarget) <> 0 then Exit;
+    if not FileExists(NewPath) then
+      if not FileCopy(OldPath, NewPath, True) then Exit;
+    DeleteFile(OldPath);
+  except
+    Log('Could not migrate an old Skrivi shortcut; it was left in place.');
+  end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep <> ssPostInstall then Exit;
+  RenameOwnedShortcut(ExpandConstant('{group}\Skrivi.lnk'),
+    ExpandConstant('{group}\Skrivi Snakk.lnk'), ExpandConstant('{app}\Skrivi.exe'));
+  RenameOwnedShortcut(ExpandConstant('{group}\Uninstall Skrivi.lnk'),
+    ExpandConstant('{group}\Uninstall Skrivi Snakk.lnk'), ExpandConstant('{uninstallexe}'));
+  RenameOwnedShortcut(ExpandConstant('{autodesktop}\Skrivi.lnk'),
+    ExpandConstant('{autodesktop}\Skrivi Snakk.lnk'), ExpandConstant('{app}\Skrivi.exe'));
+end;
+
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
   RegisteredCommand: String;

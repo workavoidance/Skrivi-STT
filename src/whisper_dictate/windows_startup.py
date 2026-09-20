@@ -138,7 +138,7 @@ class WindowsStartupManager:
             registered = self._registry.read(RUN_KEY, VALUE_NAME)
         except OSError as error:
             raise StartupRegistrationError(
-                "Skrivi could not read Windows startup settings."
+                "Skrivi Snakk could not read Windows startup settings."
             ) from error
         return (
             registered is not None and registered.casefold() == self.command.casefold()
@@ -152,7 +152,7 @@ class WindowsStartupManager:
                 self._registry.delete(RUN_KEY, VALUE_NAME)
         except OSError as error:
             raise StartupRegistrationError(
-                "Skrivi could not change Windows startup settings."
+                "Skrivi Snakk could not change Windows startup settings."
             ) from error
 
 
@@ -177,7 +177,7 @@ class PackagedWindowsStartupManager:
             state = self._backend.state(self._task_id)
         except Exception as error:
             raise StartupRegistrationError(
-                "Skrivi could not read Windows startup settings."
+                "Skrivi Snakk could not read Windows startup settings."
             ) from error
         return state in {
             PackagedStartupState.ENABLED,
@@ -195,7 +195,7 @@ class PackagedWindowsStartupManager:
                     return
                 if state is PackagedStartupState.DISABLED_BY_USER:
                     raise StartupRegistrationError(
-                        "Windows has disabled Skrivi at startup. Enable it in "
+                        "Windows has disabled Skrivi Snakk at startup. Enable it in "
                         "Windows Startup settings, then try again."
                     )
                 if state is PackagedStartupState.DISABLED_BY_POLICY:
@@ -209,7 +209,7 @@ class PackagedWindowsStartupManager:
                     PackagedStartupState.ENABLED_BY_POLICY,
                 }:
                     raise StartupRegistrationError(
-                        "Windows did not enable Skrivi at startup."
+                        "Windows did not enable Skrivi Snakk at startup."
                     )
                 return
 
@@ -224,7 +224,7 @@ class PackagedWindowsStartupManager:
             raise
         except Exception as error:
             raise StartupRegistrationError(
-                "Skrivi could not change Windows startup settings."
+                "Skrivi Snakk could not change Windows startup settings."
             ) from error
 
 

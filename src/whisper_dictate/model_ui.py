@@ -165,7 +165,7 @@ class ModelManagerPanel(QWidget):
         self.remove_button.setAccessibleName(tr("Remove selected model"))
         self.remove_button.setProperty("buttonRole", "destructive")
         self.import_button = QPushButton(f"&{tr('Choose model folder…')}", self)
-        self.import_button.setAccessibleName(tr("Import a Skrivi model folder"))
+        self.import_button.setAccessibleName(tr("Import a Skrivi Snakk model folder"))
         self.cancel_button = QPushButton(f"&{tr('Cancel download')}", self)
         self.cancel_button.setAccessibleName(tr("Cancel model download"))
         self.cancel_button.hide()
@@ -183,7 +183,10 @@ class ModelManagerPanel(QWidget):
         )
         import_layout.addWidget(self.import_title)
         self.import_help = _label(
-            tr("Import a verified Skrivi model folder copied from another computer."),
+            tr(
+                "Import a verified Skrivi Snakk model folder "
+                "copied from another computer."
+            ),
             parent=self.import_card,
             role="secondary",
         )
@@ -269,10 +272,13 @@ class ModelManagerPanel(QWidget):
         self.remove_button.setAccessibleName(tr("Remove selected model"))
         self.import_title.setText(tr("Already have a model?"))
         self.import_help.setText(
-            tr("Import a verified Skrivi model folder copied from another computer.")
+            tr(
+                "Import a verified Skrivi Snakk model folder "
+                "copied from another computer."
+            )
         )
         self.import_button.setText(f"&{tr('Choose model folder…')}")
-        self.import_button.setAccessibleName(tr("Import a Skrivi model folder"))
+        self.import_button.setAccessibleName(tr("Import a Skrivi Snakk model folder"))
         self.cancel_button.setText(f"&{tr('Cancel download')}")
         self.cancel_button.setAccessibleName(tr("Cancel model download"))
         self.refresh()
@@ -576,7 +582,7 @@ class ModelManagerPanel(QWidget):
             return
         selected = QFileDialog.getExistingDirectory(
             self,
-            tr("Choose a Skrivi model folder"),
+            tr("Choose a Skrivi Snakk model folder"),
             str(Path.home()),
         )
         if not selected:

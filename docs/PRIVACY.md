@@ -2,7 +2,7 @@
 
 **Language:** [Norsk](PRIVACY_NB.md) | English
 
-Skrivi is designed to perform speech recognition locally.
+Skrivi Snakk is designed to perform speech recognition locally.
 
 ## Data that persists
 
@@ -24,15 +24,15 @@ forensic erasure of immutable strings from memory.
 
 The destination application may retain inserted text through undo history,
 autosave, browser storage, synchronisation, or its own telemetry. That behaviour
-is outside Skrivi's control.
+is outside Skrivi Snakk's control.
 
 The recommended Small model is downloaded from its Hugging Face distribution
 host during initial setup if it is not already cached. Other models are
 downloaded only after the user selects Download. The distribution host can see
 ordinary connection metadata such as the requesting IP address during that
-download. Skrivi sends no recording, transcript, account identifier, or usage
+download. Skrivi Snakk sends no recording, transcript, account identifier, or usage
 telemetry.
 
-After a verified download completes, Skrivi loads the model by local filesystem
+After a verified download completes, Skrivi Snakk loads the model by local filesystem
 path. Transcription, installed-model selection, verification, and removal work
 offline and do not fetch a remote model catalogue.

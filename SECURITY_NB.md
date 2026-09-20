@@ -4,7 +4,7 @@
 
 ## Versjoner som støttes
 
-Skrivi er programvare i en versjon før 1.0. Sikkerhetsrettinger blir lagt inn i
+Skrivi Snakk er programvare i en versjon før 1.0. Sikkerhetsrettinger blir lagt inn i
 den nyeste utgitte versjonen.
 
 ## Rapportering av en sårbarhet

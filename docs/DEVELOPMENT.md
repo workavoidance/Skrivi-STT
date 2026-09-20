@@ -1,6 +1,6 @@
 # Fast development and preview workflow
 
-Skrivi has two local development modes and an automated Windows preview build.
+Skrivi Snakk has two local development modes and an automated Windows preview build.
 They are intended to shorten feedback cycles without weakening the privacy or
 offline requirements.
 
@@ -22,7 +22,7 @@ dev.bat preview
 ```
 
 This mode does not load Whisper, access a microphone, register a global hotkey,
-or insert text. Use **Settings** in the Skrivi tray menu to inspect the window,
+or insert text. Use **Settings** in the Skrivi Snakk tray menu to inspect the window,
 then use **Preview state** to display the loading, ready, recording,
 transcribing, no-speech, and error indicators.
 

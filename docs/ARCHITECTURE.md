@@ -2,7 +2,7 @@
 
 **Language:** [Norsk](ARCHITECTURE_NB.md) | English
 
-Skrivi is a Windows tray application with a privacy-first local speech pipeline.
+Skrivi Snakk is a Windows tray application with a privacy-first local speech pipeline.
 
 ## Current flow
 
@@ -12,7 +12,7 @@ Skrivi is a Windows tray application with a privacy-first local speech pipeline.
 2. Releasing either key in the configured shortcut closes the audio stream.
 3. Audio is normalised to mono 16 kHz float32 data.
 4. In Automatic mode, faster-whisper compares only Norwegian and English;
-   Skrivi selects the stronger match and transcribes locally in that language.
+   Skrivi Snakk selects the stronger match and transcribes locally in that language.
 5. Windows `SendInput` inserts UTF-16 text at the existing cursor.
 6. Audio buffers are overwritten on a best-effort basis and references are
    released.
@@ -57,13 +57,13 @@ separate `%APPDATA%\Skrivi\development` location. Initial setup and explicit mod
 downloads may use the internet; installed transcription remains local and must
 continue working without it.
 
-The Skrivi rename migrates the previous Bragi application-data roots with an
+The Skrivi Snakk rename migrates the previous Bragi application-data roots with an
 atomic same-volume directory rename. A failed rename falls back to the existing
 directory so settings and large model downloads are never abandoned merely
 because the branding changed. Legacy model manifests remain readable and are
 renamed after validation.
 
-The model catalogue is compiled into Skrivi with immutable upstream revisions,
+The model catalogue is compiled into Skrivi Snakk with immutable upstream revisions,
 file sizes, and checksums. Downloads and imports are verified in a staging
 directory before an atomic install. The transcriber receives an installed local
 path rather than a remote model identifier, preventing an accidental network
@@ -89,7 +89,7 @@ Invalid and newer-version files are preserved for diagnosis or recovery.
 
 Interface text is routed through the UI-independent `i18n` module. English
 source text is the stable key and Norwegian Bokmål is the first complete
-translation catalogue. At startup, Skrivi resolves the stored Automatic,
+translation catalogue. At startup, Skrivi Snakk resolves the stored Automatic,
 English, or Norwegian choice before creating Qt widgets. Automatic follows the
 Windows display language for Norwegian Windows installations and otherwise
 falls back to English. Translation does not affect transcription language or

@@ -2,7 +2,7 @@
 
 **Språk:** Norsk | [English](ARCHITECTURE.md)
 
-Skrivi er et Windows-program i systemstatusfeltet med en personvernorientert,
+Skrivi Snakk er et Windows-program i systemstatusfeltet med en personvernorientert,
 lokal kjede for behandling av tale.
 
 ## Nåværende dataflyt
@@ -12,7 +12,7 @@ lokal kjede for behandling av tale.
    tilgjengelige for bærbare PC-er.
 2. Når én av tastene i den valgte snarveien slippes, lukkes lydstrømmen.
 3. Lyden normaliseres til én kanal med 16 kHz float32-data.
-4. I automatisk modus sammenligner faster-whisper bare norsk og engelsk. Skrivi
+4. I automatisk modus sammenligner faster-whisper bare norsk og engelsk. Skrivi Snakk
    velger det sterkeste treffet og transkriberer lokalt på dette språket.
 5. Windows `SendInput` setter inn UTF-16-tekst ved den eksisterende markøren.
 6. Lydbufferne overskrives etter beste evne, og referansene frigis.
@@ -60,13 +60,13 @@ utviklingsinnstillinger bruker en separat plassering i
 modellnedlastinger kan bruke internett. Transkripsjon med en installert modell
 forblir lokal og skal fortsette å fungere uten nettilgang.
 
-Navneendringen til Skrivi flytter tidligere Bragi-mapper for programdata ved
+Navneendringen til Skrivi Snakk flytter tidligere Bragi-mapper for programdata ved
 hjelp av en atomisk navneendring på samme lagringsvolum. Dersom navneendringen
 mislykkes, brukes den eksisterende mappen videre, slik at innstillinger og store
 modellnedlastinger ikke forlates bare fordi merkevaren er endret. Eldre
 modellmanifest kan fortsatt leses og får nytt navn etter kontroll.
 
-Modellkatalogen er bygget inn i Skrivi med låste oppstrømsrevisjoner,
+Modellkatalogen er bygget inn i Skrivi Snakk med låste oppstrømsrevisjoner,
 filstørrelser og kontrollsummer. Nedlastinger og importer kontrolleres i en
 midlertidig klargjøringsmappe før atomisk installasjon. Transkripsjonsmotoren
 får en lokal, installert filbane i stedet for en ekstern modell-ID. Dette
@@ -96,7 +96,7 @@ fra nyere versjoner bevares for feilsøking eller gjenoppretting.
 
 Grensesnitttekst går gjennom den brukergrensesnittuavhengige `i18n`-modulen.
 Engelsk kildetekst er den stabile nøkkelen, og norsk bokmål er den første
-komplette oversettelseskatalogen. Ved oppstart finner Skrivi det lagrede valget
+komplette oversettelseskatalogen. Ved oppstart finner Skrivi Snakk det lagrede valget
 Automatisk, Engelsk eller Norsk før Qt-komponentene opprettes. Automatisk følger
 visningsspråket i Windows på norske Windows-installasjoner og bruker ellers
 engelsk. Oversettelse påvirker ikke transkripsjonsspråket og innfører ikke

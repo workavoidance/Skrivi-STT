@@ -2,7 +2,7 @@
 
 **Språk:** Norsk | [English](PRIVACY.md)
 
-Skrivi er utviklet for å utføre talegjenkjenning lokalt.
+Skrivi Snakk er utviklet for å utføre talegjenkjenning lokalt.
 
 ## Data som lagres
 
@@ -30,9 +30,9 @@ Den anbefalte Small-modellen lastes ned fra distribusjonsverten på Hugging Face
 under førstegangsoppsettet dersom den ikke allerede er mellomlagret. Andre
 modeller lastes bare ned etter at brukeren velger Last ned. Distribusjonsverten
 kan se vanlig tilkoblingsinformasjon, som IP-adressen forespørselen kommer fra,
-under nedlastingen. Skrivi sender ingen opptak, transkripsjoner, konto-ID-er
+under nedlastingen. Skrivi Snakk sender ingen opptak, transkripsjoner, konto-ID-er
 eller brukstelemetri.
 
-Etter at en kontrollert nedlasting er fullført, laster Skrivi modellen fra en
+Etter at en kontrollert nedlasting er fullført, laster Skrivi Snakk modellen fra en
 lokal filbane. Transkripsjon, valg av installert modell, kontroll og fjerning
 fungerer uten nett og henter ikke en ekstern modellkatalog.
