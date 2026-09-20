@@ -46,7 +46,8 @@
         BackgroundColor="transparent" />
       <Extensions>
         <uap5:Extension
-          Category="windows.startupTask"
+            Category="windows.startupTask"
+            uap10:Parameters="--tray"
           Executable="Skrivi.exe"
           EntryPoint="Windows.FullTrustApplication">
           <uap5:StartupTask

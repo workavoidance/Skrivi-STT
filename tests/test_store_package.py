@@ -51,6 +51,8 @@ def test_store_manifest_declares_opt_in_startup_task() -> None:
 
     assert extension.attrib == {
         "Category": "windows.startupTask",
+        "{http://schemas.microsoft.com/appx/manifest/uap/windows10/10}"
+        "Parameters": "--tray",
         "Executable": "Skrivi.exe",
         "EntryPoint": "Windows.FullTrustApplication",
     }

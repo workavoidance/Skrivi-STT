@@ -1,5 +1,9 @@
 # Skrivi Snakk
 
+Development source includes the [shared Skrivi interface](docs/SHARED_UX.md), with
+a dictation practice window and reorganized Settings. These changes are awaiting
+the next signed release; the 0.3.0 downloads below retain their released interface.
+
 Part of the [Skrivi](https://skrivi.no/) family, alongside
 [Skrivi Lytt](https://github.com/workavoidance/Skrivi-TTS) for listening to text.
 The names Snakk and Lytt are the same in Norwegian and English.

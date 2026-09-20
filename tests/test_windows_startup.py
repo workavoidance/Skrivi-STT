@@ -59,7 +59,7 @@ def test_windows_startup_quotes_and_registers_the_exact_executable(tmp_path) -> 
 
     manager.set_enabled(True)
 
-    assert registry.values[(RUN_KEY, VALUE_NAME)] == f'"{executable.resolve()}"'
+    assert registry.values[(RUN_KEY, VALUE_NAME)] == f'"{executable.resolve()}" --tray'
     assert manager.is_enabled() is True
 
 
@@ -200,4 +200,4 @@ def test_unpacked_executable_keeps_registry_startup(monkeypatch, tmp_path) -> No
     manager = startup_manager_for_current_app(packaged=False)
 
     assert isinstance(manager, WindowsStartupManager)
-    assert manager.command == f'"{executable.resolve()}"'
+    assert manager.command == f'"{executable.resolve()}" --tray'

@@ -1,5 +1,16 @@
 # Skrivi Snakk development plan
 
+## Shared interface implemented — 20 September 2026
+
+- [x] Match Lytt's supporting navigation, settings sections, immediate saving,
+  shortcut terminology, model actions, update checks, help and feedback.
+- [x] Add a main dictation readiness/practice window and raise it on repeated launch.
+- [x] Keep sign-in quiet, add indicator cancellation and persistent recovery.
+- [x] Preserve user data and cover persistence failures and bilingual layouts.
+
+See [shared UX details](SHARED_UX.md). Published signed installers remain unchanged;
+these changes need the next versioned release and installed acceptance checks.
+
 ## Shared release convention — 20 September 2026
 
 Snakk 0.3.0 and Lytt 0.4.1 use **Test release** and GitHub prerelease status.

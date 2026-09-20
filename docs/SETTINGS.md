@@ -52,8 +52,8 @@ Supported interface-language values are `auto`, `en`, and `nb`. Automatic uses
 the Windows display language when it is Norwegian and otherwise uses English.
 Users can explicitly select English or Norwegian Bokmål in Settings. An
 interface-language change updates the open Settings window, tray, overlay, and
-model status immediately. Cancel restores the previously saved language, while
-Save persists the previewed choice.
+model status immediately. Preferences save as they change. A failed save restores
+the previous controls and displays an explanation. Close leaves saved choices intact.
 
 `start_with_system` records the user's platform-neutral automatic-startup
 choice. The Windows platform service applies it to the current user's Run

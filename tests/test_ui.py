@@ -10,7 +10,7 @@ import pytest
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 from PySide6.QtCore import QEvent, Qt
-from PySide6.QtGui import QColor, QKeyEvent, QKeySequence, QPalette
+from PySide6.QtGui import QColor, QKeyEvent, QPalette
 from PySide6.QtWidgets import QApplication
 
 from whisper_dictate.application import (
@@ -159,7 +159,10 @@ def test_settings_window_saves_live_language_and_hotkey_choices(tmp_path: Path) 
     window._set_hotkey("f8")
     window._save()
 
-    assert applied == [UserSettings(language=LanguageMode.NORWEGIAN, hotkey="f8")]
+    assert applied == [
+        UserSettings(language=LanguageMode.NORWEGIAN),
+        UserSettings(language=LanguageMode.NORWEGIAN, hotkey="f8"),
+    ]
 
 
 def test_settings_window_saves_interface_language_choice(tmp_path: Path) -> None:
@@ -317,9 +320,6 @@ def test_settings_actions_are_named_and_keyboard_operable(tmp_path: Path) -> Non
     assert window.minimumWidth() <= 640
     assert window.minimumHeight() <= 520
     assert window.overlay_checkbox.focusPolicy() & Qt.FocusPolicy.TabFocus
-    assert window.save_shortcut.key().matches(QKeySequence.StandardKey.Save) == (
-        QKeySequence.SequenceMatch.ExactMatch
-    )
 
 
 def test_settings_guidance_and_navigation_follow_the_current_choice(
@@ -449,7 +449,7 @@ def test_tray_exposes_status_settings_and_exit() -> None:
     texts = [action.text().replace("&", "") for action in tray.menu.actions()]
     assert "Status: Starting" in texts
     assert "Settings…" in texts
-    assert "Exit" in texts
+    assert "Quit Skrivi Snakk" in texts
 
     tray.settings_action.trigger()
     tray.exit_action.trigger()
@@ -496,11 +496,12 @@ def test_norwegian_interface_covers_settings_models_tray_and_overlay(
 
         assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
         assert window.accessibleName() == "Skrivi Snakk-innstillinger"
-        assert [window.tabs.tabText(index).replace("&", "") for index in range(4)] == [
+        assert [window.tabs.tabText(index).replace("&", "") for index in range(5)] == [
             "Generelt",
+            "Hurtigtaster",
             "Modeller",
             "Personvern",
-            "Om Skrivi Snakk",
+            "Om",
         ]
         assert window.model_panel.download_button.text().replace("&", "") == (
             "Last ned modell"
@@ -510,7 +511,7 @@ def test_norwegian_interface_covers_settings_models_tray_and_overlay(
         assert window.interface_language_combo.itemText(1) == "English"
         assert window.interface_language_combo.itemText(2) == "Norsk bokmål"
         assert tray.settings_action.text().replace("&", "") == "Innstillinger…"
-        assert tray.exit_action.text().replace("&", "") == "Avslutt"
+        assert tray.exit_action.text().replace("&", "") == "Avslutt Skrivi Snakk"
         assert statuses == ["Transkriberer lokalt …"]
 
         indicator.set_hotkey("left_ctrl_windows")
@@ -521,53 +522,30 @@ def test_norwegian_interface_covers_settings_models_tray_and_overlay(
         set_interface_language(InterfaceLanguage.ENGLISH)
 
 
-def test_interface_language_previews_live_cancel_restores_and_save_persists(
-    tmp_path: Path,
-) -> None:
+def test_interface_language_saves_immediately_and_closing_keeps_it(tmp_path):
     application()
     set_interface_language(InterfaceLanguage.ENGLISH)
     store = SettingsStore(tmp_path / "settings.json")
     store.save(UserSettings(interface_language=InterfaceLanguage.ENGLISH))
-    indicator = FloatingIndicator(enabled=False)
     window = SettingsWindow(store)
-    tray = TrayIcon(lambda: None, on_settings=lambda: None)
-    indicator.status_changed.connect(tray.set_status)
-    indicator.status_changed.connect(window.set_status)
-    indicator.post("ready")
-    process_events_until(lambda: window._status.text().startswith("Ready"))
-
-    norwegian_index = window.interface_language_combo.findData(
-        InterfaceLanguage.NORWEGIAN_BOKMAL.value
-    )
-    window.interface_language_combo.setCurrentIndex(norwegian_index)
-
-    assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
-    assert window._status.text() == "Klar. Hold Høyre Ctrl for å diktere"
-    assert window.model_panel.download_button.text().replace("&", "") == (
-        "Last ned modell"
-    )
-    assert tray.settings_action.text().replace("&", "") == "Innstillinger…"
-    assert store.load().settings.interface_language is InterfaceLanguage.ENGLISH
-
-    window.reject()
-
-    assert window.windowTitle() == "Skrivi Snakk · Dictation Settings"
-    assert window._status.text() == "Ready. Hold Right Ctrl to dictate"
-    assert window.model_panel.download_button.text().replace("&", "") == (
-        "Download model"
-    )
-    assert tray.settings_action.text().replace("&", "") == "Settings…"
-    assert store.load().settings.interface_language is InterfaceLanguage.ENGLISH
-
-    window.reload()
-    window.interface_language_combo.setCurrentIndex(norwegian_index)
-    window._save()
-
-    assert (
-        store.load().settings.interface_language is InterfaceLanguage.NORWEGIAN_BOKMAL
-    )
-    assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
-    set_interface_language(InterfaceLanguage.ENGLISH)
+    try:
+        window.interface_language_combo.setCurrentIndex(
+            window.interface_language_combo.findData(
+                InterfaceLanguage.NORWEGIAN_BOKMAL.value
+            )
+        )
+        assert (
+            store.load().settings.interface_language
+            is InterfaceLanguage.NORWEGIAN_BOKMAL
+        )
+        window.reject()
+        assert (
+            store.load().settings.interface_language
+            is InterfaceLanguage.NORWEGIAN_BOKMAL
+        )
+        assert window.tabs.tabText(1) == "Hurtigtaster"
+    finally:
+        set_interface_language(InterfaceLanguage.ENGLISH)
 
 
 def test_model_download_progress_retranslates_while_active(tmp_path: Path) -> None:

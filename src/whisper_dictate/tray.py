@@ -41,6 +41,8 @@ class TrayIcon:
         on_exit: Callable[[], None],
         *,
         on_settings: Callable[[], None],
+        on_open: Callable[[], None] | None = None,
+        on_updates: Callable[[], None] | None = None,
         on_retry_model: Callable[[], object] | None = None,
         on_feedback: Callable[[], None] | None = None,
         title: str = "Skrivi Snakk",
@@ -51,6 +53,7 @@ class TrayIcon:
             raise RuntimeError("create_application() must be called before the UI")
         self._on_exit = on_exit
         self._on_settings = on_settings
+        self._on_open = on_open or on_settings
         self._on_retry_model = on_retry_model
         self._on_feedback = on_feedback or open_feedback_page
         self._title = title
@@ -70,6 +73,7 @@ class TrayIcon:
         self._status_action.setEnabled(False)
         self._menu.addSeparator()
 
+        self.open_action = self._menu.addAction(tr("Open Skrivi Snakk"), self._on_open)
         self.settings_action = QAction(f"&{tr('Settings')}…", self._menu)
         self.settings_action.setToolTip(tr("Open Skrivi Snakk settings"))
         self.settings_action.triggered.connect(self._settings_clicked)
@@ -97,8 +101,16 @@ class TrayIcon:
                     lambda _checked=False, callback=callback: callback()
                 )
 
+        self.help_action = self._menu.addAction(
+            tr("Help"),
+            lambda: QDesktopServices.openUrl(QUrl("https://skrivi.no/help/")),
+        )
+        self.update_action = self._menu.addAction(
+            tr("Check for updates"), on_updates or (lambda: None)
+        )
+        self.update_action.setEnabled(on_updates is not None)
         self._menu.addSeparator()
-        self.exit_action = QAction(f"&{tr('Exit')}", self._menu)
+        self.exit_action = QAction(f"&{tr('Quit Skrivi Snakk')}", self._menu)
         self.exit_action.triggered.connect(self._exit_clicked)
         self._menu.addAction(self.exit_action)
 
@@ -131,6 +143,9 @@ class TrayIcon:
         )
 
     def retranslate_ui(self) -> None:
+        self.open_action.setText(tr("Open Skrivi Snakk"))
+        self.help_action.setText(tr("Help"))
+        self.update_action.setText(tr("Check for updates"))
         self._title_action.setText(self._display_title())
         self._menu.setAccessibleName(tr("Skrivi Snakk tray menu"))
         self.settings_action.setText(f"&{tr('Settings')}…")
@@ -145,7 +160,7 @@ class TrayIcon:
             self._preview_menu.setTitle(f"&{tr('Preview state')}")
         for label, action in self._preview_action_items:
             action.setText(tr(label))
-        self.exit_action.setText(f"&{tr('Exit')}")
+        self.exit_action.setText(f"&{tr('Quit Skrivi Snakk')}")
         self.set_status(self._status_state, self._status_text)
 
     def _settings_clicked(self, checked: bool = False) -> None:
@@ -167,4 +182,4 @@ class TrayIcon:
 
     def _activated(self, reason: QSystemTrayIcon.ActivationReason) -> None:
         if reason == QSystemTrayIcon.ActivationReason.DoubleClick:
-            self._on_settings()
+            self._on_open()

@@ -4,7 +4,7 @@ from collections.abc import Callable
 from dataclasses import replace
 
 from PySide6.QtCore import QSignalBlocker, Qt, QUrl, Signal, Slot
-from PySide6.QtGui import QDesktopServices, QKeyEvent, QKeySequence, QShortcut
+from PySide6.QtGui import QDesktopServices, QKeyEvent
 from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
@@ -16,7 +16,6 @@ from PySide6.QtWidgets import (
     QGridLayout,
     QHBoxLayout,
     QLabel,
-    QMessageBox,
     QPushButton,
     QScrollArea,
     QTabWidget,
@@ -335,6 +334,7 @@ class SettingsWindow(QDialog):
         startup_available: bool = False,
     ) -> None:
         super().__init__()
+        self._autosave_ready = False
         self._store = store
         self._save_settings = save_settings or store.save
         self._microphone_provider = microphone_provider or self._default_microphones
@@ -393,28 +393,32 @@ class SettingsWindow(QDialog):
         self.tabs = QTabWidget(self)
         self.tabs.setDocumentMode(True)
         self.tabs.setAccessibleName(tr("Settings sections"))
+        self._shortcuts_page = QWidget(self)
+        self._shortcuts_layout = QFormLayout(self._shortcuts_page)
         self.tabs.addTab(self._general_page(), f"&{tr('General')}")
         self.model_panel = ModelManagerPanel(model_manager, model_runtime, self)
         self.model_panel.model_activated.connect(self._model_activated)
+        self.tabs.addTab(self._shortcuts_page, tr("Shortcuts"))
         self.tabs.addTab(self.model_panel, f"&{tr('Models')}")
         self.tabs.addTab(self._privacy_page(), f"&{tr('Privacy')}")
         self.tabs.addTab(self._about_page(), f"&{tr('About')}")
         root.addWidget(self.tabs, 1)
-        self.manage_models_button.clicked.connect(lambda: self.tabs.setCurrentIndex(1))
+        self.manage_models_button.clicked.connect(
+            lambda: self.tabs.setCurrentWidget(self.model_panel)
+        )
 
         self.buttons = QDialogButtonBox(
-            QDialogButtonBox.StandardButton.Save
-            | QDialogButtonBox.StandardButton.Cancel,
+            QDialogButtonBox.StandardButton.Close,
             parent=self,
         )
         self.buttons.setAccessibleName(tr("Settings actions"))
-        self.buttons.accepted.connect(self._save)
+        self.buttons.button(QDialogButtonBox.StandardButton.Close).setText(tr("Close"))
         self.buttons.rejected.connect(self.reject)
 
         footer = QHBoxLayout()
         footer.setSpacing(12)
         self._save_hint = _text_label(
-            tr("Ctrl+S saves changes"), self, role="secondary"
+            tr("Changes are saved automatically"), self, role="secondary"
         )
         self._save_hint.setWordWrap(False)
         footer.addWidget(self._save_hint)
@@ -422,24 +426,22 @@ class SettingsWindow(QDialog):
         footer.addWidget(self.buttons)
         root.addLayout(footer)
 
-        save_button = self.buttons.button(QDialogButtonBox.StandardButton.Save)
-        if save_button is not None:
-            save_button.setProperty("buttonRole", "primary")
-            save_button.setText(f"&{tr('Save')}")
-            save_button.setAccessibleName(tr("Save settings"))
-        cancel_button = self.buttons.button(QDialogButtonBox.StandardButton.Cancel)
-        if cancel_button is not None:
-            cancel_button.setText(f"&{tr('Cancel')}")
-            cancel_button.setAccessibleName(tr("Cancel changes"))
-
-        self.save_shortcut = QShortcut(QKeySequence.StandardKey.Save, self)
-        self.save_shortcut.setContext(Qt.ShortcutContext.WindowShortcut)
-        self.save_shortcut.activated.connect(self._save)
         self.interface_language_combo.currentIndexChanged.connect(
             self._preview_interface_language
         )
         add_interface_language_listener(self.retranslate_ui)
         self.reload()
+        self._autosave_ready = True
+        for combo in (
+            self.language_combo,
+            self.microphone_combo,
+            self.interface_language_combo,
+        ):
+            combo.currentIndexChanged.connect(self._save)
+        self.overlay_checkbox.toggled.connect(self._save)
+        self.startup_checkbox.toggled.connect(self._save)
+        self.hotkey_capture_button.hotkey_captured.connect(self._save)
+        self.restore_hotkey_button.clicked.connect(self._save)
 
     @staticmethod
     def _default_microphones() -> list[MicrophoneDevice]:
@@ -553,7 +555,7 @@ class SettingsWindow(QDialog):
             hotkey_row, can_capture=self._can_change_input
         )
         self.restore_hotkey_button = QPushButton(
-            f"&{tr('Restore Default')}", hotkey_row
+            f"&{tr('Restore default')}", hotkey_row
         )
         self.restore_hotkey_button.setAccessibleName(
             tr("Restore default push-to-talk key")
@@ -562,14 +564,14 @@ class SettingsWindow(QDialog):
         hotkey_layout.addWidget(self.hotkey_capture_button)
         hotkey_layout.addWidget(self.restore_hotkey_button)
         self._hotkey_label = QLabel(f"{tr('Push-to-talk key')}:", self._dictation_card)
-        setup_layout.addRow(self._hotkey_label, hotkey_row)
+        self._shortcuts_layout.addRow(self._hotkey_label, hotkey_row)
         self._hotkey_help = _text_label(
             tr(HOTKEY_GUIDANCE),
             self._dictation_card,
             role="secondary",
         )
         self._hotkey_help.setAccessibleName(tr("Push-to-talk key guidance"))
-        setup_layout.addRow(self._hotkey_help)
+        self._shortcuts_layout.addRow(self._hotkey_help)
         self.hotkey_capture_button.hotkey_captured.connect(self._set_hotkey)
         self.hotkey_capture_button.capture_rejected.connect(self._hotkey_help.setText)
         self.hotkey_capture_button.capture_started.connect(self.hotkey_capture_started)
@@ -824,6 +826,9 @@ class SettingsWindow(QDialog):
         self.notices_button.clicked.connect(
             lambda: QDesktopServices.openUrl(QUrl(NOTICES_URL))
         )
+        self.updates_button = QPushButton(tr("Check for updates"), self._links_card)
+        self.updates_button.clicked.connect(self.check_updates)
+        links.addWidget(self.updates_button)
         links.addWidget(self.website_button)
         links.addWidget(self.source_button)
         links.addWidget(self.notices_button)
@@ -832,6 +837,13 @@ class SettingsWindow(QDialog):
         layout.addWidget(self._links_card)
         layout.addStretch(1)
         return _scrollable_page(page, self)
+
+    def check_updates(self) -> None:
+        from whisper_dictate.support import UpdateDialog
+
+        if not hasattr(self, "_update_dialog"):
+            self._update_dialog = UpdateDialog(self)
+        self._update_dialog.check()
 
     @Slot()
     def _open_privacy_details(self) -> None:
@@ -896,9 +908,8 @@ class SettingsWindow(QDialog):
     def _preview_interface_language(self, index: int) -> None:
         if index < 0:
             return
-        set_interface_language(
-            InterfaceLanguage(self.interface_language_combo.itemData(index))
-        )
+        if self._autosave_ready:
+            self._save()
 
     def retranslate_ui(self) -> None:
         self.setWindowTitle(
@@ -920,19 +931,15 @@ class SettingsWindow(QDialog):
         )
         self.tabs.setAccessibleName(tr("Settings sections"))
         self.tabs.setTabText(0, f"&{tr('General')}")
-        self.tabs.setTabText(1, f"&{tr('Models')}")
-        self.tabs.setTabText(2, f"&{tr('Privacy')}")
-        self.tabs.setTabText(3, f"&{tr('About')}")
+        self.tabs.setTabText(1, tr("Shortcuts"))
+        self.tabs.setTabText(2, f"&{tr('Models')}")
+        self.tabs.setTabText(3, f"&{tr('Privacy')}")
+        self.tabs.setTabText(4, f"&{tr('About')}")
         self.buttons.setAccessibleName(tr("Settings actions"))
-        save_button = self.buttons.button(QDialogButtonBox.StandardButton.Save)
-        if save_button is not None:
-            save_button.setText(f"&{tr('Save')}")
-            save_button.setAccessibleName(tr("Save settings"))
-        cancel_button = self.buttons.button(QDialogButtonBox.StandardButton.Cancel)
-        if cancel_button is not None:
-            cancel_button.setText(f"&{tr('Cancel')}")
-            cancel_button.setAccessibleName(tr("Cancel changes"))
-        self._save_hint.setText(tr("Ctrl+S saves changes"))
+        close_button = self.buttons.button(QDialogButtonBox.StandardButton.Close)
+        close_button.setText(tr("Close"))
+        self.updates_button.setText(tr("Check for updates"))
+        self._save_hint.setText(tr("Changes are saved automatically"))
 
         self._status_title.setText(tr("Current status"))
         if self._status_state == "starting":
@@ -967,7 +974,7 @@ class SettingsWindow(QDialog):
         self._hotkey_label.setText(f"{tr('Push-to-talk key')}:")
         self._hotkey.setAccessibleName(tr("Push-to-talk key value"))
         self.hotkey_capture_button.retranslate_ui()
-        self.restore_hotkey_button.setText(f"&{tr('Restore Default')}")
+        self.restore_hotkey_button.setText(f"&{tr('Restore default')}")
         self.restore_hotkey_button.setAccessibleName(
             tr("Restore default push-to-talk key")
         )
@@ -1040,6 +1047,7 @@ class SettingsWindow(QDialog):
 
     @Slot()
     def _refresh_microphones(self) -> None:
+        blocker = QSignalBlocker(self.microphone_combo)
         selected = self.microphone_combo.currentData() or self._settings.microphone
         try:
             devices = self._microphone_provider()
@@ -1072,8 +1080,11 @@ class SettingsWindow(QDialog):
         self.microphone_combo.setCurrentIndex(max(selected_index, 0))
         self._microphone_help.setText(warning)
         self._microphone_help.setVisible(bool(warning))
+        del blocker
 
     def reload(self) -> SettingsLoadResult:
+        ready = self._autosave_ready
+        self._autosave_ready = False
         result = self._store.load()
         self._settings = result.settings
         self._settings_warning = result.warning
@@ -1100,6 +1111,7 @@ class SettingsWindow(QDialog):
         self.model_panel.refresh()
         self._set_hotkey(self._settings.hotkey)
         self._refresh_microphones()
+        self._autosave_ready = ready
         return result
 
     @Slot(str)
@@ -1133,7 +1145,9 @@ class SettingsWindow(QDialog):
         super().reject()
 
     @Slot()
-    def _save(self) -> None:
+    def _save(self, *_args) -> None:
+        if not self._autosave_ready:
+            return
         language = LanguageMode(self.language_combo.currentData())
         microphone = self.microphone_combo.currentData()
         updated = replace(
@@ -1147,19 +1161,20 @@ class SettingsWindow(QDialog):
             ),
             start_with_system=self.startup_checkbox.isChecked(),
         )
+        if updated == self._settings:
+            return
         try:
             self._save_settings(updated)
         except (SettingsWriteError, RuntimeSettingsError) as error:
-            QMessageBox.critical(
-                self,
-                tr("Settings could not be applied"),
-                tr(str(error))
-                or tr(
-                    "Skrivi Snakk could not apply settings safely. Previous settings "
-                    "remain active."
-                ),
+            previous = self._settings
+            self.reload()
+            self._settings = previous
+            self._warning.setText(
+                tr("Settings could not be applied") + ": " + tr(str(error))
             )
+            self._warning.show()
             return
         self._settings = updated
+        set_interface_language(updated.interface_language)
         self.settings_saved.emit(updated)
-        self.accept()
+        self._warning.hide()
