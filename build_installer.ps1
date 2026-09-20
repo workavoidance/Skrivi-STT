@@ -52,7 +52,7 @@ New-Item -ItemType Directory -Path $InstallerDist, $InstallerWork, $InstallerSpe
     --contents-directory runtime `
     --windowed `
     --name Skrivi `
-    --version-file build\version-info.txt `
+    --version-file (Join-Path $PSScriptRoot "build\version-info.txt") `
     --icon $IconPath `
     --paths src `
     --distpath $InstallerDist `
