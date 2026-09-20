@@ -38,6 +38,8 @@ def test_website_offers_the_accepted_store_release_and_current_installer() -> No
 
     assert website.count(PUBLIC_INSTALLER_URL) == 2
     assert testing.count(PUBLIC_INSTALLER_URL) == 2
+    assert "same version from GitHub" not in website
+    assert "Microsoft Store may still show an older version" in website
     assert website.count(STORE_URL) == 2
     assert testing.count(STORE_URL) == 2
 
