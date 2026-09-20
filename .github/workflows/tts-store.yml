@@ -1,0 +1,26 @@
+name: Skrivi Lytt Microsoft Store
+on:
+  workflow_dispatch:
+    inputs:
+      submit:
+        description: Submit an existing Lytt release to Microsoft
+        type: boolean
+        default: false
+      release_tag:
+        description: Lytt release tag, required when submitting
+        type: string
+        default: v0.4.3
+permissions:
+  contents: read
+jobs:
+  lytt:
+    if: github.ref == 'refs/heads/main'
+    uses: workavoidance/Skrivi-TTS/.github/workflows/store-submit.yml@0542c0adeddfe31960197ccfa99fdc11ad5f5157
+    with:
+      submit: ${{ inputs.submit }}
+      release_tag: ${{ inputs.release_tag }}
+    secrets:
+      AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
+      AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
+      AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      SELLER_ID: ${{ secrets.SELLER_ID }}
