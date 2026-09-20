@@ -15,7 +15,7 @@ retain that shared layout, spacing, typography and accessible Windows behaviour.
   live. Tray titles retain development build identifiers.
 - About explains the two apps and offers a user-activated companion link.
 - Settings, README and the dictation product page explain using both apps.
-- Windows shortcut and app display names identify Skrivi Dictation. The installer
+- Windows shortcut and app display names identify Skrivi Snakk. The installer
   removes the old app shortcuts when replacing them. AppId, package identity,
   startup IDs, executable, installation directory and data paths remain stable.
 - No microphone, transcription, model or saved-shortcut behaviour changes.
@@ -28,7 +28,7 @@ do not inspect each other's saved configuration or automatically resolve it.
 
 ## Evidence and remaining checks
 
-203 automated tests passed on Windows/Python 3.14, including live translation,
+204 automated tests passed on Windows/Python 3.14, including live translation,
 explicit companion-link activation, icon sizes, model/settings preservation,
 installer identity and existing hotkey behaviour. Ruff formatting/lint and
 module compilation passed. Qt renders were reviewed in English and Bokmål.

@@ -109,7 +109,7 @@ class TrayIcon:
         add_interface_language_listener(self.retranslate_ui)
 
     def _display_title(self) -> str:
-        return f"{self._title} · {tr('Dictation')}"
+        return f"{self._title} Snakk · {tr('Dictation')}"
 
     @property
     def menu(self) -> QMenu:

@@ -1,7 +1,7 @@
-# Skrivi · Dictation
+# Skrivi Snakk · Dictation
 
 The microphone in the Skrivi family: speak to write with this app, or use
-[**Skrivi TTS · Read aloud**](https://github.com/workavoidance/Skrivi-TTS)
+[**Skrivi Lytt · Read aloud**](https://github.com/workavoidance/Skrivi-TTS)
 to listen to text. The apps share an orange visual identity and work independently.
 
 When using both, keep **Right Ctrl** or **Left Ctrl + Windows** for dictation.

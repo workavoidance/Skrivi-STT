@@ -210,7 +210,7 @@ its warm surfaces, rounded controls and orange palette from STT. Installation
 and data identities stay unchanged. Shortcut guidance recommends Right Ctrl or
 Left Ctrl + Windows to avoid overlap with the reader's Ctrl + Alt + Space.
 
-Verification: 203 automated tests passed locally on Windows with Python 3.14;
+Verification: 204 automated tests passed locally on Windows with Python 3.14;
 formatting, lint and compilation passed. English and Norwegian settings/About
 renders were inspected. See [ecosystem review](ECOSYSTEM_REVIEW.md) for scope,
 screenshots and remaining packaged-installation/accessibility checks.

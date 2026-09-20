@@ -311,7 +311,7 @@ def test_settings_actions_are_named_and_keyboard_operable(tmp_path: Path) -> Non
     assert window.model_panel.accessibleName() == "Local speech models"
     assert window.model_panel.model_combo.accessibleName() == "Speech model"
     assert window.model_panel.download_button.isEnabled() is False
-    assert window.windowTitle() == "Skrivi · Dictation Settings"
+    assert window.windowTitle() == "Skrivi Snakk · Dictation Settings"
     assert window.minimumWidth() <= 640
     assert window.minimumHeight() <= 520
     assert window.overlay_checkbox.focusPolicy() & Qt.FocusPolicy.TabFocus
@@ -492,7 +492,7 @@ def test_norwegian_interface_covers_settings_models_tray_and_overlay(
         indicator.post("transcribing")
         process_events_until(lambda: bool(statuses))
 
-        assert window.windowTitle() == "Innstillinger for Skrivi · Diktering"
+        assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
         assert window.accessibleName() == "Skrivi-innstillinger"
         assert [window.tabs.tabText(index).replace("&", "") for index in range(4)] == [
             "Generelt",
@@ -539,7 +539,7 @@ def test_interface_language_previews_live_cancel_restores_and_save_persists(
     )
     window.interface_language_combo.setCurrentIndex(norwegian_index)
 
-    assert window.windowTitle() == "Innstillinger for Skrivi · Diktering"
+    assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
     assert window._status.text() == "Klar. Hold Høyre Ctrl for å diktere"
     assert window.model_panel.download_button.text().replace("&", "") == (
         "Last ned modell"
@@ -549,7 +549,7 @@ def test_interface_language_previews_live_cancel_restores_and_save_persists(
 
     window.reject()
 
-    assert window.windowTitle() == "Skrivi · Dictation Settings"
+    assert window.windowTitle() == "Skrivi Snakk · Dictation Settings"
     assert window._status.text() == "Ready. Hold Right Ctrl to dictate"
     assert window.model_panel.download_button.text().replace("&", "") == (
         "Download model"
@@ -564,7 +564,7 @@ def test_interface_language_previews_live_cancel_restores_and_save_persists(
     assert (
         store.load().settings.interface_language is InterfaceLanguage.NORWEGIAN_BOKMAL
     )
-    assert window.windowTitle() == "Innstillinger for Skrivi · Diktering"
+    assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
     set_interface_language(InterfaceLanguage.ENGLISH)
 
 
@@ -611,8 +611,8 @@ def test_ecosystem_labels_translate_and_companion_link_is_explicit(
     window.companion_button.click()
     assert opened == [COMPANION_URL]
     set_interface_language(InterfaceLanguage.NORWEGIAN_BOKMAL)
-    assert window._product_name.text() == "Skrivi · Diktering"
-    assert window._about_title.text() == "Skrivi · Diktering"
+    assert window._product_name.text() == "Skrivi Snakk · Diktering"
+    assert window._about_title.text() == "Skrivi Snakk · Diktering"
     assert "Diktering" in tray._title_action.text()
     assert "DEV test" in tray._icon.toolTip()
     assert "Unngå venstre Ctrl" in window._hotkey_help.text()

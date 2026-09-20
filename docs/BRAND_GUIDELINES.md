@@ -10,9 +10,9 @@ for the umbrella brand. Product icons describe the action: an orange microphone
 for dictation and an orange speaker for read-aloud, using #F05A24, rounded ends,
 transparent backgrounds and a comparable visual weight.
 
-Use “Skrivi · Dictation” / “Skrivi · Diktering” in the dictation interface.
-Windows installation labels use “Skrivi Dictation”; persistent IDs, paths and
-Skrivi.exe stay stable for upgrades. The companion is Skrivi TTS / read-aloud.
+Use “Skrivi Snakk · Dictation” / “Skrivi Snakk · Diktering” in the dictation interface.
+Windows installation labels use “Skrivi Snakk”; persistent IDs, paths and
+Skrivi.exe stay stable for upgrades. The companion is Skrivi Lytt / read-aloud (repository: Skrivi-TTS).
 Keep the shared warm surfaces, rounded cards, spacing, typography and orange
 accents already used by both apps. Windows accessibility colours take precedence.
 Recording and playback must have text labels, not colour-only meanings.

@@ -57,7 +57,7 @@ def test_store_manifest_declares_opt_in_startup_task() -> None:
     assert startup_task.attrib == {
         "TaskId": "SkriviStartup",
         "Enabled": "false",
-        "DisplayName": "Skrivi Dictation",
+        "DisplayName": "Skrivi Snakk",
     }
 
 

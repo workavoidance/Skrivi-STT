@@ -13,7 +13,7 @@ here before a release.
   Norwegian labels, companion-app guidance and a read-aloud link in About.
 - Clarify shortcuts for running dictation and read-aloud together. Keep existing
   settings, model locations, executable name and installation identity.
-- Label Windows shortcuts and app listings Skrivi Dictation.
+- Label Windows shortcuts and app listings Skrivi Snakk.
 
 ## [0.2.0-alpha.4] - 2026-09-04
 
