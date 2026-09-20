@@ -11,10 +11,13 @@ from PySide6.QtWidgets import (
     QFormLayout,
     QFrame,
     QHBoxLayout,
+    QHeaderView,
     QLabel,
     QMessageBox,
     QProgressBar,
     QPushButton,
+    QTreeWidget,
+    QTreeWidgetItem,
     QVBoxLayout,
     QWidget,
 )
@@ -135,7 +138,28 @@ class ModelManagerPanel(QWidget):
             QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow
         )
         model_form.addRow(self.model_label, self.model_combo)
-        model_layout.addLayout(model_form)
+        self.model_combo.hide()
+        self.model_label.hide()
+        self.model_table = QTreeWidget(self)
+        self.model_table.setRootIsDecorated(False)
+        self.model_table.setColumnCount(3)
+        self.model_table.setMinimumHeight(155)
+        self.model_table.setHeaderLabels([tr("Model"), tr("Size"), tr("Availability")])
+        self.model_table.header().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        for spec in self._catalogue:
+            item = QTreeWidgetItem(
+                ["Whisper " + spec.name, spec.download_size_label, ""]
+            )
+            item.setData(0, Qt.ItemDataRole.UserRole, spec.identifier)
+            self.model_table.addTopLevelItem(item)
+        self.model_table.currentItemChanged.connect(
+            lambda item, previous: (
+                self.select_model(item.data(0, Qt.ItemDataRole.UserRole))
+                if item
+                else None
+            )
+        )
+        model_layout.addWidget(self.model_table)
 
         self.details = _label(parent=self.model_card, role="secondary")
         self.details.setAccessibleName(tr("Selected model details"))
@@ -157,10 +181,10 @@ class ModelManagerPanel(QWidget):
         button_row = QHBoxLayout()
         self.download_button = QPushButton(f"&{tr('Download model')}", self)
         self.download_button.setAccessibleName(tr("Download selected model"))
-        self.download_button.setProperty("buttonRole", "primary")
+
         self.activate_button = QPushButton(f"&{tr('Use this model')}", self)
         self.activate_button.setAccessibleName(tr("Use selected speech model"))
-        self.activate_button.setProperty("buttonRole", "primary")
+
         self.remove_button = QPushButton(f"&{tr('Remove from this PC')}", self)
         self.remove_button.setAccessibleName(tr("Remove selected model"))
         self.remove_button.setProperty("buttonRole", "destructive")
@@ -198,7 +222,11 @@ class ModelManagerPanel(QWidget):
         import_row.addWidget(self.verify_button)
         import_row.addStretch(1)
         import_layout.addLayout(import_row)
-        layout.addWidget(self.import_card)
+        self.import_title.hide()
+        self.import_help.hide()
+        self.import_card.hide()
+        import_layout.removeItem(import_row)
+        model_layout.addLayout(import_row)
         layout.addStretch(1)
 
         self.download_button.clicked.connect(self._download)
@@ -300,6 +328,31 @@ class ModelManagerPanel(QWidget):
     @Slot()
     def refresh(self) -> None:
         identifier = self.selected_identifier()
+        self.model_table.setHeaderLabels([tr("Model"), tr("Size"), tr("Availability")])
+        with QSignalBlocker(self.model_table):
+            for row, entry in enumerate(self._catalogue):
+                item = self.model_table.topLevelItem(row)
+                installed = self._manager is not None and self._manager.is_installed(
+                    entry.identifier
+                )
+                state = (
+                    tr("Installed and active")
+                    if entry.identifier == self.active_identifier()
+                    else tr("Installed")
+                    if installed
+                    else tr("Not installed")
+                )
+                if self._manager is not None:
+                    current = self._manager.status(entry.identifier)
+                    if current.state in {
+                        ModelState.DOWNLOADING,
+                        ModelState.VERIFYING,
+                        ModelState.LOADING,
+                    }:
+                        state = tr(current.state.value.title())
+                item.setText(2, state)
+                if entry.identifier == identifier:
+                    self.model_table.setCurrentItem(item)
         spec = next(spec for spec in self._catalogue if spec.identifier == identifier)
         ram = (
             tr(" Detected RAM: {memory:.1f} GB.", memory=self._memory_gb)
@@ -376,6 +429,7 @@ class ModelManagerPanel(QWidget):
     def _set_busy(self, busy: bool, *, cancellable: bool = False) -> None:
         self.verify_button.setEnabled(not busy)
         self.model_combo.setEnabled(not busy)
+        self.model_table.setEnabled(not busy)
         for button in (
             self.download_button,
             self.activate_button,
@@ -437,6 +491,10 @@ class ModelManagerPanel(QWidget):
     @Slot(object)
     def _status_changed(self, status: ModelStatus) -> None:
         self._last_status = status
+        for row in range(self.model_table.topLevelItemCount()):
+            item = self.model_table.topLevelItem(row)
+            if item.data(0, Qt.ItemDataRole.UserRole) == status.identifier:
+                item.setText(2, tr(status.state.value.replace("_", " ").title()))
         if status.state in {ModelState.DOWNLOADING, ModelState.VERIFYING}:
             self.select_model(status.identifier)
             cancellable = (

@@ -21,6 +21,8 @@ $BuildPython = Join-Path $PSScriptRoot ".build-venv\Scripts\python.exe"
 & $BuildPython -m pip install --upgrade pip
 & $BuildPython -m pip install -r requirements-build.txt -c constraints-windows.txt
 & $BuildPython tools\create_icon.py
+& $BuildPython tools\create_version_info.py
+if ($LASTEXITCODE -ne 0) { throw "Product metadata generation failed." }
 
 & $BuildPython -m PyInstaller `
     --noconfirm `
@@ -28,6 +30,7 @@ $BuildPython = Join-Path $PSScriptRoot ".build-venv\Scripts\python.exe"
     --onefile `
     --windowed `
     --name Skrivi `
+    --version-file build\version-info.txt `
     --icon assets\skrivi.ico `
     --paths src `
     --collect-all faster_whisper `

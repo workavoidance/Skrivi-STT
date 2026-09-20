@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.3.0",
+    [string]$Version = "0.3.2",
     [string]$BuildId = "",
     [string]$SigningThumbprint = "",
     [switch]$Development
@@ -36,6 +36,8 @@ $BuildPython = Join-Path $PSScriptRoot ".build-venv\Scripts\python.exe"
 & $BuildPython -m pip install --upgrade pip
 & $BuildPython -m pip install -r requirements-build.txt -c constraints-windows.txt
 & $BuildPython tools\create_icon.py
+& $BuildPython tools\create_version_info.py
+if ($LASTEXITCODE -ne 0) { throw "Product metadata generation failed." }
 
 $InstallerDist = Join-Path $PSScriptRoot "dist\installed"
 $InstallerWork = Join-Path $PSScriptRoot "build\installer"
@@ -50,6 +52,7 @@ New-Item -ItemType Directory -Path $InstallerDist, $InstallerWork, $InstallerSpe
     --contents-directory runtime `
     --windowed `
     --name Skrivi `
+    --version-file (Join-Path $PSScriptRoot "build\version-info.txt") `
     --icon $IconPath `
     --paths src `
     --distpath $InstallerDist `
@@ -104,7 +107,7 @@ if ($SigningThumbprint) {
 & $InnoCompiler @InnoArgs "installer\Skrivi.iss"
 if ($LASTEXITCODE -ne 0) { throw "The installer build failed." }
 
-$OutputName = "Skrivi-$Version-windows-x64-setup.exe"
+$OutputName = "Skrivi-Snakk-$Version-windows-x64-setup.exe"
 Write-Host ""
 if ($SigningThumbprint) {
     & "$PSScriptRoot\tools\sign_windows.ps1" -Path (Join-Path $InstallerOutput $OutputName) -Thumbprint $SigningThumbprint

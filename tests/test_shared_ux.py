@@ -11,6 +11,71 @@ from whisper_dictate.settings_window import SettingsWindow
 from whisper_dictate.support import HomeWindow
 
 
+def test_wheel_scrolls_settings_without_changing_focused_selector(tmp_path):
+    from PySide6.QtCore import QPoint, QPointF, Qt
+    from PySide6.QtGui import QWheelEvent
+
+    app = application()
+    window = SettingsWindow(SettingsStore(tmp_path / "settings.json"))
+    window.resize(640, 520)
+    window.show()
+    combo = window.language_combo
+    combo.setFocus()
+    app.processEvents()
+    before = combo.currentIndex()
+    event = QWheelEvent(
+        QPointF(10, 10),
+        QPointF(10, 10),
+        QPoint(),
+        QPoint(0, -120),
+        Qt.MouseButton.NoButton,
+        Qt.KeyboardModifier.NoModifier,
+        Qt.ScrollPhase.NoScrollPhase,
+        False,
+    )
+    app.sendEvent(combo, event)
+    assert combo.currentIndex() == before
+    assert window.tabs.widget(0).verticalScrollBar().value() > 0
+    window.close()
+
+
+def test_welcome_uses_current_shortcut_and_remembers_skip(tmp_path):
+    from PySide6.QtWidgets import QLabel
+
+    from whisper_dictate.ux_helpers import show_welcome
+
+    application()
+    parent = SettingsWindow(SettingsStore(tmp_path / "settings.json"))
+    marker = tmp_path / "welcome-v1.done"
+    show_welcome(parent, "Skrivi Snakk", marker, ["F9"], lambda: None, lambda s: s)
+    assert any("F9" in label.text() for label in parent._welcome.findChildren(QLabel))
+    assert not marker.exists()
+    parent._welcome.reject()
+    assert marker.exists()
+    show_welcome(parent, "Skrivi Snakk", marker, ["F9"], lambda: None, lambda s: s)
+    assert not parent._welcome.isVisible()
+    show_welcome(
+        parent, "Skrivi Snakk", marker, ["F9"], lambda: None, lambda s: s, force=True
+    )
+    assert parent._welcome.isVisible()
+    parent._welcome.accept()
+    assert not (tmp_path / "settings.json").exists()
+
+
+def test_small_model_page_scrolls_without_overlapping_controls(tmp_path):
+    app = application()
+    window = SettingsWindow(SettingsStore(tmp_path / "settings.json"))
+    window.resize(640, 520)
+    window.tabs.setCurrentIndex(2)
+    window.show()
+    app.processEvents()
+    panel = window.model_panel
+    assert window.tabs.widget(2).widget() is panel
+    assert panel.model_table.geometry().bottom() < panel.details.geometry().top()
+    assert window.tabs.widget(2).horizontalScrollBar().maximum() == 0
+    window.close()
+
+
 def test_test_channel_finds_newer_prerelease_without_offering_downgrade():
     releases = [
         {"tag_name": "v0.2.1"},

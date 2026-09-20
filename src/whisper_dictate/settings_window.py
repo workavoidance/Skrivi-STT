@@ -197,6 +197,17 @@ class HotkeyCaptureButton(QPushButton):
             )
         )
         self.clicked.connect(self.begin_capture)
+        self.capture_rejected.connect(self._show_capture_message)
+
+    def _show_capture_message(self, text):
+        if self._capturing:
+            self._capture_prompt.setText(text)
+
+    def setText(self, text):
+        if self._capturing and hasattr(self, "_capture_prompt"):
+            self._capture_prompt.setText(text)
+        else:
+            super().setText(text)
 
     @property
     def is_capturing(self) -> bool:
@@ -211,6 +222,20 @@ class HotkeyCaptureButton(QPushButton):
                 tr("Finish the current recording before changing the push-to-talk key.")
             )
             return
+        self._capture_dialog = QDialog(self.window())
+        self._capture_dialog.setWindowTitle(tr("Change shortcut…"))
+        self._capture_dialog.setWindowModality(Qt.WindowModality.WindowModal)
+        self._capture_dialog.setMinimumWidth(420)
+        capture_layout = QVBoxLayout(self._capture_dialog)
+        self._capture_prompt = QLabel(tr("Press a key or combination…"))
+        self._capture_prompt.setWordWrap(True)
+        capture_layout.addWidget(self._capture_prompt)
+        cancel = QPushButton(tr("Cancel"))
+        cancel.setAutoDefault(False)
+        cancel.clicked.connect(self.cancel_capture)
+        capture_layout.addWidget(cancel)
+        self._capture_dialog.rejected.connect(self.cancel_capture)
+        self._capture_dialog.show()
         self._capturing = True
         self._captured_identifier = None
         self._pressed_parts.clear()
@@ -228,6 +253,8 @@ class HotkeyCaptureButton(QPushButton):
     def _finish_capture(self) -> None:
         self.releaseKeyboard()
         self._capturing = False
+        if hasattr(self, "_capture_dialog"):
+            self._capture_dialog.hide()
         self._captured_identifier = None
         self._pressed_parts.clear()
         self.setText(f"&{tr('Change…')}")
@@ -395,17 +422,17 @@ class SettingsWindow(QDialog):
         self.tabs.setAccessibleName(tr("Settings sections"))
         self._shortcuts_page = QWidget(self)
         self._shortcuts_layout = QFormLayout(self._shortcuts_page)
+        self._shortcuts_layout.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
+        self._shortcuts_layout.setVerticalSpacing(16)
         self.tabs.addTab(self._general_page(), f"&{tr('General')}")
         self.model_panel = ModelManagerPanel(model_manager, model_runtime, self)
         self.model_panel.model_activated.connect(self._model_activated)
-        self.tabs.addTab(self._shortcuts_page, tr("Shortcuts"))
-        self.tabs.addTab(self.model_panel, f"&{tr('Models')}")
+        self.tabs.addTab(_scrollable_page(self._shortcuts_page, self), tr("Shortcuts"))
+        self.tabs.addTab(_scrollable_page(self.model_panel, self), f"&{tr('Models')}")
         self.tabs.addTab(self._privacy_page(), f"&{tr('Privacy')}")
         self.tabs.addTab(self._about_page(), f"&{tr('About')}")
         root.addWidget(self.tabs, 1)
-        self.manage_models_button.clicked.connect(
-            lambda: self.tabs.setCurrentWidget(self.model_panel)
-        )
+        self.manage_models_button.clicked.connect(lambda: self.tabs.setCurrentIndex(2))
 
         self.buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Close,
@@ -442,6 +469,9 @@ class SettingsWindow(QDialog):
         self.startup_checkbox.toggled.connect(self._save)
         self.hotkey_capture_button.hotkey_captured.connect(self._save)
         self.restore_hotkey_button.clicked.connect(self._save)
+        from whisper_dictate.ux_helpers import polish
+
+        polish(self)
 
     @staticmethod
     def _default_microphones() -> list[MicrophoneDevice]:
@@ -481,7 +511,7 @@ class SettingsWindow(QDialog):
         self._status.setAccessibleName(tr("Current dictation status"))
         status_copy.addWidget(self._status)
         status_layout.addLayout(status_copy, 1)
-        layout.addWidget(self._status_card)
+        self._status_card.hide()
 
         self._dictation_card, dictation_layout = _card(page)
         self._dictation_title, self._dictation_description = _add_section_heading(
@@ -490,6 +520,7 @@ class SettingsWindow(QDialog):
             tr("Choose what Skrivi Snakk listens for and how you start speaking."),
         )
         setup_layout = QFormLayout()
+        setup_layout.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
         setup_layout.setContentsMargins(0, 6, 0, 0)
         setup_layout.setHorizontalSpacing(18)
         setup_layout.setVerticalSpacing(10)
@@ -560,11 +591,11 @@ class SettingsWindow(QDialog):
         self.restore_hotkey_button.setAccessibleName(
             tr("Restore default push-to-talk key")
         )
-        hotkey_layout.addWidget(self._hotkey, 1)
         hotkey_layout.addWidget(self.hotkey_capture_button)
         hotkey_layout.addWidget(self.restore_hotkey_button)
         self._hotkey_label = QLabel(f"{tr('Push-to-talk key')}:", self._dictation_card)
-        self._shortcuts_layout.addRow(self._hotkey_label, hotkey_row)
+        self._shortcuts_layout.addRow(self._hotkey_label, self._hotkey)
+        self._shortcuts_layout.addRow(hotkey_row)
         self._hotkey_help = _text_label(
             tr(HOTKEY_GUIDANCE),
             self._dictation_card,
@@ -591,6 +622,7 @@ class SettingsWindow(QDialog):
             tr("Choose how Skrivi Snakk looks and behaves when Windows starts."),
         )
         application_form = QFormLayout()
+        application_form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
         application_form.setContentsMargins(0, 6, 0, 2)
         application_form.setHorizontalSpacing(18)
         application_form.setVerticalSpacing(10)
@@ -807,7 +839,7 @@ class SettingsWindow(QDialog):
             tr("Learn more"),
             tr("Open documentation in your web browser."),
         )
-        links = QHBoxLayout()
+        links = QGridLayout()
         links.setSpacing(8)
         self.website_button = QPushButton(f"&{tr('Website')}", self._links_card)
         self.website_button.setAccessibleName(tr("Open Skrivi Snakk website"))
@@ -828,11 +860,10 @@ class SettingsWindow(QDialog):
         )
         self.updates_button = QPushButton(tr("Check for updates"), self._links_card)
         self.updates_button.clicked.connect(self.check_updates)
-        links.addWidget(self.updates_button)
-        links.addWidget(self.website_button)
-        links.addWidget(self.source_button)
-        links.addWidget(self.notices_button)
-        links.addStretch(1)
+        links.addWidget(self.updates_button, 0, 0)
+        links.addWidget(self.website_button, 0, 1)
+        links.addWidget(self.source_button, 1, 0)
+        links.addWidget(self.notices_button, 1, 1)
         links_layout.addLayout(links)
         layout.addWidget(self._links_card)
         layout.addStretch(1)
@@ -1106,7 +1137,7 @@ class SettingsWindow(QDialog):
             if self._model_runtime is not None
             else self._active_model
         )
-        self._model.setText(active_model)
+        self._model.setText("Whisper " + active_model.title())
         self.model_panel.select_model(active_model)
         self.model_panel.refresh()
         self._set_hotkey(self._settings.hotkey)
@@ -1117,7 +1148,7 @@ class SettingsWindow(QDialog):
     @Slot(str)
     def _model_activated(self, identifier: str) -> None:
         self._active_model = identifier
-        self._model.setText(identifier)
+        self._model.setText("Whisper " + identifier.title())
         self._settings = self._store.load().settings
 
     @Slot()

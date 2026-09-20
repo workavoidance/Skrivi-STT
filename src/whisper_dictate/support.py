@@ -103,7 +103,7 @@ class HomeWindow(QDialog):
         self.setMinimumSize(640, 520)
         layout = QVBoxLayout(self)
         layout.setContentsMargins(24, 22, 24, 18)
-        self.brand = QLabel(tr("Skrivi Snakk · Dictation"))
+        self.brand = QLabel("Skrivi Snakk")
         self.brand.setProperty("uiRole", "eyebrow")
         layout.addWidget(self.brand)
         self.heading = QLabel(tr("Dictation"))
@@ -128,6 +128,15 @@ class HomeWindow(QDialog):
         row = QHBoxLayout()
         self.settings_button = QPushButton()
         self.settings_button.clicked.connect(settings_window.show_settings)
+        self.shortcuts_button = QPushButton(tr("Change shortcuts"))
+        self.shortcuts_button.clicked.connect(self.change_shortcuts)
+        self.help_button = QPushButton(tr("How to use"))
+        self.help_button.clicked.connect(lambda: self.introduction(force=True))
+        actions = QHBoxLayout()
+        actions.addWidget(self.shortcuts_button)
+        actions.addWidget(self.help_button)
+        actions.addStretch()
+        layout.insertLayout(4, actions)
         self.cancel_button = QPushButton()
         self.cancel_button.clicked.connect(self.cancel_requested)
         self.retry_button = QPushButton()
@@ -143,14 +152,17 @@ class HomeWindow(QDialog):
         ):
             row.addWidget(button)
         layout.addLayout(row)
+        from whisper_dictate.ux_helpers import polish
+
+        polish(self)
         add_interface_language_listener(self.refresh)
         self.refresh()
 
     def refresh(self):
         settings = self.store.load().settings
         self.setWindowTitle("Skrivi Snakk")
-        self.brand.setText(tr("Skrivi Snakk · Dictation"))
-        self.heading.setText(tr("Dictation"))
+        self.brand.setText("Skrivi Snakk")
+        self.heading.setText(tr("Speak wherever you write"))
         self.summary.setText(
             tr("Microphone")
             + ": "
@@ -170,13 +182,14 @@ class HomeWindow(QDialog):
         )
         self.guide.setText(
             tr(
-                "Try dictation here: click the box, hold your shortcut, "
-                "speak, then release. "
-                "Esc cancels. You can also dictate directly into another app."
-            )
+                "Click where you want to write in any app. "
+                "Hold {shortcut}, speak, then release. Esc cancels."
+            ).format(shortcut=tr(hotkey_display_name(settings.hotkey)))
         )
-        self.practice.setPlaceholderText(tr("Try dictation here…"))
-        self.practice.setAccessibleName(tr("Try dictation here…"))
+        self.shortcuts_button.setText(tr("Change shortcuts"))
+        self.help_button.setText(tr("How to use"))
+        self.practice.setPlaceholderText(tr("Optional: try dictation here…"))
+        self.practice.setAccessibleName(tr("Optional: try dictation here…"))
         self.notice.setText(
             tr(
                 "Practice text is not saved and is cleared when this window closes. "
@@ -198,6 +211,25 @@ class HomeWindow(QDialog):
         self.showNormal()
         self.raise_()
         self.activateWindow()
+        self.introduction()
+
+    def change_shortcuts(self):
+        self.settings_window.show_settings()
+        self.settings_window.tabs.setCurrentIndex(1)
+
+    def introduction(self, *, force=False):
+        from whisper_dictate.ux_helpers import show_welcome
+
+        settings = self.store.load().settings
+        show_welcome(
+            self,
+            "Skrivi Snakk",
+            self.store.path.parent / "welcome-v1.done",
+            [tr(hotkey_display_name(settings.hotkey))],
+            self.change_shortcuts,
+            tr,
+            force=force,
+        )
 
     def reject(self):
         self.practice.clear()

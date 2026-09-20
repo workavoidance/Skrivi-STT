@@ -1,0 +1,13 @@
+﻿Skrivi Snakk
+
+Norsk
+Dette installerer Skrivi Snakk for din Windows-bruker. Lukk appen før installasjon.
+Eksisterende innstillinger og modeller beholdes ved oppdatering og avinstallasjon.
+Appen bruker en lokal talemodell. Første oppsett kan kreve en modellnedlasting.
+Appen har MIT-lisens; lisensen og tredjepartsmerknader følger med appen.
+
+English
+This installs Skrivi Snakk for your Windows user. Quit the app before installation.
+Existing settings and models are preserved through updates and uninstall.
+The app uses a local speech model. First setup may require a model download.
+The app uses the MIT licence; the licence and third-party notices are included.

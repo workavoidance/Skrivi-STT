@@ -265,7 +265,7 @@ def test_hotkey_capture_accepts_laptop_combination_in_either_order() -> None:
 
     button.keyPressEvent(left_windows)
     assert captured == []
-    assert button.text() == "Press the second key…"
+    assert button._capture_prompt.text() == "Press the second key…"
 
     button.keyPressEvent(left_ctrl)
     assert captured == ["left_ctrl_windows"]
@@ -349,7 +349,7 @@ def test_settings_guidance_and_navigation_follow_the_current_choice(
     assert window._language_help.text() == "Always listens for English."
 
     window.manage_models_button.click()
-    assert window.tabs.currentWidget() is window.model_panel
+    assert window.tabs.currentWidget().widget() is window.model_panel
 
 
 def test_privacy_and_about_pages_explain_the_product_boundary(tmp_path: Path) -> None:

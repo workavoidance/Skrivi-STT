@@ -220,6 +220,7 @@ def main(argv: list[str] | None = None) -> None:
         indicator.request_exit,
         on_settings=settings_window.show_settings,
         on_open=home.open,
+        on_how_to=lambda: home.introduction(force=True),
         on_updates=settings_window.check_updates,
         on_retry_model=controller.retry_model_load,
         title=identity.title,

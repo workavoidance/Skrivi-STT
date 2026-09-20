@@ -22,6 +22,9 @@ if ($env:SKRIVI_EXPECTED_SIGNER) {
     & (Join-Path $root 'tools\sign_windows.ps1') -VerifyOnly -Thumbprint $env:SKRIVI_EXPECTED_SIGNER -Path @($app, (Join-Path $appRoot 'unins000.exe'))
 }
 if (!(Test-Path -LiteralPath $app)) { throw 'Stable executable path changed.' }
+$info = (Get-Item -LiteralPath $app).VersionInfo
+$expectedVersion = (Get-Content (Join-Path $root 'release/VERSION') -Raw).Trim().TrimStart('v')
+if ($info.ProductName -ne 'Skrivi Snakk' -or $info.ProductVersion -ne $expectedVersion) { throw 'Application product metadata mismatch.' }
 $menu = Join-Path ([Environment]::GetFolderPath('Programs')) 'Skrivi'
 $desktop = [Environment]::GetFolderPath('Desktop')
 $shellLink = New-Object -ComObject WScript.Shell
@@ -47,8 +50,11 @@ foreach ($folder in @($menu,$desktop)) {
 foreach ($file in $before.Keys) {
     if ((Get-FileHash -LiteralPath $file).Hash -ne $before[$file]) { throw 'Reinstall changed user data.' }
 }
+$startupKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run'
+New-ItemProperty -Path $startupKey -Name Skrivi -Value ('"' + $app + '" --tray') -PropertyType String -Force | Out-Null
 $process = Start-Process -FilePath (Join-Path $appRoot 'unins000.exe') -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -WindowStyle Hidden -PassThru
 if (!$process.WaitForExit(120000) -or $process.ExitCode -ne 0) { throw 'Uninstall failed.' }
+if (Get-ItemProperty -Path $startupKey -Name Skrivi -ErrorAction SilentlyContinue) { throw 'Uninstall left an owned startup entry.' }
 foreach ($folder in @($menu,$desktop)) {
     if (Test-Path -LiteralPath (Join-Path $folder 'Skrivi Snakk.lnk')) { throw 'Uninstall left a renamed shortcut.' }
 }

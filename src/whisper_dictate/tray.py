@@ -43,6 +43,7 @@ class TrayIcon:
         on_settings: Callable[[], None],
         on_open: Callable[[], None] | None = None,
         on_updates: Callable[[], None] | None = None,
+        on_how_to: Callable[[], None] | None = None,
         on_retry_model: Callable[[], object] | None = None,
         on_feedback: Callable[[], None] | None = None,
         title: str = "Skrivi Snakk",
@@ -101,8 +102,13 @@ class TrayIcon:
                     lambda _checked=False, callback=callback: callback()
                 )
 
-        self.help_action = self._menu.addAction(
-            tr("Help"),
+        self.help_menu = self._menu.addMenu(tr("Help"))
+        self.help_action = self.help_menu.menuAction()
+        self.how_action = self.help_menu.addAction(
+            tr("How to use"), on_how_to or self._on_open
+        )
+        self.online_help_action = self.help_menu.addAction(
+            tr("Online help"),
             lambda: QDesktopServices.openUrl(QUrl("https://skrivi.no/help/")),
         )
         self.update_action = self._menu.addAction(
@@ -145,6 +151,8 @@ class TrayIcon:
     def retranslate_ui(self) -> None:
         self.open_action.setText(tr("Open Skrivi Snakk"))
         self.help_action.setText(tr("Help"))
+        self.how_action.setText(tr("How to use"))
+        self.online_help_action.setText(tr("Online help"))
         self.update_action.setText(tr("Check for updates"))
         self._title_action.setText(self._display_title())
         self._menu.setAccessibleName(tr("Skrivi Snakk tray menu"))

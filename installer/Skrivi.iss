@@ -23,7 +23,7 @@ PrivilegesRequired=lowest
 ArchitecturesAllowed=x64compatible
 MinVersion=10.0.22000
 OutputDir={#MyOutputDir}
-OutputBaseFilename=Skrivi-{#MyAppVersion}-windows-x64-setup
+OutputBaseFilename=Skrivi-Snakk-{#MyAppVersion}-windows-x64-setup
 SetupIconFile={#MyProjectRoot}\assets\skrivi.ico
 UninstallDisplayIcon={app}\Skrivi.exe
 Compression=lzma2/max
@@ -32,7 +32,7 @@ WizardStyle=modern
 CloseApplications=yes
 RestartApplications=no
 SetupLogging=yes
-LicenseFile={#MyProjectRoot}\LICENSE
+InfoBeforeFile={#MyProjectRoot}\installer\welcome.txt
 ChangesAssociations=no
 ChangesEnvironment=no
 UsedUserAreasWarning=no
@@ -118,7 +118,8 @@ begin
     'Software\Microsoft\Windows\CurrentVersion\Run',
     'Skrivi',
     RegisteredCommand
-  ) and (CompareText(RegisteredCommand, InstalledCommand) = 0) then
+  ) and ((CompareText(RegisteredCommand, InstalledCommand) = 0) or
+    (CompareText(RegisteredCommand, InstalledCommand + ' --tray') = 0)) then
     RegDeleteValue(
       HKCU,
       'Software\Microsoft\Windows\CurrentVersion\Run',

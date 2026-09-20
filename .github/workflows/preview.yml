@@ -32,7 +32,7 @@ jobs:
           $shortSha = $sha.Substring(0, 7)
           $buildId = "PR-${{ github.event.pull_request.number }}-$shortSha"
           .\build_installer.ps1 `
-            -Version "0.3.0-pr.${{ github.event.pull_request.number }}" `
+            -Version "0.3.2-pr.${{ github.event.pull_request.number }}" `
             -BuildId $buildId `
             -Development
       - name: Verify renamed shortcuts and data-preserving reinstall

@@ -646,3 +646,38 @@ NORWEGIAN_BOKMAL.update(
         "This model is not ready. Open Settings → Models to download or verify it.": "Modellen er ikke klar. Åpne Innstillinger → Modeller for å laste ned eller kontrollere den.",
     }
 )
+
+
+NORWEGIAN_BOKMAL.update(
+    {
+        "How to use": "Slik bruker du appen",
+        "Online help": "Hjelp på nettet",
+        "Change shortcuts": "Endre hurtigtaster",
+        "Get started": "Kom i gang",
+        "Skip introduction": "Hopp over introduksjonen",
+        "Speak wherever you write": "Snakk der du skriver",
+        "Use your voice in emails, documents, messages and other apps.": "Bruk stemmen i e-post, dokumenter, meldinger og andre apper.",
+        "1. Click where you want your words to appear.": "1. Klikk der du vil sette inn ordene dine.",
+        "2. Hold {shortcut} and speak.": "2. Hold {shortcut} inne og snakk.",
+        "3. Release the key to insert your words.": "3. Slipp tasten for å sette inn ordene.",
+        "You do not need to open Snakk. It stays available in the background.": "Du trenger ikke å åpne Snakk. Appen er tilgjengelig i bakgrunnen.",
+        "Press Esc to cancel a dictation.": "Trykk Esc for å avbryte dikteringen.",
+        "Listen to text anywhere": "Lytt til tekst i alle apper",
+        "Read text aloud from websites, documents, emails and other apps.": "Få lest opp tekst fra nettsider, dokumenter, e-post og andre apper.",
+        "1. Select the text you want to hear.": "1. Merk teksten du vil høre.",
+        "2. Press {shortcut}.": "2. Trykk {shortcut}.",
+        "Lytt reads your selection aloud. You do not need to copy it into this window.": "Lytt leser opp den merkede teksten. Du trenger ikke å kopiere den inn i dette vinduet.",
+        "Cannot select the text?": "Kan du ikke merke teksten?",
+        "Press {shortcut}, then drag around the text on your screen.": "Trykk {shortcut}, og dra deretter rundt teksten på skjermen.",
+        "Press Esc to stop reading.": "Trykk Esc for å stoppe opplesingen.",
+        "Click where you want to write in any app. Hold {shortcut}, speak, then release. Esc cancels.": "Klikk der du vil skrive i en app. Hold {shortcut} inne, snakk og slipp. Esc avbryter.",
+        "Optional: try dictation here…": "Valgfritt: prøv å diktere her…",
+        "Select text in any app, then use the shortcut. You do not need to copy it here.": "Merk tekst i en app og bruk hurtigtasten. Du trenger ikke å kopiere teksten hit.",
+        "Or paste or type text below": "Eller lim inn eller skriv tekst nedenfor",
+        "With Automatic reading language, Lytt detects the language of selected or pasted text. Choose a fallback for uncertain text.": "Med Automatisk som lesespråk gjenkjenner Lytt språket i merket eller innlimt tekst. Velg språk for tekst som er vanskelig å gjenkjenne.",
+        "Free, local and open source": "Gratis, lokal og med åpen kildekode",
+        "Size": "Størrelse",
+        "Availability": "Tilgjengelighet",
+        "Not installed": "Ikke installert",
+    }
+)
