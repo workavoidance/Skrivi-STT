@@ -432,7 +432,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-weight: 700;
 }
 
-.doc-links a:hover {
+/* Reference cards have light backgrounds, unlike the approval panel. */
+.feature-card .doc-links a {
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.doc-links a:hover,
+.doc-links a:focus-visible {
   border-color: var(--orange);
   background: rgba(240,90,36,.1);
 }
