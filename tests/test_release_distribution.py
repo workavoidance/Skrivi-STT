@@ -5,11 +5,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TAG = "v0.3.2"
-SITE_TAG = "v0.3.0"
-INSTALLER = f"Skrivi-{SITE_TAG}-windows-x64-setup.exe"
+SITE_TAG = "v0.3.2"
+INSTALLER = f"Skrivi-Snakk-{SITE_TAG.removeprefix('v')}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
     f"https://github.com/workavoidance/Skrivi-STT/releases/download/{SITE_TAG}/"
-    f"Skrivi-{SITE_TAG}-windows-x64-setup.exe"
+    f"Skrivi-Snakk-{SITE_TAG.removeprefix('v')}-windows-x64-setup.exe"
 )
 STORE_URL = "https://apps.microsoft.com/detail/9P42NBXD8W36"
 
