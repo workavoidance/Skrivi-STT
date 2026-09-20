@@ -7,11 +7,11 @@
 <meta name="theme-color" content="#faf7f2">
 <title  data-nb="Skrivi Lytt — lytt til teksten" data-en="Skrivi Lytt — listen to text">Skrivi Lytt — lytt til teksten</title>
 <link rel="icon" href="../assets/skrivi-mark.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=product-pages-1">
 <link rel="canonical" href="https://skrivi.no/read-aloud/">
-<script src="../script.js" defer></script>
+<script src="../script.js?v=product-pages-1" defer></script>
 </head>
-<body>
+<body class="product-page">
 <a href="#main" class="skip-link" data-nb="Hopp til innhold" data-en="Skip to content">Hopp til innhold</a>
 <header class="site-header">
 <a class="brand" href="../" aria-label="Skrivi"><img class="wordmark" src="../assets/skrivi-wordmark.svg" alt=""></a>
@@ -29,8 +29,12 @@
     <p class="hero-copy" data-nb="Få tekst lest høyt på norsk og engelsk. Lokalt på din egen maskin. Gratis å bruke." data-en="Listen to written text in Norwegian and English. Locally on your own computer. Free to use.">Få tekst lest høyt på norsk og engelsk. Lokalt på din egen maskin. Gratis å bruke.</p>
     <div class="hero-actions">
       <a href="https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.4.3/Skrivi-Lytt-0.4.3-windows-x64-setup.exe" class="button button-primary" data-nb="Last ned Lytt for Windows" data-en="Download Lytt for Windows">Last ned Lytt for Windows</a>
-      <a href="#install" class="hero-text-link" data-nb="Slik installerer du ↓" data-en="How to install ↓">Slik installerer du ↓</a>
+      <a href="#how" class="hero-text-link" data-nb="Slik fungerer det ↓" data-en="How it works ↓">Slik fungerer det ↓</a>
     </div>
+<div class="trust-row" aria-label="Skrivi-egenskaper" data-aria-nb="Skrivi-egenskaper" data-aria-en="Skrivi features"><span><b data-nb="Kjører lokalt" data-en="Runs locally">Kjører lokalt</b></span>
+<span><b data-nb="Ingen konto" data-en="No account">Ingen konto</b></span>
+<span><b data-nb="Gratis" data-en="Free">Gratis</b></span>
+<span><b data-nb="Åpen kildekode" data-en="Open source">Åpen kildekode</b></span></div>
     <p class="product-note" data-nb="Testutgave 0.4.3 · Windows 11 (x64)" data-en="Test release 0.4.3 · Windows 11 (x64)">Testutgave 0.4.3 · Windows 11 (x64)</p>
     <p class="product-note" data-nb="En egen app — du trenger ikke Snakk. Etter installasjon heter den «Skrivi Lytt» i Start-menyen." data-en="A separate app — you do not need Snakk. After installation it appears as “Skrivi Lytt” in the Start menu.">En egen app — du trenger ikke Snakk. Etter installasjon heter den «Skrivi Lytt» i Start-menyen.</p>
   </section>
@@ -54,7 +58,8 @@
       </article>
     </div>
     <p class="product-note" data-nb="Automatisk velger norsk eller engelsk for hele teksten. Du kan også velge språk selv. En norsk bokmålsstemme og engelske stemmer følger med; støtte for nynorsk er ikke bekreftet." data-en="Automatic chooses Norwegian or English for the whole passage. You can also choose a language yourself. Norwegian Bokmål and English voices are included; Nynorsk support is not confirmed.">Automatisk velger norsk eller engelsk for hele teksten. Du kan også velge språk selv. En norsk bokmålsstemme og engelske stemmer følger med; støtte for nynorsk er ikke bekreftet.</p>
-  </section>
+  <figure class="app-preview"><img src="../assets/product-screenshots/lytt-nb.png" data-src-nb="../assets/product-screenshots/lytt-nb.png" data-src-en="../assets/product-screenshots/lytt-en.png" alt="Leservinduet i Lytt" data-alt-nb="Leservinduet i Lytt" data-alt-en="Lytt reader window" loading="lazy" width="820" height="900"><figcaption data-nb="Leservinduet i Lytt · 0.4.3. Skjermbilde fra utgavens kildekode med separate testinnstillinger." data-en="Lytt reader window · 0.4.3. Captured from the release source with isolated test settings.">Leservinduet i Lytt · 0.4.3. Skjermbilde fra utgavens kildekode med separate testinnstillinger.</figcaption></figure>
+</section>
   <section class="statement-section">
     <div class="section-shell statement-grid">
       <div><p class="kicker kicker-light" data-nb="En annen vei inn i teksten" data-en="Another way into the text">En annen vei inn i teksten</p><h2 data-nb="La ørene hjelpe øynene." data-en="Let your ears help your eyes.">La ørene hjelpe øynene.</h2></div>
@@ -64,38 +69,36 @@
       </div>
     </div>
   </section>
-  <section id="install" class="section section-shell">
+<section id="technical" class="section technical-section"><div class="section-shell technical-grid"><div><p class="kicker" data-nb="Praktisk informasjon" data-en="Practical information">Praktisk informasjon</p><h2 data-nb="Dette trenger du å vite." data-en="What you need to know.">Dette trenger du å vite.</h2></div><dl class="technical-list"><div><dt data-nb="Plattform" data-en="Platform">Plattform</dt><dd data-nb="Windows 11 (x64)" data-en="Windows 11 (x64)">Windows 11 (x64)</dd></div>
+<div><dt data-nb="Språk og stemmer" data-en="Languages and voices">Språk og stemmer</dt><dd data-nb="Norsk bokmål og engelsk. Automatisk språkvalg eller ditt eget valg." data-en="Norwegian Bokmål and English. Automatic language selection or your own choice.">Norsk bokmål og engelsk. Automatisk språkvalg eller ditt eget valg.</dd></div>
+<div><dt data-nb="Nynorsk" data-en="Nynorsk">Nynorsk</dt><dd data-nb="Støtte er ikke bekreftet." data-en="Support is not confirmed.">Støtte er ikke bekreftet.</dd></div>
+<div><dt data-nb="Nettverk" data-en="Network">Nettverk</dt><dd data-nb="Stemmer følger med. Både opplesing og tekstgjenkjenning fungerer uten nett etter nedlasting." data-en="Voices are included. Reading aloud and text recognition work offline after download.">Stemmer følger med. Både opplesing og tekstgjenkjenning fungerer uten nett etter nedlasting.</dd></div>
+<div><dt data-nb="Personvern" data-en="Privacy">Personvern</dt><dd data-nb="Ingen konto eller telemetri. Tekst og lyd lastes ikke opp for opplesing." data-en="No account or telemetry. Text and audio are not uploaded for speech synthesis.">Ingen konto eller telemetri. Tekst og lyd lastes ikke opp for opplesing.</dd></div>
+<div><dt data-nb="Oppdateringer" data-en="Updates">Oppdateringer</dt><dd data-nb="Installeres manuelt fra GitHub. Modeller og innstillinger beholdes." data-en="Installed manually from GitHub. Models and settings are preserved.">Installeres manuelt fra GitHub. Modeller og innstillinger beholdes.</dd></div></dl></div></section>
+<section id="screen-reading" class="section section-shell"><div class="section-heading wide-heading"><p class="kicker" data-nb="Også tekst i bilder" data-en="Text in images too">Også tekst i bilder</p><h2 data-nb="Velg et område. Hør teksten." data-en="Select an area. Hear the text.">Velg et område. Hør teksten.</h2><p data-nb="Hvis markert tekst ikke kan hentes fra en app, lim den inn i leservinduet. For tekst i bilder eller skannede dokumenter: trykk Ctrl + Alt + Shift + Mellomrom og velg et skjermområde. Lokal tekstgjenkjenning (OCR) kan gjøre feil; kontroller teksten." data-en="If selected text cannot be captured from an app, paste it into the reader window. For text in images or scanned documents, press Ctrl + Alt + Shift + Space and select a screen region. Local text recognition (OCR) can make mistakes; check the text.">Hvis markert tekst ikke kan hentes fra en app, lim den inn i leservinduet. For tekst i bilder eller skannede dokumenter: trykk Ctrl + Alt + Shift + Mellomrom og velg et skjermområde. Lokal tekstgjenkjenning (OCR) kan gjøre feil; kontroller teksten.</p><p data-nb="Skjermområdet behandles på din egen PC. Funksjonen leser teksten den gjenkjenner; den forklarer ikke bilder eller lager et svar." data-en="The screen region is processed on your own PC. This feature reads recognised text; it does not explain images or generate an answer.">Skjermområdet behandles på din egen PC. Funksjonen leser teksten den gjenkjenner; den forklarer ikke bilder eller lager et svar.</p></div></section>
+  <section id="install" class="download-section"><div class="section-shell download-inner"><div>
     <div class="section-heading wide-heading">
       <p class="kicker" data-nb="Kom i gang" data-en="Get started">Kom i gang</p>
       <h2 data-nb="Last ned. Installer. Lytt." data-en="Download. Install. Listen.">Last ned. Installer. Lytt.</h2>
       <p data-nb="Last ned .exe-filen, åpne den og følg installasjonsveiviseren. Lukk Skrivi Lytt først hvis appen allerede kjører. Start deretter appen fra Start-menyen. Du trenger ikke administratorrettigheter eller en egen Python-installasjon." data-en="Download the .exe file, open it and follow the setup wizard. Quit Skrivi Lytt first if it is already running. Then start the app from the Start menu. No administrator rights or separate Python installation are needed.">Last ned .exe-filen, åpne den og følg installasjonsveiviseren. Lukk Skrivi Lytt først hvis appen allerede kjører. Start deretter appen fra Start-menyen. Du trenger ikke administratorrettigheter eller en egen Python-installasjon.</p>
     </div>
     <div class="hero-actions">
-      <a href="https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.4.3/Skrivi-Lytt-0.4.3-windows-x64-setup.exe" class="button button-primary" data-nb="Last ned Lytt for Windows" data-en="Download Lytt for Windows">Last ned Lytt for Windows</a>
-      <a href="https://github.com/workavoidance/Skrivi-TTS/releases/tag/v0.4.3" class="text-link" data-nb="Versjonsnotater og kontrollsummer (engelsk) ↗" data-en="Release notes and checksums ↗">Versjonsnotater og kontrollsummer (engelsk) ↗</a>
+      <a href="https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.4.3/Skrivi-Lytt-0.4.3-windows-x64-setup.exe" class="button button-paper" data-nb="Last ned Lytt for Windows" data-en="Download Lytt for Windows">Last ned Lytt for Windows</a>
+      <a href="https://github.com/workavoidance/Skrivi-TTS/releases/tag/v0.4.3" class="download-text-link" data-nb="Versjonsnotater og kontrollsummer (engelsk) ↗" data-en="Release notes and checksums ↗">Versjonsnotater og kontrollsummer (engelsk) ↗</a>
     </div>
     <div class="development-notice">
       <strong data-nb="Testutgave · kodesignert" data-en="Test release · code-signed">Testutgave · kodesignert</strong>
       <p data-nb="Utgiver er Open Source Developer Jonathan Wright. Windows kan fortsatt vise en SmartScreen-advarsel. Installer bare hvis du stoler på prosjektet; på en skole-PC bør du følge skolens IT-rutiner. Lytt er ikke tilgjengelig i Microsoft Store ennå." data-en="The publisher is Open Source Developer Jonathan Wright. Windows may still show a SmartScreen reputation warning. Install only if you trust the project; on a school PC, follow your school's IT procedures. Lytt is not available in Microsoft Store yet.">Utgiver er Open Source Developer Jonathan Wright. Windows kan fortsatt vise en SmartScreen-advarsel. Installer bare hvis du stoler på prosjektet; på en skole-PC bør du følge skolens IT-rutiner. Lytt er ikke tilgjengelig i Microsoft Store ennå.</p>
-      <p data-nb="Hvis markert tekst ikke kan hentes fra en app, lim den inn i leservinduet. For tekst i bilder eller skannede dokumenter: trykk Ctrl + Alt + Shift + Mellomrom og velg et skjermområde. Lokal tekstgjenkjenning (OCR) kan gjøre feil; kontroller teksten." data-en="If selected text cannot be captured from an app, paste it into the reader window. For text in images or scanned documents, press Ctrl + Alt + Shift + Space and select a screen region. Local text recognition (OCR) can make mistakes; check the text.">Hvis markert tekst ikke kan hentes fra en app, lim den inn i leservinduet. For tekst i bilder eller skannede dokumenter: trykk Ctrl + Alt + Shift + Mellomrom og velg et skjermområde. Lokal tekstgjenkjenning (OCR) kan gjøre feil; kontroller teksten.</p>
+
     </div>
     <p class="product-note" data-nb="Installasjonsfilen inkluderer stemmer og motorer. Eksisterende modeller og innstillinger beholdes ved ny installasjon. Oppdateringer installeres manuelt fra GitHub." data-en="The installer includes voices and engines. Existing models and settings are preserved on reinstall. Updates are installed manually from GitHub.">Installasjonsfilen inkluderer stemmer og motorer. Eksisterende modeller og innstillinger beholdes ved ny installasjon. Oppdateringer installeres manuelt fra GitHub.</p>
-  </section>
-  <section class="section technical-section">
-    <div class="section-shell">
-      <div class="section-heading wide-heading">
-        <p class="kicker" data-nb="Samme grunnlag" data-en="The same foundation">Samme grunnlag</p>
-        <h2 data-nb="Din tekst. Din maskin." data-en="Your text. Your computer.">Din tekst. Din maskin.</h2>
-        <p data-nb="Ingen Skrivi-konto, ingen lisensavgift og åpen kildekode. Den fulle pakken inneholder stemmene, så både installasjon og vanlig opplesing fungerer uten nett etter nedlasting. Tekst og lyd lastes ikke opp for opplesing; appen har ingen telemetri." data-en="No Skrivi account, no licence fee and open source. The full package includes the voices, so installation and normal reading work offline after download. Text and audio are not uploaded for speech synthesis; the app has no telemetry.">Ingen Skrivi-konto, ingen lisensavgift og åpen kildekode. Den fulle pakken inneholder stemmene, så både installasjon og vanlig opplesing fungerer uten nett etter nedlasting. Tekst og lyd lastes ikke opp for opplesing; appen har ingen telemetri.</p>
-      </div>
-      <div class="hero-actions">
-        <a href="../schools/#read-aloud" class="button button-secondary" data-nb="Informasjon for skoler →" data-en="Information for schools →">Informasjon for skoler →</a>
-        <a href="https://github.com/workavoidance/Skrivi-TTS/blob/main/README.md" class="text-link" data-nb="Brukerveiledning og personvern (engelsk) ↗" data-en="User guide and privacy details ↗">Brukerveiledning og personvern (engelsk) ↗</a>
-        <a href="https://github.com/workavoidance/Skrivi-TTS/issues" class="text-link" data-nb="Gi tilbakemelding på Lytt ↗" data-en="Give feedback on Lytt ↗">Gi tilbakemelding på Lytt ↗</a>
-      </div>
-      <p class="product-note" data-nb="Ikke legg ut private elevopplysninger eller sensitive tekster i offentlige tilbakemeldinger." data-en="Do not post private student information or sensitive text in public feedback.">Ikke legg ut private elevopplysninger eller sensitive tekster i offentlige tilbakemeldinger.</p>
-    </div>
-  </section>
+</div></div></section>
+<section class="section section-shell"><div class="section-heading"><h2 data-nb="Neste steg" data-en="Next steps">Neste steg</h2></div><div class="hero-actions">
+<a href="../help/" class="button button-secondary" data-nb="Hjelp og installasjon →" data-en="Help and installation →">Hjelp og installasjon →</a>
+<a href="../schools/#school-guide" class="text-link" data-nb="Dokumentasjon for skoler →" data-en="School documentation →">Dokumentasjon for skoler →</a>
+<a href="https://github.com/workavoidance/Skrivi-TTS/blob/main/README.md" class="text-link" data-nb="Brukerveiledning (engelsk) ↗" data-en="User guide (English) ↗">Brukerveiledning (engelsk) ↗</a>
+<a href="https://github.com/workavoidance/Skrivi-TTS/issues" class="text-link" data-nb="Gi tilbakemelding på Lytt ↗" data-en="Give feedback on Lytt ↗">Gi tilbakemelding på Lytt ↗</a>
+</div><p class="product-note" data-nb="Ikke legg ut private elevopplysninger eller sensitive tekster i offentlige tilbakemeldinger." data-en="Do not post private student information or sensitive text in public feedback.">Ikke legg ut private elevopplysninger eller sensitive tekster i offentlige tilbakemeldinger.</p></section>
 </main>
 <footer class="site-footer section-shell">
 <a class="footer-brand" href="../" aria-label="Skrivi"><img class="wordmark" src="../assets/skrivi-wordmark.svg" alt=""></a>

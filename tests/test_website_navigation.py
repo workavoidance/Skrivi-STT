@@ -19,7 +19,7 @@ def test_internal_page_links_assets_and_anchors_resolve() -> None:
     pages = {path.resolve(): Page(path) for path in ROOT.rglob("*.html")}
     for path, page in pages.items():
         for tag, attrs in page.elements:
-            for key in ("href", "src"):
+            for key in ("href", "src", "data-src-nb", "data-src-en"):
                 link = attrs.get(key)
                 if not link or urlsplit(link).scheme or link.startswith("//"):
                     continue
@@ -45,16 +45,33 @@ def test_pages_share_bilingual_navigation_and_norwegian_default() -> None:
                 ("data-href-nb", "data-href-en"),
                 ("data-aria-nb", "data-aria-en"),
                 ("data-alt-nb", "data-alt-en"),
+                ("data-src-nb", "data-src-en"),
             ):
                 assert bool(attrs.get(nb)) == bool(attrs.get(en)), (path, attrs)
         sources = [a.get("src", "") for tag, a in page.elements if tag == "script"]
-        assert any(source.endswith("/script.js") for source in sources)
+        assert any(urlsplit(source).path.endswith("/script.js") for source in sources)
+
+
+def test_product_pages_share_structure_and_localised_screenshots() -> None:
+    for route in ("dictation", "read-aloud"):
+        page = Page(ROOT / route / "index.html")
+        classes = [attrs.get("class", "").split() for _, attrs in page.elements]
+        for expected in ("trust-row", "steps", "technical-list", "download-section"):
+            assert any(expected in value for value in classes), (route, expected)
+        images = [
+            attrs
+            for tag, attrs in page.elements
+            if tag == "img" and "data-src-nb" in attrs
+        ]
+        assert len(images) == 1
+        assert images[0]["src"] == images[0]["data-src-nb"]
+        assert images[0]["data-src-en"].endswith("-en.png")
 
 
 def test_read_aloud_links_to_full_setup_not_store_or_update_zip() -> None:
     installer = (
-        "https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.4.1/"
-        "Skrivi-TTS-0.4.1-windows-x64-setup.exe"
+        "https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.4.3/"
+        "Skrivi-Lytt-0.4.3-windows-x64-setup.exe"
     )
     for route in ("index.html", "read-aloud/index.html", "help/index.html"):
         page = (ROOT / route).read_text(encoding="utf-8")

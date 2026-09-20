@@ -16,6 +16,9 @@
     document.querySelectorAll('[data-alt-nb][data-alt-en]').forEach((element) => {
       element.setAttribute('alt', norwegian ? element.dataset.altNb : element.dataset.altEn);
     });
+    document.querySelectorAll('[data-src-nb][data-src-en]').forEach((element) => {
+      element.setAttribute('src', norwegian ? element.dataset.srcNb : element.dataset.srcEn);
+    });
     document.querySelectorAll('[data-href-nb][data-href-en]').forEach((element) => {
       element.href = norwegian ? element.dataset.hrefNb : element.dataset.hrefEn;
     });
