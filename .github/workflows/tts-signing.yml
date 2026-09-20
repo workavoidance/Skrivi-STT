@@ -10,7 +10,7 @@ permissions:
   contents: read
 jobs:
   tts:
-    uses: workavoidance/Skrivi-TTS/.github/workflows/signed-release.yml@26e38f8fb5fee035866d18110017750cc5089523
+    uses: workavoidance/Skrivi-TTS/.github/workflows/signed-release.yml@28ffc132e8d82aaa1fff36fc4380ba4cde60e892
     with:
       source_ref: ${{ inputs.source_ref }}
     secrets:
