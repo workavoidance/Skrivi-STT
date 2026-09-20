@@ -1,0 +1,73 @@
+name: Microsoft Store submission
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      submit:
+        type: boolean
+        default: false
+    secrets:
+      AZURE_AD_APPLICATION_CLIENT_ID:
+        required: true
+      AZURE_AD_APPLICATION_SECRET:
+        required: true
+      AZURE_AD_TENANT_ID:
+        required: true
+      SELLER_ID:
+        required: true
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: microsoft-store-9P42NBXD8W36
+  cancel-in-progress: false
+
+jobs:
+  store:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Store access and submission state
+        id: check
+        shell: pwsh
+        env:
+          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
+          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
+          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+          SELLER_ID: ${{ secrets.SELLER_ID }}
+          STORE_SUBMIT: ${{ inputs.submit && github.ref == 'refs/heads/main' }}
+        run: ./tools/check_store_access.ps1
+      - uses: actions/download-artifact@v4
+        if: inputs.submit && github.ref == 'refs/heads/main'
+        with:
+          pattern: Skrivi-*-Microsoft-Store
+          path: store-release
+          merge-multiple: true
+      - name: Install Microsoft Store CLI
+        if: inputs.submit && github.ref == 'refs/heads/main'
+        uses: microsoft/microsoft-store-apppublisher@15abd1c50fcc164b19cb240fb04ef3c49bf715a2 # v1.1
+        with:
+          version: v0.4.2
+      - name: Submit package for Microsoft certification
+        if: inputs.submit && github.ref == 'refs/heads/main'
+        shell: pwsh
+        env:
+          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
+          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
+          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+          SELLER_ID: ${{ secrets.SELLER_ID }}
+        run: |
+          $packages = @(Get-ChildItem store-release -Filter '*.msix' -File)
+          if ($packages.Count -ne 1) { throw 'Expected exactly one Store package from this release run.' }
+          # Check again immediately before publishing: the CLI replaces existing drafts.
+          $env:STORE_SUBMIT = 'true'
+          ./tools/check_store_access.ps1
+          msstore reconfigure --tenantId $env:AZURE_AD_TENANT_ID --sellerId $env:SELLER_ID --clientId $env:AZURE_AD_APPLICATION_CLIENT_ID --clientSecret $env:AZURE_AD_APPLICATION_SECRET
+          if ($LASTEXITCODE -ne 0) { throw 'Store CLI configuration failed.' }
+          msstore publish . --inputFile $packages[0].FullName --appId 9P42NBXD8W36
+          if ($LASTEXITCODE -ne 0) { throw 'Store submission failed. Inspect Partner Center before retrying.' }
+          'Package submitted to Microsoft. Certification and publication follow Partner Center submission settings.' >> $env:GITHUB_STEP_SUMMARY
