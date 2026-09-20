@@ -1,15 +1,23 @@
-# Skrivi
+# Skrivi Snakk
 
-Skrivi is a private, local push-to-talk dictation app for Windows 11.
+Part of the [Skrivi](https://skrivi.no/) family, alongside
+[Skrivi Lytt](https://github.com/workavoidance/Skrivi-TTS) for listening to text.
+The names Snakk and Lytt are the same in Norwegian and English.
+
+**Name transition:** the website and current source use Skrivi Snakk. The
+published alpha.4 installer and current Store release are still labelled
+**Skrivi**. Settings, models, executable filenames and Store identity are unchanged.
+
+Skrivi Snakk is a private, local push-to-talk dictation app for Windows 11.
 Hold **Right Ctrl**, speak, and release the key. The complete transcription is
 typed into the application that already has the cursor. Language, microphone,
 and push-to-talk key can be changed from the tray's Settings window. On laptops
 without Right Ctrl, **Left Ctrl + Windows** is the recommended combination.
 
-Press **Escape** while Skrivi is recording or transcribing to cancel the current
+Press **Escape** while Skrivi Snakk is recording or transcribing to cancel the current
 dictation. Recordings are automatically cancelled after five minutes so an
 accidentally held key cannot leave the microphone recording indefinitely.
-Exiting Skrivi stops keyboard and microphone input, cancels active model work,
+Exiting Skrivi Snakk stops keyboard and microphone input, cancels active model work,
 and prevents an in-progress transcription from inserting text after exit.
 
 The project is open source under the MIT licence. It is currently alpha
@@ -18,7 +26,7 @@ hardware testing are being developed.
 
 ## Maintainer
 
-Skrivi is maintained by **Jonathan Wright**, who uses the GitHub account
+Skrivi Snakk is maintained by **Jonathan Wright**, who uses the GitHub account
 [@workavoidance](https://github.com/workavoidance). Jonathan Wright maintains
 the source code in this repository and publishes the project's releases.
 
@@ -49,16 +57,17 @@ the source code in this repository and publishes the project's releases.
 Whisper itself may add punctuation or omit hesitations. The app does not perform
 any additional rewriting or filler-word removal.
 
-## Install Skrivi
+## Install Skrivi Snakk
 
-1. [Download the Skrivi v0.2 alpha installer for Windows 11](https://github.com/workavoidance/Skrivi-STT/releases/download/v0.2.0-alpha.4/Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe).
+1. [Download the Skrivi Snakk v0.2 alpha installer for Windows 11](https://github.com/workavoidance/Skrivi-STT/releases/download/v0.2.0-alpha.4/Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe).
 2. Open the downloaded installer. This alpha is not code-signed yet, so Windows
    may show SmartScreen. If you trust this project, choose **More info**, then
    **Run anyway**.
-3. Complete the short installer and start Skrivi from the Start menu.
+3. Complete the short installer and start **Skrivi** from the Start menu
+   (the linked alpha.4 release; renamed builds use **Skrivi Snakk**).
 4. On the first run, wait while the multilingual Small speech model downloads
    and is verified under `%LOCALAPPDATA%\Skrivi\models`. This is a one-time
-   download of roughly 486 MB shared by later Skrivi versions.
+   download of roughly 486 MB shared by later Skrivi Snakk versions.
 5. Put the cursor in Word, Outlook, Notepad, or a browser text field.
 6. Hold **Right Ctrl**, speak, then release it. Press **Escape** to cancel.
    If the laptop has no Right Ctrl, open Settings and select
@@ -86,7 +95,7 @@ Python is not required on PCs that only run the finished executable.
 
 ## Build the Windows installer
 
-The conventional installer uses a one-folder application build so Skrivi does
+The conventional installer uses a one-folder application build so Skrivi Snakk does
 not unpack its full Python runtime on every launch. On Windows 11, install
 Python 3.14 and Inno Setup 6, then run:
 
@@ -123,7 +132,7 @@ verification requirements, and maintainer responsibilities.
 - The first model load can take a little while on a CPU, particularly the first
   time the app starts.
 - Very short phrases can still be misidentified as Norwegian or English.
-- A normal app cannot type into an administrator-elevated window. Run Skrivi as
+- A normal app cannot type into an administrator-elevated window. Run Skrivi Snakk as
   administrator only if that is genuinely required.
 - Windows secure fields and some games intentionally reject simulated input.
 - Only one dictation can be processed at a time. The push-to-talk shortcut is
@@ -134,18 +143,18 @@ verification requirements, and maintainer responsibilities.
 
 - **Model unavailable:** open the tray menu and choose **Retry speech model**.
   If the selected model is not installed, open Settings → Models and download or
-  select an installed model. Skrivi retries automatically after activation, so
+  select an installed model. Skrivi Snakk retries automatically after activation, so
   the application does not need to restart.
-- **Transcription failed:** the recording is discarded from memory and Skrivi
+- **Transcription failed:** the recording is discarded from memory and Skrivi Snakk
   returns to Ready. Hold the dictation key and try again.
 - **Microphone unavailable:** if a specifically selected microphone is
-  disconnected, Skrivi temporarily uses Windows Default and automatically returns
+  disconnected, Skrivi Snakk temporarily uses Windows Default and automatically returns
   to the selected microphone when it reconnects. If no Windows input is
   available, check Windows Sound settings.
 - **Nothing is typed:** test in Notepad first. Confirm the target app is not
-  running as administrator while Skrivi is running normally.
+  running as administrator while Skrivi Snakk is running normally.
 - **Too slow:** the first candidate change is the model from `small` to `base` in
-  Skrivi Settings → Models. Tiny is faster again. Accuracy will decrease.
+  Skrivi Snakk Settings → Models. Tiny is faster again. Accuracy will decrease.
 
 ## Development checks
 
@@ -170,7 +179,7 @@ as school-ready assistive software.
 
 ## Licence
 
-Skrivi is released under the [MIT licence](LICENSE). Third-party libraries and
+Skrivi Snakk is released under the [MIT licence](LICENSE). Third-party libraries and
 downloaded speech models retain their own licences. PySide6 and Qt notices are
 listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and included with
 packaged builds.

@@ -35,6 +35,9 @@ jobs:
             -Version "0.2.0-alpha.4-pr.${{ github.event.pull_request.number }}" `
             -BuildId $buildId `
             -Development
+      - name: Verify renamed shortcuts and data-preserving reinstall
+        shell: powershell
+        run: .\tests\check_naming_installer.ps1
       - name: Package identifiable preview
         shell: powershell
         run: |

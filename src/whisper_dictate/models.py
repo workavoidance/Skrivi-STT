@@ -406,7 +406,7 @@ class LocalModelManager:
     @property
     def download_cache(self) -> Path:
         # Keep using the prototype's cache root so an existing Small download
-        # can be reused during migration into Skrivi's verified installed area.
+        # can be reused during migration into Skrivi Snakk's verified installed area.
         return self.root
 
     @property
@@ -418,7 +418,7 @@ class LocalModelManager:
             return self._by_id[identifier]
         except KeyError:
             raise ModelManagerError(
-                tr("That model is not in Skrivi's catalogue.")
+                tr("That model is not in Skrivi Snakk's catalogue.")
             ) from None
 
     def model_path(self, identifier: str) -> Path:
@@ -640,7 +640,10 @@ class LocalModelManager:
         with self._idle:
             if self._shutting_down:
                 raise ModelBusyError(
-                    tr("Skrivi is shutting down. No new model operation can start.")
+                    tr(
+                        "Skrivi Snakk is shutting down. "
+                        "No new model operation can start."
+                    )
                 )
             if self._active_operation is not None:
                 raise ModelBusyError(
@@ -860,12 +863,12 @@ class LocalModelManager:
             identifier = manifest["model"]
         except (OSError, ValueError, KeyError, TypeError) as error:
             raise ModelIntegrityError(
-                tr("That folder is not a complete Skrivi model export.")
+                tr("That folder is not a complete Skrivi Snakk model export.")
             ) from error
         spec = self.spec(identifier)
         if manifest != self._manifest_document(spec):
             raise ModelIntegrityError(
-                tr("That model does not match Skrivi's trusted catalogue.")
+                tr("That model does not match Skrivi Snakk's trusted catalogue.")
             )
         cancel_event = self._begin(identifier)
         self.staging_root.mkdir(parents=True, exist_ok=True)

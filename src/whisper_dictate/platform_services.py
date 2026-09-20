@@ -8,7 +8,7 @@ class StartupRegistrationError(OSError):
 
 
 class StartupManager(Protocol):
-    """Platform boundary for starting Skrivi when the user signs in."""
+    """Platform boundary for starting Skrivi Snakk when the user signs in."""
 
     @property
     def available(self) -> bool: ...
@@ -31,5 +31,5 @@ class UnavailableStartupManager:
     def set_enabled(self, enabled: bool) -> None:
         if enabled:
             raise StartupRegistrationError(
-                "Automatic startup is unavailable in this Skrivi build."
+                "Automatic startup is unavailable in this Skrivi Snakk build."
             )

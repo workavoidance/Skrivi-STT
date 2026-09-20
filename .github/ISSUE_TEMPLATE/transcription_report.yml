@@ -1,5 +1,5 @@
 name: Transcription problem
-description: Tell us when Skrivi did not transcribe your words correctly
+description: Tell us when Skrivi Snakk did not transcribe your words correctly
 title: "[Transcription]: "
 body:
   - type: markdown
@@ -10,7 +10,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Skrivi version
+      label: Skrivi Snakk version
       placeholder: e.g. v0.2.0-alpha.2
     validations:
       required: true
@@ -51,10 +51,10 @@ body:
     id: example
     attributes:
       label: Optional anonymised example
-      description: If useful, provide a short synthetic or anonymised example of what you said and what Skrivi produced.
+      description: If useful, provide a short synthetic or anonymised example of what you said and what Skrivi Snakk produced.
       placeholder: |
         Said: "..."
-        Skrivi wrote: "..."
+        Skrivi Snakk wrote: "..."
   - type: input
     id: environment
     attributes:

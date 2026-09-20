@@ -4,7 +4,7 @@
 
 ## Supported versions
 
-Skrivi is pre-1.0 software. Security fixes are applied to the latest
+Skrivi Snakk is pre-1.0 software. Security fixes are applied to the latest
 released version.
 
 ## Reporting a vulnerability
