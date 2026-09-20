@@ -55,7 +55,7 @@ Manager (Windows) access in Partner Center. Save the secret expiry date and
 replace the GitHub secret before it expires. Never include keys in screenshots.
 
 Run `Microsoft Store submission` manually to check authentication, package
-identity and whether a published or pending submission exists. This manual run
+identity and whether a published or pending submission exists. By default, this manual run
 is read-only. It checks that SELLER_ID is present; it does not independently
 validate that value with the MSIX API.
 
@@ -75,3 +75,8 @@ mean certification has finished.
 References:
 - https://learn.microsoft.com/en-us/windows/apps/publish/msstore-dev-cli/github-actions
 - https://learn.microsoft.com/en-us/windows/apps/publish/msstore-dev-cli/commands
+
+To submit an existing release manually, run the workflow on main, enable the
+submit option, and enter a release tag such as v0.3.2. It downloads that release's
+MSIX and checks its SHA-256 sidecar before submission. Leave submit unchecked for
+a read-only check. The pinned CLI accepts a standalone MSIX path directly.
