@@ -40,3 +40,18 @@ if ($env:STORE_SUBMIT -eq 'true') {
     if (-not $published) { throw 'Complete the first Store submission in Partner Center before automating updates.' }
     if ($pending) { throw 'A Store draft or submission already exists. Resolve it in Partner Center; automation will not replace it.' }
 }
+
+if ($pending -and $env:STORE_SUBMIT -ne 'true') {
+    $submissionId = [string]$app.pendingApplicationSubmission.id
+    if ($submissionId -notmatch '^[0-9]+$') { throw 'Unexpected submission identifier.' }
+    try {
+        $state = Invoke-RestMethod -Uri "https://manage.devcenter.microsoft.com/v1.0/my/applications/9P42NBXD8W36/submissions/$submissionId/status" -Headers @{
+            Authorization = "Bearer $($token.access_token)"
+        }
+    } catch {
+        throw 'Could not retrieve the pending submission status.'
+    }
+    $message = "Pending submission ${submissionId}: $($state.status)"
+    Write-Output $message
+    if ($env:GITHUB_STEP_SUMMARY) { $message | Add-Content $env:GITHUB_STEP_SUMMARY }
+}

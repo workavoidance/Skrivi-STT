@@ -31,7 +31,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: microsoft-store-9P42NBXD8W36
+  group: microsoft-store-${{ inputs.submit && '9P42NBXD8W36' || github.run_id }}
   cancel-in-progress: false
 
 jobs:
