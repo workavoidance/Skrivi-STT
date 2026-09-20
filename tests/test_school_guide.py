@@ -8,6 +8,15 @@ from test_website_navigation import Page
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_reference_links_use_dark_text_on_light_cards() -> None:
+    css = (ROOT / "website/styles.css").read_text(encoding="utf-8")
+    rule = re.search(r"\.feature-card \.doc-links a\s*\{([^}]+)\}", css)
+    assert rule is not None
+    assert "color: var(--ink);" in rule[1]
+    assert "border-color: var(--line);" in rule[1]
+    assert ".doc-links a:focus-visible" in css
+
+
 def test_shared_school_page_keeps_both_app_anchors_and_one_checklist() -> None:
     page = Page(ROOT / "website/schools/index.html")
     ids = [attrs.get("id") for _, attrs in page.elements]
