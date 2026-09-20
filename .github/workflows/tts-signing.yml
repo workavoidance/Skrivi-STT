@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       source_ref:
-        description: TTS source commit to build
+        description: TTS branch or commit (main builds current code)
         required: true
-        default: 26e38f8fb5fee035866d18110017750cc5089523
+        default: main
 permissions:
   contents: read
 jobs:
