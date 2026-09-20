@@ -4,7 +4,7 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = "v0.3.1"
+TAG = "v0.3.2"
 SITE_TAG = "v0.3.0"
 INSTALLER = f"Skrivi-{SITE_TAG}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
@@ -24,10 +24,10 @@ def test_alpha_version_is_consistent_across_package_and_installer() -> None:
         encoding="utf-8"
     )
 
-    assert project["project"]["version"] == "0.3.1"
-    assert '__version__ = "0.3.1"' in package
-    assert '[string]$Version = "0.3.1"' in installer
-    assert '-Version "0.3.1-pr.${{ github.event.pull_request.number }}"' in (preview)
+    assert project["project"]["version"] == "0.3.2"
+    assert '__version__ = "0.3.2"' in package
+    assert '[string]$Version = "0.3.2"' in installer
+    assert '-Version "0.3.2-pr.${{ github.event.pull_request.number }}"' in (preview)
 
 
 def test_website_offers_the_accepted_store_release_and_current_installer() -> None:

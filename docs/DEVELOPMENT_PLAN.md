@@ -1,5 +1,11 @@
 # Skrivi Snakk development plan
 
+## User feedback implemented — 20 September 2026
+
+See [UX feedback implementation](UX_FEEDBACK_IMPLEMENTED.md). Snakk 0.3.2 and
+Lytt 0.4.3 are replacement acceptance candidates; publication awaits user approval.
+
+
 ## Shared interface implemented — 20 September 2026
 
 - [x] Match Lytt's supporting navigation, settings sections, immediate saving,
