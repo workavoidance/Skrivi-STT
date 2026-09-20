@@ -113,10 +113,10 @@ forensic guarantees that an immutable string has vanished instantly from RAM.
 
 ## Code signing policy
 
-Current Skrivi releases are not code-signed. The project's
-[code signing policy](CODE_SIGNING_POLICY.md) documents the Windows artifacts,
-team roles, privacy information, and manual approval process proposed for the
-SignPath Foundation open-source programme.
+The release workflow signs new Windows builds with Jonathan Wright's Certum
+code-signing certificate. Previously published unsigned releases remain unsigned.
+The [code signing policy](CODE_SIGNING_POLICY.md) documents the signed artifacts,
+verification requirements, and maintainer responsibilities.
 
 ## Expected limitations
 

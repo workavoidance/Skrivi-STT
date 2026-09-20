@@ -1,6 +1,7 @@
 param(
     [string]$Version = "0.2.0-alpha.4",
     [string]$BuildId = "",
+    [string]$SigningThumbprint = "",
     [switch]$Development
 )
 
@@ -70,6 +71,10 @@ $ApplicationDir = Join-Path $InstallerDist "Skrivi"
     development = [bool]$Development
 } | ConvertTo-Json | Set-Content (Join-Path $ApplicationDir "BUILD_INFO.json") -Encoding utf8
 
+if ($SigningThumbprint) {
+    & "$PSScriptRoot\tools\sign_windows.ps1" -Path (Join-Path $ApplicationDir "Skrivi.exe") -Thumbprint $SigningThumbprint
+}
+
 $InnoCandidates = @(
     (Get-Command ISCC.exe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -ErrorAction SilentlyContinue),
     "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
@@ -92,5 +97,8 @@ if ($LASTEXITCODE -ne 0) { throw "The installer build failed." }
 
 $OutputName = "Skrivi-$Version-windows-x64-setup.exe"
 Write-Host ""
+if ($SigningThumbprint) {
+    & "$PSScriptRoot\tools\sign_windows.ps1" -Path (Join-Path $InstallerOutput $OutputName) -Thumbprint $SigningThumbprint
+}
 Write-Host "Installer complete:" -ForegroundColor Green
 Write-Host (Join-Path $InstallerOutput $OutputName)
