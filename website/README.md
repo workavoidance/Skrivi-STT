@@ -5,17 +5,17 @@ This folder contains the public Skrivi website at https://skrivi.no.
 ## Products and routes
 
 - `/`: shared brand and two-app chooser.
-- `/dictation/`: Skrivi Diktering / Skrivi Dictation, the existing Windows app.
+- `/dictation/`: Skrivi Snakk, the existing speech-to-text Windows app.
   Its Store listing and installed name remain Skrivi. Downloads, release notes
   and technical details belong here.
-- `/read-aloud/`: Skrivi Opplesing / Skrivi Read Aloud, a separate Windows x64 reader.
+- `/read-aloud/`: Skrivi Lytt, a separate text-to-speech Windows x64 reader.
   Links to the full 0.2.1 setup executable in `workavoidance/Skrivi-TTS`, not the
-  update-only ZIP or Dictation installer. Installed name: Skrivi TTS.
-- `/schools/`: shared principles, current Dictation documents and a clearly
-  labelled Read Aloud data flow and its own technical documentation. The existing
-  bilingual school pack covers Dictation only; Read Aloud's technical docs are English.
+  update-only ZIP or Snakk installer. Installed name: Skrivi TTS.
+- `/schools/`: shared principles, current Snakk documents and a clearly
+  labelled Lytt data flow and its own technical documentation. The existing
+  bilingual school pack covers Snakk only; Lytt's technical docs are English.
 - `/help/`: app-specific installation, feedback and release-note links.
-- `/alpha/` and `/feedback/`: existing Dictation guides and feedback, kept at
+- `/alpha/` and `/feedback/`: existing Snakk guides and feedback, kept at
   their original URLs. The home anchors `#download`, `#how`, `#schools` and
   `#technical` still lead to relevant content.
 
@@ -24,8 +24,12 @@ English choice in internal links as `?lang=en`, including anchors. It also
 switches document destinations, titles, descriptions and accessible labels.
 No cookies or browser storage are used for language selection.
 
-Read Aloud has no Microsoft Store listing yet. Keep its download, source and
-feedback links separate from Dictation. The EXE bundles the published 0.2.1 app,
+Skrivi is the family name. Snakk and Lytt are product names in both languages;
+translate their explanations, not their names. Existing routes, repository names,
+installer filenames and installed-app identities remain unchanged.
+
+Lytt has no Microsoft Store listing yet. Keep its download, source and
+feedback links separate from Snakk. The EXE bundles the published 0.2.1 app,
 engines and voices; no cloud service or background update check is introduced.
 Verify the exact release asset before updating version-pinned download links.
 
