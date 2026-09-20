@@ -103,7 +103,7 @@ jobs:
           Copy-Item $installer.FullName $publishedInstaller
           $installerHash = (Get-FileHash $publishedInstaller -Algorithm SHA256).Hash.ToLower()
           "$installerHash *$publishedInstaller" | Set-Content "$publishedInstaller.sha256"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: Skrivi-Snakk-${{ steps.version.outputs.number }}-windows-x64
           if-no-files-found: error
@@ -181,7 +181,7 @@ jobs:
           .\build_store_msix.ps1
           -Version "${{ steps.version.outputs.tag }}"
           -StoreBuild "${{ github.run_number }}"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: Skrivi-${{ steps.version.outputs.tag }}-Microsoft-Store
           path: dist/store/*.msix
