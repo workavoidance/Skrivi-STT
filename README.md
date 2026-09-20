@@ -16,6 +16,12 @@ The project is open source under the MIT licence. It is currently alpha
 software: the core dictation workflow works, while configuration and broader
 hardware testing are being developed.
 
+## Maintainer
+
+Skrivi is maintained by **Jonathan Wright**, who uses the GitHub account
+[@workavoidance](https://github.com/workavoidance). Jonathan Wright maintains
+the source code in this repository and publishes the project's releases.
+
 ## What this first version does
 
 - Offers Automatic, Norwegian, and English dictation modes. Automatic compares
