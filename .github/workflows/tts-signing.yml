@@ -5,9 +5,9 @@ permissions:
   contents: read
 jobs:
   tts:
-    uses: workavoidance/Skrivi-TTS/.github/workflows/signed-release.yml@90cf0f49358e8bd2456e424a6caee0da960d8deb
+    uses: workavoidance/Skrivi-TTS/.github/workflows/signed-release.yml@dd4721c17ec253b6dfcf8c3a86fa675bc03a6a92
     with:
-      source_ref: 90cf0f49358e8bd2456e424a6caee0da960d8deb
+      source_ref: dd4721c17ec253b6dfcf8c3a86fa675bc03a6a92
     secrets:
       CERTUM_USERNAME: ${{ secrets.CERTUM_USERNAME }}
       CERTUM_OTP_URI: ${{ secrets.CERTUM_OTP_URI }}
