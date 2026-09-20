@@ -2,6 +2,15 @@ name: Microsoft Store submission
 
 on:
   workflow_dispatch:
+    inputs:
+      submit:
+        description: Submit an existing release to Microsoft (main only)
+        type: boolean
+        default: false
+      release_tag:
+        description: Existing GitHub release tag, required when submitting
+        type: string
+        default: ''
   workflow_call:
     inputs:
       submit:
@@ -42,11 +51,29 @@ jobs:
           STORE_SUBMIT: ${{ inputs.submit && github.ref == 'refs/heads/main' }}
         run: ./tools/check_store_access.ps1
       - uses: actions/download-artifact@v4
-        if: inputs.submit && github.ref == 'refs/heads/main'
+        if: inputs.submit && github.ref == 'refs/heads/main' && inputs.release_tag == ''
         with:
           pattern: Skrivi-*-Microsoft-Store
           path: store-release
           merge-multiple: true
+      - name: Download and verify existing release package
+        if: inputs.submit && github.ref == 'refs/heads/main' && inputs.release_tag != ''
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          if ($env:RELEASE_TAG -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$') {
+            throw 'Specify an existing release tag, such as v0.3.2.'
+          }
+          gh release download $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --pattern '*.msix' --pattern '*.msix.sha256' --dir store-release
+          if ($LASTEXITCODE -ne 0) { throw 'Could not download the release Store package and checksum.' }
+          $packages = @(Get-ChildItem store-release -Filter '*.msix' -File)
+          if ($packages.Count -ne 1) { throw 'Expected exactly one Store package.' }
+          $expected = (Get-Content "$($packages[0].FullName).sha256" -Raw).Trim().Split(' ')[0]
+          if ($expected -notmatch '^[0-9a-fA-F]{64}$' -or (Get-FileHash $packages[0].FullName -Algorithm SHA256).Hash -ne $expected) {
+            throw 'Store package checksum verification failed.'
+          }
       - name: Install Microsoft Store CLI
         if: inputs.submit && github.ref == 'refs/heads/main'
         uses: microsoft/microsoft-store-apppublisher@15abd1c50fcc164b19cb240fb04ef3c49bf715a2 # v1.1
