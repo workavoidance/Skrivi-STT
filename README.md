@@ -178,7 +178,7 @@ schema, and [docs/ROADMAP.md](docs/ROADMAP.md) for planned releases. The
 [local model guide](docs/MODELS.md) documents downloads, integrity checks,
 offline operation, hardware guidance, and USB-folder import. The
 project's longer-term credibility requirements are recorded in
-[docs/QUALITY_BAR.md](docs/QUALITY_BAR.md) without presenting the current alpha
+[docs/QUALITY_BAR.md](docs/QUALITY_BAR.md) without presenting the current test release
 as school-ready assistive software.
 
 ## Licence

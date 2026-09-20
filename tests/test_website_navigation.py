@@ -53,8 +53,8 @@ def test_pages_share_bilingual_navigation_and_norwegian_default() -> None:
 
 def test_read_aloud_links_to_full_setup_not_store_or_update_zip() -> None:
     installer = (
-        "https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.2.1/"
-        "Skrivi-TTS-0.2.1-windows-x64-setup.exe"
+        "https://github.com/workavoidance/Skrivi-TTS/releases/download/v0.4.1/"
+        "Skrivi-TTS-0.4.1-windows-x64-setup.exe"
     )
     for route in ("index.html", "read-aloud/index.html", "help/index.html"):
         page = (ROOT / route).read_text(encoding="utf-8")
@@ -64,8 +64,10 @@ def test_read_aloud_links_to_full_setup_not_store_or_update_zip() -> None:
     page = (ROOT / "read-aloud/index.html").read_text(encoding="utf-8")
     assert "apps.microsoft.com" not in page
     assert "App-Update-Windows-x64.zip" not in page
-    assert "not code-signed" in page
-    assert "ikke kodesignert" in page
+    assert "code-signed" in page
+    assert "not code-signed" not in page
+    assert "kodesignert" in page
+    assert "Ctrl + Alt + Shift + Space" in page
     assert "Ctrl + Alt + Space" in page
     assert "https://github.com/workavoidance/Skrivi-TTS/issues" in page
 

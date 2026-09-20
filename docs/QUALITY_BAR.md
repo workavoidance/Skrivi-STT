@@ -8,7 +8,10 @@ standards used from the beginning.
 This document describes software gates, not claims that the project currently
 meets educational, accessibility, security, or government requirements.
 
-## Current gate: trustworthy alpha
+## Current gate: trustworthy test release
+
+The public label is **Test release** for both Snakk and Lytt. This replaces the
+alpha wording without claiming that the public-beta gates below are complete.
 
 - The core workflow remains local and understandable.
 - Releases are produced from tagged source by automated Windows builds.
@@ -16,7 +19,7 @@ meets educational, accessibility, security, or government requirements.
 - Tests cover the state machine, Unicode insertion and privacy-sensitive paths.
 - Errors are actionable without logging audio or dictated text.
 - Configuration changes cannot silently weaken the privacy defaults.
-- The application clearly states its alpha status and limitations.
+- The application clearly states its test-release status and limitations.
 
 ## Next gate: credible public beta
 

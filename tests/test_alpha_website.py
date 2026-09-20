@@ -11,7 +11,7 @@ ALPHA_SCRIPT = ALPHA_ROOT / "alpha.js"
 def test_alpha_page_has_current_install_feedback_and_school_paths() -> None:
     page = ALPHA_PAGE.read_text(encoding="utf-8")
 
-    assert "Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe" in page
+    assert "Skrivi-v0.3.0-windows-x64-setup.exe" in page
     assert "apps.microsoft.com/detail/9P42NBXD8W36" in page
     assert "cid=skrivi-website-testing" in page
     assert 'href="../feedback/"' in page
@@ -24,8 +24,9 @@ def test_alpha_page_is_explicit_about_early_release_and_privacy() -> None:
     page = ALPHA_PAGE.read_text(encoding="utf-8")
 
     assert "SmartScreen" in page
-    assert "ikke er kodesignert" in page
-    assert "not code-signed" in page
+    assert "kodesignert av Open Source Developer Jonathan Wright" in page
+    assert "code-signed" in page
+    assert "not code-signed" not in page
     assert "Ikke legg ut private elevopplysninger" in page
     assert "Do not post private student information" in page
 
@@ -59,7 +60,7 @@ def test_main_site_links_to_alpha_guide() -> None:
 
     assert "help/" in page
     assert "../alpha/#install" in help_page
-    assert "Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe" in page
+    assert "Skrivi-v0.3.0-windows-x64-setup.exe" in page
     assert "apps.microsoft.com/detail/9P42NBXD8W36" in page
     assert "cid=skrivi-website-home" in page
     assert "Installer Snakk fra Microsoft Store" in page

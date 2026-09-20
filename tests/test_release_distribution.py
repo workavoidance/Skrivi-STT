@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TAG = "v0.3.0"
-SITE_TAG = "v0.2.0-alpha.4"
+SITE_TAG = "v0.3.0"
 INSTALLER = f"Skrivi-{TAG}-windows-x64-setup.exe"
 PUBLIC_INSTALLER_URL = (
     f"https://github.com/workavoidance/Skrivi-STT/releases/download/{SITE_TAG}/"
@@ -38,6 +38,8 @@ def test_website_offers_the_accepted_store_release_and_current_installer() -> No
 
     assert website.count(PUBLIC_INSTALLER_URL) == 2
     assert testing.count(PUBLIC_INSTALLER_URL) == 2
+    assert "same version from GitHub" not in website
+    assert "Microsoft Store may still show an older version" in website
     assert website.count(STORE_URL) == 2
     assert testing.count(STORE_URL) == 2
 

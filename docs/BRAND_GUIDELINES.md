@@ -1,5 +1,11 @@
 # Skrivi Brand Guidelines
 
+Both products use **Test release** in English and **testutgave** in Norwegian
+while real-world testing continues. Version numbers advance independently:
+Snakk 0.3.0 and Lytt 0.4.1. GitHub marks these as prereleases. Product pages link
+to each signed installer and release notes; a Store submission package is not
+a claim that the corresponding version has been approved or published there.
+
 > **Status:** Active family brand direction, updated 20 September 2026.
 > Skrivi is the family; Skrivi Snakk and Skrivi Lytt are its separate apps.
 
