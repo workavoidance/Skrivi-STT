@@ -297,6 +297,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   max-width: 790px;
 }
 
+.approval-intro h2,
 .approval-intro h3 {
   max-width: 700px;
   margin: 10px 0 20px;

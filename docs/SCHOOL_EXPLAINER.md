@@ -2,6 +2,10 @@
 
 **Language:** [Norsk](SCHOOL_EXPLAINER_NB.md) | English
 
+For the shared introduction and assessment checklist covering both apps, start
+with [Skrivi for schools: Snakk and Lytt](SCHOOL_GUIDE.md). This older,
+Snakk-specific discussion document is supplementary, not a separate approval route.
+
 > **Draft for discussion with schools.** Skrivi Snakk is currently alpha software. This document explains its intended design and use as an accessibility tool; it does not claim that Skrivi Snakk is formally approved by Udir, Oslo kommune, or any school.
 
 ## What is Skrivi Snakk?
