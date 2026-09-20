@@ -25,8 +25,8 @@ def _feedback_text() -> str:
 
 def _feedback_tooltip() -> str:
     if current_interface_language() is InterfaceLanguage.NORWEGIAN_BOKMAL:
-        return "Åpne Skrivi-siden for tilbakemeldinger i nettleseren"
-    return "Open the Skrivi feedback page in your web browser"
+        return "Åpne Skrivi Snakk-siden for tilbakemeldinger i nettleseren"
+    return "Open the Skrivi Snakk feedback page in your web browser"
 
 
 def open_feedback_page() -> None:
@@ -34,7 +34,7 @@ def open_feedback_page() -> None:
 
 
 class TrayIcon:
-    """Skrivi's Qt system tray menu."""
+    """Skrivi Snakk's Qt system tray menu."""
 
     def __init__(
         self,
@@ -43,7 +43,7 @@ class TrayIcon:
         on_settings: Callable[[], None],
         on_retry_model: Callable[[], object] | None = None,
         on_feedback: Callable[[], None] | None = None,
-        title: str = "Skrivi",
+        title: str = "Skrivi Snakk",
         preview_actions: Mapping[str, Callable[[], None]] | None = None,
     ) -> None:
         app = QApplication.instance()
@@ -61,7 +61,7 @@ class TrayIcon:
         self._preview_action_items: list[tuple[str, QAction]] = []
 
         self._menu = QMenu()
-        self._menu.setAccessibleName(tr("Skrivi tray menu"))
+        self._menu.setAccessibleName(tr("Skrivi Snakk tray menu"))
         self._title_action = self._menu.addAction(self._display_title())
         self._title_action.setEnabled(False)
         self._status_action = self._menu.addAction(
@@ -71,7 +71,7 @@ class TrayIcon:
         self._menu.addSeparator()
 
         self.settings_action = QAction(f"&{tr('Settings')}…", self._menu)
-        self.settings_action.setToolTip(tr("Open Skrivi settings"))
+        self.settings_action.setToolTip(tr("Open Skrivi Snakk settings"))
         self.settings_action.triggered.connect(self._settings_clicked)
         self._menu.addAction(self.settings_action)
 
@@ -109,7 +109,7 @@ class TrayIcon:
         add_interface_language_listener(self.retranslate_ui)
 
     def _display_title(self) -> str:
-        return f"{self._title} Snakk · {tr('Dictation')}"
+        return f"{self._title} · {tr('Dictation')}"
 
     @property
     def menu(self) -> QMenu:
@@ -132,9 +132,9 @@ class TrayIcon:
 
     def retranslate_ui(self) -> None:
         self._title_action.setText(self._display_title())
-        self._menu.setAccessibleName(tr("Skrivi tray menu"))
+        self._menu.setAccessibleName(tr("Skrivi Snakk tray menu"))
         self.settings_action.setText(f"&{tr('Settings')}…")
-        self.settings_action.setToolTip(tr("Open Skrivi settings"))
+        self.settings_action.setToolTip(tr("Open Skrivi Snakk settings"))
         self.feedback_action.setText(f"&{_feedback_text()}")
         self.feedback_action.setToolTip(_feedback_tooltip())
         self.retry_model_action.setText(f"&{tr('Retry speech model')}")

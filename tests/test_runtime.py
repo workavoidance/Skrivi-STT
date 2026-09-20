@@ -88,7 +88,7 @@ def test_explicit_development_build_identity() -> None:
     )
 
     assert identity == BuildIdentity(identifier="abc1234", development=True)
-    assert identity.title == "Skrivi DEV abc1234"
+    assert identity.title == "Skrivi Snakk DEV abc1234"
 
 
 def test_packaged_preview_identity(tmp_path) -> None:

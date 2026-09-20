@@ -128,7 +128,7 @@ class DictationController:
         self._indicator.post("ready")
 
     def retry_model_load(self) -> bool:
-        """Retry a failed startup model load without restarting Skrivi."""
+        """Retry a failed startup model load without restarting Skrivi Snakk."""
         with self._lock:
             if self._stopping.is_set() or self._state is not AppState.ERROR:
                 return False
@@ -162,7 +162,7 @@ class DictationController:
             return
         except Exception:
             self._return_to_ready_with_error(
-                "The microphone could not start. Check Skrivi Settings."
+                "The microphone could not start. Check Skrivi Snakk Settings."
             )
             return
         if self._stopping.is_set():

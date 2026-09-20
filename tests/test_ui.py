@@ -45,7 +45,7 @@ def reset_interface_language():
 
 
 def application() -> QApplication:
-    return create_application("Skrivi tests")
+    return create_application("Skrivi Snakk tests")
 
 
 def process_events_until(predicate, timeout: float = 1.0) -> None:
@@ -100,7 +100,7 @@ def test_indicator_is_non_activating_and_worker_safe() -> None:
     assert received == [("transcribing", "Transcribing locally…")]
     assert indicator.windowFlags() & Qt.WindowType.WindowDoesNotAcceptFocus
     assert indicator.testAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
-    assert indicator.accessibleName() == "Skrivi dictation status"
+    assert indicator.accessibleName() == "Skrivi Snakk dictation status"
 
 
 def test_settings_window_saves_overlay_choice(tmp_path: Path) -> None:
@@ -128,7 +128,7 @@ def test_settings_window_saves_automatic_startup_choice(tmp_path: Path) -> None:
 
     assert store.load().settings.start_with_system is True
     assert window._startup_help.text() == (
-        "Skrivi starts quietly in the system tray. You can also manage "
+        "Skrivi Snakk starts quietly in the system tray. You can also manage "
         "startup apps in Windows Settings."
     )
 
@@ -143,7 +143,7 @@ def test_source_build_explains_that_automatic_startup_is_unavailable(
 
     assert window.startup_checkbox.isEnabled() is False
     assert window._startup_help.text() == (
-        "Automatic startup is unavailable in this Skrivi build."
+        "Automatic startup is unavailable in this Skrivi Snakk build."
     )
 
 
@@ -302,10 +302,12 @@ def test_settings_actions_are_named_and_keyboard_operable(tmp_path: Path) -> Non
     application()
     window = SettingsWindow(SettingsStore(tmp_path / "settings.json"))
 
-    assert window.accessibleName() == "Skrivi settings"
+    assert window.accessibleName() == "Skrivi Snakk settings"
     assert window.tabs.accessibleName() == "Settings sections"
     assert window.overlay_checkbox.accessibleName() == ("Show dictation status overlay")
-    assert window.startup_checkbox.accessibleName() == "Start Skrivi automatically"
+    assert (
+        window.startup_checkbox.accessibleName() == "Start Skrivi Snakk automatically"
+    )
     assert window.language_combo.accessibleName() == "Dictation language"
     assert window.microphone_combo.accessibleName() == "Microphone"
     assert window.model_panel.accessibleName() == "Local speech models"
@@ -360,7 +362,7 @@ def test_privacy_and_about_pages_explain_the_product_boundary(tmp_path: Path) ->
     assert window.privacy_details_button.accessibleName() == (
         "Open privacy documentation"
     )
-    assert window.website_button.accessibleName() == "Open Skrivi website"
+    assert window.website_button.accessibleName() == "Open Skrivi Snakk website"
 
 
 def test_theme_has_visible_focus_disabled_states_and_high_contrast_fallback() -> None:
@@ -493,12 +495,12 @@ def test_norwegian_interface_covers_settings_models_tray_and_overlay(
         process_events_until(lambda: bool(statuses))
 
         assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
-        assert window.accessibleName() == "Skrivi-innstillinger"
+        assert window.accessibleName() == "Skrivi Snakk-innstillinger"
         assert [window.tabs.tabText(index).replace("&", "") for index in range(4)] == [
             "Generelt",
             "Modeller",
             "Personvern",
-            "Om Skrivi",
+            "Om Skrivi Snakk",
         ]
         assert window.model_panel.download_button.text().replace("&", "") == (
             "Last ned modell"

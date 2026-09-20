@@ -1,7 +1,23 @@
 # Skrivi Brand Guidelines
 
-> **Status:** Active brand direction, September 2026. Skrivi is the current
-> product name. These principles should remain stable as the product develops.
+> **Status:** Active family brand direction, updated 20 September 2026.
+> Skrivi is the family; Skrivi Snakk and Skrivi Lytt are its separate apps.
+
+## Product naming
+
+| Family member | Short name | Norwegian explanation | English explanation |
+| --- | --- | --- | --- |
+| Skrivi Snakk | Snakk | Skriv med stemmen. | Write with your voice. |
+| Skrivi Lytt | Lytt | Få teksten lest høyt. | Have text read aloud. |
+
+Keep the names in both languages. Use short names in navigation and full names
+on product pages, windows, installers and Store listings. STT/TTS and
+Diktering/Opplesing describe functions; they are not the product names.
+Keep the shared wordmark, palette and distinct app icons. Give both apps equal
+standing without implying equal maturity, features or Store availability.
+They remain separate installs with no required account or shared launcher.
+Keep technical identities and published URLs stable; distinguish old installed
+names from new source names until the renamed builds are released.
 
 ## Skrivi family conventions (20 September 2026)
 
@@ -24,19 +40,22 @@ settings, models and lifecycle; a family identity does not imply a combined app.
 
 ## 1. Brand idea
 
-Skrivi helps students get their thoughts onto the page.
+Skrivi supports reading, writing and expressing what you know.
 
-It is a simple, highly accurate speech-to-text tool designed first for Norwegian schools. It should help students express what they know without typing, spelling, or the mechanics of writing becoming the main barrier.
+Snakk turns speech into text. Lytt reads existing text aloud. Both are simple,
+local tools designed with Norwegian students and schools in mind.
 
-Dyslexia is an important and highly visible use case, but Skrivi is not defined only as a dyslexia product. The broader purpose is to help students turn spoken thoughts into written text accurately and efficiently.
+Dyslexia is an important use case, but not the whole identity. Short names,
+clear explanations and consistent controls help people choose the right tool.
+Do not claim the names alone establish accessibility.
 
 ### Working tagline
 
-**Get your thoughts onto the page.**
+**Support for reading and writing.**
 
 ### Supporting product line
 
-**Highly accurate, local speech-to-text. Free for everyone.**
+**Free tools. On your own computer. No account.**
 
 ## 2. Core promise
 
@@ -44,7 +63,7 @@ Skrivi should make two promises equally clearly.
 
 ### For students
 
-Get what you know into written text without typing getting in the way.
+Read, write and express what you know with less effort.
 
 ### For schools
 
@@ -56,7 +75,7 @@ The product should feel like dependable utility, not AI magic.
 
 Skrivi is:
 
-- highly accurate speech-to-text
+- tools for writing with your voice and listening to text
 - local and self-contained
 - private by design
 - free to use
@@ -66,7 +85,8 @@ Skrivi is:
 - designed first for Norwegian education
 - intended to be low-risk and low-overhead for school IT teams
 
-Skrivi transcribes what the student says. It does not generate ideas, rewrite answers, or create work on the student's behalf.
+Snakk transcribes what the student says. Lytt reads existing text. Neither
+generates ideas, rewrites answers, or creates work on the student's behalf.
 
 A useful internal sentiment is:
 
@@ -94,7 +114,8 @@ Skrivi should not present itself as:
 - a large company when it is not one
 - a Norse mythology brand
 
-Do not lead with the word **AI**. If relevant, explain the technology further down the page in technical information. The primary language should be **local speech-to-text**.
+Do not lead with **AI**. Explain technology in each app's technical information.
+Lead with **write with your voice** and **listen to text**.
 
 Whisper may be named in technical documentation, but it is not part of the headline proposition.
 
@@ -205,7 +226,8 @@ See also:
 
 ## 9. Accuracy
 
-Skrivi may describe itself as **highly accurate speech-to-text**.
+Describe Snakk's transcription accuracy and Lytt's pronunciation quality
+separately, supported by the relevant app's evidence.
 
 Accuracy should eventually be demonstrated with real examples, school feedback, or a simple demo rather than supported only by marketing copy.
 
@@ -304,13 +326,14 @@ The first version can be primarily text-led. Visual polish should come from spac
 
 Working English direction:
 
-> **Get your thoughts onto the page.**
+> **Support for reading and writing.**
 >
-> Highly accurate, local speech-to-text. Free for everyone.
+> Free tools. On your own computer. No account.
 >
-> **Download**  |  **How it works**
+> **Snakk — Write with your voice** | **Lytt — Have text read aloud**
 
-The hero should explicitly use the well-understood term **speech-to-text**.
+Explain speech-to-text and text-to-speech on their respective product pages;
+the family homepage should offer both tools with equal visual prominence.
 
 Norway does not need to be mentioned in the hero. Norwegian relevance should be obvious through the default language and content further down the page.
 
@@ -327,11 +350,16 @@ Free should be more prominent than the no-account message.
 
 ### How it works
 
-Keep the basic use case extremely simple:
+Keep each app's basic use case extremely simple. For Snakk:
 
 1. Press the shortcut.
 2. Speak naturally.
 3. Text appears where you are working.
+
+For Lytt: select or paste text, start reading, and listen. Only describe OCR or
+other features where the linked release actually includes them. A combined
+example can be: listen to the task, dictate an answer, then listen back. This
+is a user workflow across separate apps, not a claim of automatic integration.
 
 Do not mix this simple explanation with technical or privacy detail.
 

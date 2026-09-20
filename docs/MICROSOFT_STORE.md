@@ -1,6 +1,6 @@
 # Microsoft Store distribution
 
-Skrivi's Microsoft Store product identity is:
+Skrivi Snakk's Microsoft Store product identity is:
 
 - Store ID: `9P42NBXD8W36`
 - Package name: `Skrivi.Skrivi`
@@ -17,7 +17,7 @@ publication.
 1. Let the release workflow build the unsigned `.msix` artifact.
 2. Download the `Skrivi-<version>-Microsoft-Store` artifact from the workflow
    run.
-3. In Partner Center, open Skrivi and start an MSIX submission.
+3. In Partner Center, open Skrivi Snakk and start an MSIX submission.
 4. Complete pricing, availability, properties, age ratings, Store listings and
    submission options.
 5. Upload the `.msix` from the workflow artifact and submit it for
@@ -29,8 +29,8 @@ workflow artifact as a direct download: it is intended only for Partner Center.
 Before each public submission, verify microphone capture, global push-to-talk,
 text insertion, model download, settings persistence and automatic startup from
 an installed Store package. The Store package declares a `windows.startupTask`
-and Skrivi controls it through Windows' packaged `StartupTask` API. Users and
-organisation policies remain able to control Skrivi through Windows Startup
+and Skrivi Snakk controls it through Windows' packaged `StartupTask` API. Users and
+organisation policies remain able to control Skrivi Snakk through Windows Startup
 settings. Also avoid installing the Store and website editions together; they
 are separate installations and may keep separate application data.
 

@@ -1,4 +1,11 @@
-# Skrivi development plan
+# Skrivi Snakk development plan
+
+## Naming update — 20 September 2026
+
+The family is Skrivi; this app is Skrivi Snakk and its reading companion is
+Skrivi Lytt. Current source and installer labels use these names. Published
+downloads may still say Skrivi / Skrivi TTS. Preserve data folders, package
+identities and existing release assets. Earlier entries retain historical wording.
 
 This is the project's durable execution checklist and current source of truth
 for development progress. Update it in the same pull request that completes or

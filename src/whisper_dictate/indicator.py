@@ -75,7 +75,7 @@ class FloatingIndicator(QWidget):
 
     def __init__(
         self,
-        title: str = "Skrivi",
+        title: str = "Skrivi Snakk",
         *,
         enabled: bool = True,
         hotkey: str = DEFAULT_HOTKEY,
@@ -93,9 +93,9 @@ class FloatingIndicator(QWidget):
         self.setWindowTitle(title)
         self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
         self.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
-        self.setAccessibleName(tr("Skrivi dictation status"))
+        self.setAccessibleName(tr("Skrivi Snakk dictation status"))
         self.setAccessibleDescription(
-            tr("Shows whether Skrivi is loading, listening, or transcribing.")
+            tr("Shows whether Skrivi Snakk is loading, listening, or transcribing.")
         )
         self.setMinimumWidth(300)
         self.setMaximumWidth(480)
@@ -212,9 +212,9 @@ class FloatingIndicator(QWidget):
         self.status_changed.emit(state, text)
 
     def retranslate_ui(self) -> None:
-        self.setAccessibleName(tr("Skrivi dictation status"))
+        self.setAccessibleName(tr("Skrivi Snakk dictation status"))
         self.setAccessibleDescription(
-            tr("Shows whether Skrivi is loading, listening, or transcribing.")
+            tr("Shows whether Skrivi Snakk is loading, listening, or transcribing.")
         )
         self._state_mark.setAccessibleName(tr("Status symbol"))
         self._message.setAccessibleName(tr("Dictation status message"))
