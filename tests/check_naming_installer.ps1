@@ -18,6 +18,9 @@ function Install-TestApp {
 }
 Install-TestApp
 $app = Join-Path $appRoot 'Skrivi.exe'
+if ($env:SKRIVI_EXPECTED_SIGNER) {
+    & (Join-Path $root 'tools\sign_windows.ps1') -VerifyOnly -Thumbprint $env:SKRIVI_EXPECTED_SIGNER -Path @($app, (Join-Path $appRoot 'unins000.exe'))
+}
 if (!(Test-Path -LiteralPath $app)) { throw 'Stable executable path changed.' }
 $menu = Join-Path ([Environment]::GetFolderPath('Programs')) 'Skrivi'
 $desktop = [Environment]::GetFolderPath('Desktop')

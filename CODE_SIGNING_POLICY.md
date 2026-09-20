@@ -9,7 +9,7 @@ Previously published unsigned releases remain unsigned.
 
 ## Project and responsibility
 
-- **Project:** Skrivi
+- **Project:** Skrivi Snakk
 - **Repository:** <https://github.com/workavoidance/Skrivi-STT>
 - **Licence:** [MIT](LICENSE)
 - **Maintainer and release owner:** Jonathan Wright ([@workavoidance](https://github.com/workavoidance))
@@ -25,7 +25,8 @@ The release workflow signs and verifies:
 
 - the portable `dist/Skrivi.exe` before creating the ZIP;
 - the installed `dist/installed/Skrivi/Skrivi.exe` before compiling the installer;
-- the final `Skrivi-<version>-windows-x64-setup.exe` installer.
+- the final `Skrivi-<version>-windows-x64-setup.exe` installer;
+- the Inno Setup uninstaller, checked after a disposable-runner installation.
 
 Third-party binaries are not re-signed as project-owned code. The ZIP is not
 Authenticode-signable. The Microsoft Store package follows its separate Store

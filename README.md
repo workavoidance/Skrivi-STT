@@ -9,9 +9,11 @@ When using both, keep **Right Ctrl** or **Left Ctrl + Windows** for dictation.
 Lytt defaults to **Ctrl + Alt + Space**; avoid **Left Ctrl + Left Alt** for
 dictation because it overlaps the reader shortcut.
 
-**Name transition:** the website and current source use Skrivi Snakk. The
-published alpha.4 installer and current Store release are still labelled
-**Skrivi**. Settings, models, executable filenames and Store identity are unchanged.
+**Release status:** Snakk 0.3.0 is a signed **test release**, alongside
+[Lytt 0.4.1](https://github.com/workavoidance/Skrivi-TTS/releases/tag/v0.4.1).
+The apps have independent version numbers and share the same release convention.
+The existing Store listing may still show an older version named **Skrivi**.
+Settings, models, executable filenames and Store identity are unchanged.
 
 Skrivi Snakk is a private, local push-to-talk dictation app for Windows 11.
 Hold **Right Ctrl**, speak, and release the key. The complete transcription is
@@ -25,8 +27,7 @@ accidentally held key cannot leave the microphone recording indefinitely.
 Exiting Skrivi Snakk stops keyboard and microphone input, cancels active model work,
 and prevents an in-progress transcription from inserting text after exit.
 
-The project is open source under the MIT licence. It is currently alpha
-software: the core dictation workflow works, while configuration and broader
+The project is open source under the MIT licence. It is currently a test release: the core dictation workflow works, while configuration and broader
 hardware testing are being developed.
 
 ## Maintainer
@@ -64,12 +65,10 @@ any additional rewriting or filler-word removal.
 
 ## Install Skrivi Snakk
 
-1. [Download the Skrivi Snakk v0.2 alpha installer for Windows 11](https://github.com/workavoidance/Skrivi-STT/releases/download/v0.2.0-alpha.4/Skrivi-v0.2.0-alpha.4-windows-x64-setup.exe).
-2. Open the downloaded installer. This alpha is not code-signed yet, so Windows
-   may show SmartScreen. If you trust this project, choose **More info**, then
-   **Run anyway**.
-3. Complete the short installer and start **Skrivi** from the Start menu
-   (the linked alpha.4 release; renamed builds use **Skrivi Snakk**).
+1. [Download the Skrivi Snakk 0.3.0 signed test installer for Windows 11](https://github.com/workavoidance/Skrivi-STT/releases/download/v0.3.0/Skrivi-v0.3.0-windows-x64-setup.exe).
+2. Open the downloaded installer. Its verified publisher is **Open Source Developer
+   Jonathan Wright**. Windows may still show a SmartScreen reputation warning.
+3. Complete the short installer and start **Skrivi Snakk** from the Start menu.
 4. On the first run, wait while the multilingual Small speech model downloads
    and is verified under `%LOCALAPPDATA%\Skrivi\models`. This is a one-time
    download of roughly 486 MB shared by later Skrivi Snakk versions.
@@ -83,7 +82,7 @@ connection and no speech is sent to a cloud service.
 
 The installer needs no administrator permission and provides standard Start
 menu and uninstall entries. Advanced users can instead download the portable
-ZIP from the [release page](https://github.com/workavoidance/Skrivi-STT/releases/tag/v0.2.0-alpha.4)
+ZIP from the [release page](https://github.com/workavoidance/Skrivi-STT/releases/tag/v0.3.0)
 or follow [the development guide](docs/DEVELOPMENT.md) to run from source.
 
 ## Build the portable executable

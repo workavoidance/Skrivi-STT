@@ -1,5 +1,13 @@
 # Skrivi Snakk development plan
 
+## Shared release convention — 20 September 2026
+
+Snakk 0.3.0 and Lytt 0.4.1 use **Test release** and GitHub prerelease status.
+Keep independent version numbers and stable app/Store identities. Match product
+names, orange microphone/speaker icons, signed-installer guidance and direct
+download/release links across GitHub and the bilingual website. Store packages
+are maintainer uploads; Store approval is separate from GitHub publication.
+
 ## Naming update — 20 September 2026
 
 The family is Skrivi; this app is Skrivi Snakk and its reading companion is

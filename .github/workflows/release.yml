@@ -31,7 +31,7 @@ jobs:
         run: |
           $tag = (Get-Content release\VERSION -Raw).Trim()
           if ($tag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$') {
-            throw "release/VERSION must contain a tag such as v0.2.0-alpha.1."
+            throw "release/VERSION must contain a tag such as v0.3.0."
           }
           "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - uses: actions/setup-python@v5
@@ -79,6 +79,11 @@ jobs:
           $installer = Get-Item "dist\installer\Skrivi-*-windows-x64-setup.exe"
           if (@($installer).Count -ne 1) { throw "Expected exactly one installer." }
           .\tools\sign_windows.ps1 -VerifyOnly -Thumbprint $env:CERTUM_KEY_ID -Path @("dist\Skrivi.exe", "dist\installed\Skrivi\Skrivi.exe", $installer.FullName)
+      - name: Check signed installation and preserved user data
+        shell: powershell
+        env:
+          SKRIVI_EXPECTED_SIGNER: ${{ secrets.CERTUM_KEY_ID }}
+        run: .\tests\check_naming_installer.ps1
       - name: Package release
         shell: powershell
         run: |
@@ -124,7 +129,7 @@ jobs:
             $notesArgs = @("--notes-file", $notesFile)
           }
           $prereleaseArgs = @()
-          if ($tag.Contains("-")) {
+          if ($tag.StartsWith("v0.") -or $tag.Contains("-")) {
             $prereleaseArgs = @("--prerelease")
           }
           $originalErrorActionPreference = $ErrorActionPreference
@@ -135,11 +140,11 @@ jobs:
           if ($releaseExists) {
             & gh release upload $tag @assets --clobber
             if ($LASTEXITCODE -ne 0) { throw "GitHub release upload failed." }
-            & gh release edit $tag --title "Skrivi $tag" @notesArgs @prereleaseArgs
+            & gh release edit $tag --title "Skrivi Snakk $tag - Test release" @notesArgs @prereleaseArgs
           } else {
             & gh release create $tag @assets `
               --target "${{ github.sha }}" `
-              --title "Skrivi $tag" `
+              --title "Skrivi Snakk $tag - Test release" `
               @notesArgs @prereleaseArgs
           }
           if ($LASTEXITCODE -ne 0) { throw "GitHub release publication failed." }
@@ -157,7 +162,7 @@ jobs:
         run: |
           $tag = (Get-Content release\VERSION -Raw).Trim()
           if ($tag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$') {
-            throw "release/VERSION must contain a tag such as v0.2.0-alpha.1."
+            throw "release/VERSION must contain a tag such as v0.3.0."
           }
           "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - uses: actions/setup-python@v5
@@ -178,3 +183,28 @@ jobs:
           name: Skrivi-${{ steps.version.outputs.tag }}-Microsoft-Store
           path: dist/store/*.msix
           if-no-files-found: error
+
+  publish-store-package:
+    needs: [build, store-package]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.publish)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: Skrivi-*-Microsoft-Store
+          path: store-release
+          merge-multiple: true
+      - name: Attach Store submission package and checksum
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = (Get-Content release\VERSION -Raw).Trim()
+          $packages = @(Get-ChildItem store-release -Filter '*.msix')
+          if ($packages.Count -ne 1) { throw "Expected exactly one Store package." }
+          $package = $packages[0]
+          $hash = (Get-FileHash $package.FullName -Algorithm SHA256).Hash.ToLower()
+          "$hash *$($package.Name)" | Set-Content "$($package.FullName).sha256"
+          & gh release upload $tag $package.FullName "$($package.FullName).sha256"
+          if ($LASTEXITCODE -ne 0) { throw "Store package upload failed." }

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0] - 2026-09-20
+
+- Publish Skrivi Snakk as a signed test release in the Skrivi family.
+- Use the orange microphone and consistent Snakk names, with Lytt shortcut guidance.
+- Preserve settings, models and owned shortcuts during upgrades.
+- Sign and verify the installer, app and uninstaller; attach the Store submission package.
+
+
 This project follows semantic versioning. User-visible changes are recorded
 here before a release.
 
