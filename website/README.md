@@ -67,3 +67,13 @@ Open `index.html` directly in a browser, or serve this folder with any basic sta
 GitHub Pages must be enabled for the repository with **GitHub Actions** selected as the Pages source. Once enabled, the site should be available at the repository's GitHub Pages URL.
 
 The existing custom domain is `skrivi.no`, configured by `CNAME`.
+
+## Shared release labels
+
+Use `Test release VERSION · Windows 11 (x64)` in English and
+`Testutgave VERSION · Windows 11 (x64)` in Norwegian on product cards and pages.
+Show each app's current independent version without a leading v in visible copy.
+Keep the v prefix in GitHub URLs. Use `Download APP for Windows` /
+`Last ned APP for Windows` for installer links. Keep signing and Store availability
+notes separate from the platform/version label. Both Store manifests specify
+Windows 11 (minimum build 22000), x64. Preserve the existing /alpha/ guide URL.
