@@ -70,6 +70,7 @@ def _arguments(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Preview indicator states without audio, Whisper, hotkeys or typing",
     )
+    parser.add_argument("--tray", action="store_true", help="Start quietly at sign-in")
     return parser.parse_args(argv)
 
 
@@ -100,18 +101,29 @@ def main(argv: list[str] | None = None) -> None:
         run_preview(identity.title)
         return
 
+    _application = create_application(identity.title)
+    from PySide6.QtNetwork import QLocalServer, QLocalSocket
+
+    from whisper_dictate.support import HomeWindow
+
     mutexes, already_exists = _single_instance_mutex()
     if already_exists:
-        ctypes.windll.user32.MessageBoxW(
-            None,
-            tr("Skrivi Snakk is already running."),
-            identity.title,
-            0x40,
-        )
+        if args.tray:
+            _close_mutexes(mutexes)
+            return
+        socket = QLocalSocket()
+        socket.connectToServer("Skrivi-Snakk-UI")
+        if socket.waitForConnected(1000):
+            socket.write(b"open")
+            socket.flush()
+            socket.waitForBytesWritten(1000)
+        else:
+            ctypes.windll.user32.MessageBoxW(
+                None, tr("Skrivi Snakk is already running."), identity.title, 0x40
+            )
         _close_mutexes(mutexes)
         return
 
-    _application = create_application(identity.title)
     config = AppConfig(model_name=settings.model)
     indicator = FloatingIndicator(
         title=identity.title,
@@ -200,12 +212,20 @@ def main(argv: list[str] | None = None) -> None:
         model_runtime=model_runtime,
         startup_available=startup_manager.available,
     )
+    home = HomeWindow(settings_window, settings_store)
+    indicator.cancel_requested.connect(cancelled)
+    home.cancel_requested.connect(cancelled)
+    home.retry_requested.connect(controller.retry_model_load)
     tray = TrayIcon(
         indicator.request_exit,
         on_settings=settings_window.show_settings,
+        on_open=home.open,
+        on_updates=settings_window.check_updates,
         on_retry_model=controller.retry_model_load,
         title=identity.title,
     )
+    indicator.status_changed.connect(home.set_status)
+    settings_window.settings_saved.connect(lambda _settings: home.refresh())
     indicator.status_changed.connect(tray.set_status)
     indicator.status_changed.connect(settings_window.set_status)
     settings_window.settings_saved.connect(
@@ -229,6 +249,22 @@ def main(argv: list[str] | None = None) -> None:
         )
 
     indicator.set_exit_handler(shutdown)
+    server = QLocalServer(_application)
+    server.setSocketOptions(QLocalServer.SocketOption.UserAccessOption)
+    if not server.listen("Skrivi-Snakk-UI"):
+        QLocalServer.removeServer("Skrivi-Snakk-UI")
+        server.listen("Skrivi-Snakk-UI")
+
+    def activate():
+        connection = server.nextPendingConnection()
+        if connection:
+            connection.disconnectFromServer()
+            connection.deleteLater()
+        home.open()
+
+    server.newConnection.connect(activate)
     tray.start()
+    if not args.tray:
+        home.open()
     controller.start()
     indicator.run()

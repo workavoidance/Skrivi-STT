@@ -164,7 +164,7 @@ class ModelManagerPanel(QWidget):
         self.remove_button = QPushButton(f"&{tr('Remove from this PC')}", self)
         self.remove_button.setAccessibleName(tr("Remove selected model"))
         self.remove_button.setProperty("buttonRole", "destructive")
-        self.import_button = QPushButton(f"&{tr('Choose model folder…')}", self)
+        self.import_button = QPushButton(f"&{tr('Locate existing files…')}", self)
         self.import_button.setAccessibleName(tr("Import a Skrivi Snakk model folder"))
         self.cancel_button = QPushButton(f"&{tr('Cancel download')}", self)
         self.cancel_button.setAccessibleName(tr("Cancel model download"))
@@ -193,6 +193,9 @@ class ModelManagerPanel(QWidget):
         import_layout.addWidget(self.import_help)
         import_row = QHBoxLayout()
         import_row.addWidget(self.import_button)
+        self.verify_button = QPushButton(tr("Verify files"), self)
+        self.verify_button.clicked.connect(self._verify)
+        import_row.addWidget(self.verify_button)
         import_row.addStretch(1)
         import_layout.addLayout(import_row)
         layout.addWidget(self.import_card)
@@ -270,6 +273,7 @@ class ModelManagerPanel(QWidget):
         self.activate_button.setAccessibleName(tr("Use selected speech model"))
         self.remove_button.setText(f"&{tr('Remove from this PC')}")
         self.remove_button.setAccessibleName(tr("Remove selected model"))
+        self.verify_button.setText(tr("Verify files"))
         self.import_title.setText(tr("Already have a model?"))
         self.import_help.setText(
             tr(
@@ -277,7 +281,7 @@ class ModelManagerPanel(QWidget):
                 "copied from another computer."
             )
         )
-        self.import_button.setText(f"&{tr('Choose model folder…')}")
+        self.import_button.setText(f"&{tr('Locate existing files…')}")
         self.import_button.setAccessibleName(tr("Import a Skrivi Snakk model folder"))
         self.cancel_button.setText(f"&{tr('Cancel download')}")
         self.cancel_button.setAccessibleName(tr("Cancel model download"))
@@ -370,6 +374,7 @@ class ModelManagerPanel(QWidget):
         return message.exec() == QMessageBox.StandardButton.Yes
 
     def _set_busy(self, busy: bool, *, cancellable: bool = False) -> None:
+        self.verify_button.setEnabled(not busy)
         self.model_combo.setEnabled(not busy)
         for button in (
             self.download_button,
@@ -508,7 +513,7 @@ class ModelManagerPanel(QWidget):
     def _operation_failed(self, message: str) -> None:
         self._set_busy(False)
         self.refresh()
-        QMessageBox.critical(self, tr("Model operation failed"), tr(message))
+        self.state.setText(tr("Model operation failed") + ": " + tr(message))
         self._task_signals = None
 
     @Slot(str)
@@ -526,6 +531,18 @@ class ModelManagerPanel(QWidget):
             self.cancel_button.setEnabled(False)
             self.state.setText(tr("Cancelling model download…"))
             self.progress.setFormat(tr("Cancelling…"))
+
+    @Slot()
+    def _verify(self) -> None:
+        if self._manager is None:
+            return
+        identifier = self.selected_identifier()
+
+        def verify(_callback) -> str:
+            self._manager.verify_installed(identifier)
+            return identifier
+
+        self._run(identifier, verify)
 
     @Slot()
     def _download(self) -> None:

@@ -131,7 +131,7 @@ class WindowsStartupManager:
     def command(self) -> str:
         # Windows paths cannot contain a quote. Always quoting the executable
         # prevents a path containing spaces from being split at sign-in.
-        return f'"{self._executable}"'
+        return f'"{self._executable}" --tray'
 
     def is_enabled(self) -> bool:
         try:

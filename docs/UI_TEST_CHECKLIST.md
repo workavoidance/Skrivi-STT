@@ -104,9 +104,9 @@ issue #8.
 
 - Open the tray menu from the Windows notification area using only the
   keyboard, then open Settings and exit Skrivi.
-- In Settings, use Tab, Shift+Tab, arrow keys, Alt+G, Alt+P, Alt+A, Ctrl+S and
+- In Settings, use Tab, Shift+Tab, arrow keys, tab mnemonics and
   Escape. Confirm every action has a visible focus indicator.
-- With Windows Narrator, confirm the window, tabs, overlay option, Save, Cancel,
+- With Windows Narrator, confirm the window, tabs, overlay option, Close,
   language, microphone, hotkey controls, status text, and any settings warning
   have useful names.
 - Confirm loading, ready, listening, transcribing, no-speech and error states
@@ -121,9 +121,9 @@ issue #8.
   window, tray, overlay, model status, and accessibility labels update
   immediately without restarting Skrivi. Confirm each language remains
   self-named in both pickers.
-- Change the interface language, choose Cancel, and confirm the previously saved
-  language returns everywhere. Repeat the change, choose Save, reopen Settings,
-  and confirm the new language remains selected.
+- Change the interface language, choose Close, reopen Settings, and confirm the
+  new language remains selected. Simulate an unwritable settings file and confirm
+  the previous choice is restored with a visible explanation.
 - Switch the interface language during an active model download and during
   dictation. Confirm the visible progress or status updates without interrupting
   either operation.

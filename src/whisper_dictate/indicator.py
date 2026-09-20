@@ -4,7 +4,14 @@ from collections.abc import Callable
 
 from PySide6.QtCore import Qt, QTimer, Signal, Slot
 from PySide6.QtGui import QCursor, QGuiApplication, QPalette
-from PySide6.QtWidgets import QApplication, QFrame, QHBoxLayout, QLabel, QWidget
+from PySide6.QtWidgets import (
+    QApplication,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QWidget,
+)
 
 from whisper_dictate.application import theme_colors
 from whisper_dictate.hotkeys import DEFAULT_HOTKEY, hotkey_display_name, validate_hotkey
@@ -50,6 +57,7 @@ class FloatingIndicator(QWidget):
 
     state_requested = Signal(str, object)
     exit_requested = Signal()
+    cancel_requested = Signal()
     status_changed = Signal(str, str)
 
     STATES = {
@@ -92,7 +100,7 @@ class FloatingIndicator(QWidget):
         )
         self.setWindowTitle(title)
         self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
-        self.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.setAccessibleName(tr("Skrivi Snakk dictation status"))
         self.setAccessibleDescription(
             tr("Shows whether Skrivi Snakk is loading, listening, or transcribing.")
@@ -132,6 +140,10 @@ class FloatingIndicator(QWidget):
         self._message.setWordWrap(True)
         self._message.setAccessibleName(tr("Dictation status message"))
         layout.addWidget(self._message, 1)
+        self.cancel_button = QPushButton(tr("Esc · Cancel"), frame)
+        self.cancel_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.cancel_button.clicked.connect(self._cancel_or_dismiss)
+        layout.addWidget(self.cancel_button)
 
         outer = QHBoxLayout(self)
         outer.setContentsMargins(0, 0, 0, 0)
@@ -197,7 +209,16 @@ class FloatingIndicator(QWidget):
         self.show()
         self.raise_()
 
+    def _cancel_or_dismiss(self) -> None:
+        if self._current_state in ("recording", "transcribing"):
+            self.cancel_requested.emit()
+        else:
+            self.hide()
+
     def _update_text(self, state: str, detail: str | None) -> None:
+        self.cancel_button.setText(
+            tr("Esc · Cancel" if state in ("recording", "transcribing") else "Dismiss")
+        )
         symbol, default_text = self.STATES.get(state, self.STATES["error"])
         if state == "ready" and detail is None:
             text = tr(
