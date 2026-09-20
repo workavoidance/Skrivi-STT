@@ -203,10 +203,24 @@ Tracked by [#4](https://github.com/workavoidance/Skrivi-STT/issues/4).
 - [ ] Update the changelog, limitations, and privacy documentation.
 - [ ] Tag and publish a clearly labelled alpha release.
 
-## Planned: Skrivi ecosystem and visual identity review
+## Skrivi ecosystem and visual identity review
 
-Added: 2026-09-19. Planning only; implementation and release scheduling remain
-to be decided.
+Added: 2026-09-19. Implementation prepared: 2026-09-20; awaiting Windows CI,
+merge and a packaged release. Keep the acceptance items below unchecked until
+the applicable verification and merge requirements are met.
+
+The implementation uses an orange microphone rendered from one shared source
+for the runtime, executable, installer and Store assets. Settings and tray labels
+now say Dictation / Diktering, and About explains the companion reader with an
+explicit browser link. Shared settings styling is retained: TTS already derives
+its warm surfaces, rounded controls and orange palette from STT. Installation
+and data identities stay unchanged. Shortcut guidance recommends Right Ctrl or
+Left Ctrl + Windows to avoid overlap with the reader's Ctrl + Alt + Space.
+
+Verification: 204 automated tests passed locally on Windows with Python 3.14;
+formatting, lint and compilation passed. English and Norwegian settings/About
+renders were inspected. See [ecosystem review](ECOSYSTEM_REVIEW.md) for scope,
+screenshots and remaining packaged-installation/accessibility checks.
 
 Skrivi now also has a text-to-speech application. Review the speech-to-text
 application's identity and presentation so dictation feels like a natural

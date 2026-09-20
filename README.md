@@ -3,6 +3,11 @@
 Part of the [Skrivi](https://skrivi.no/) family, alongside
 [Skrivi Lytt](https://github.com/workavoidance/Skrivi-TTS) for listening to text.
 The names Snakk and Lytt are the same in Norwegian and English.
+The orange microphone identifies dictation; the speaker identifies read-aloud.
+
+When using both, keep **Right Ctrl** or **Left Ctrl + Windows** for dictation.
+Lytt defaults to **Ctrl + Alt + Space**; avoid **Left Ctrl + Left Alt** for
+dictation because it overlaps the reader shortcut.
 
 **Name transition:** the website and current source use Skrivi Snakk. The
 published alpha.4 installer and current Store release are still labelled

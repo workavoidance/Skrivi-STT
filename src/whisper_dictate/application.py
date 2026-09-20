@@ -272,39 +272,27 @@ QToolTip {{
 
 
 def _skrivi_icon_pixmap(size: int) -> QPixmap:
-    """Render a high-contrast Skrivi mark at one native icon size."""
+    """Render the orange dictation microphone at one native icon size."""
     pixmap = QPixmap(size, size)
     pixmap.fill(Qt.GlobalColor.transparent)
 
     painter = QPainter(pixmap)
     painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
-    dot_radius = size * 0.14
-    dot_x = size * 0.17
-    dot_y = size * 0.50
+    # Same orange and rounded geometry as the companion reader's speaker.
+    painter.scale(size / 100, size / 100)
     painter.setPen(Qt.PenStyle.NoPen)
     painter.setBrush(SKRIVI_ORANGE)
-    painter.drawEllipse(
-        QRectF(
-            dot_x - dot_radius,
-            dot_y - dot_radius,
-            dot_radius * 2,
-            dot_radius * 2,
-        )
-    )
-
-    lines = (
-        QLineF(size * 0.50, size * 0.38, size * 0.78, size * 0.17),
-        QLineF(size * 0.52, size * 0.50, size * 0.94, size * 0.50),
-        QLineF(size * 0.50, size * 0.62, size * 0.78, size * 0.83),
-    )
-    mark_width = max(2.0, size * 0.13)
-    mark_pen = QPen(SKRIVI_ORANGE)
-    mark_pen.setWidthF(mark_width)
-    mark_pen.setCapStyle(Qt.PenCapStyle.RoundCap)
-    painter.setPen(mark_pen)
-    for line in lines:
-        painter.drawLine(line)
+    painter.drawRoundedRect(QRectF(34, 8, 32, 51), 16, 16)
+    pen = QPen(SKRIVI_ORANGE, 7)
+    pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+    painter.setPen(pen)
+    painter.setBrush(Qt.BrushStyle.NoBrush)
+    painter.drawArc(QRectF(22, 27, 56, 48), 180 * 16, 180 * 16)
+    painter.drawLine(QLineF(22, 42, 22, 51))
+    painter.drawLine(QLineF(78, 42, 78, 51))
+    painter.drawLine(QLineF(50, 75, 50, 90))
+    painter.drawLine(QLineF(35, 90, 65, 90))
     painter.end()
     return pixmap
 

@@ -71,13 +71,13 @@ def test_tray_icon_has_native_small_sizes_and_uses_the_available_canvas() -> Non
         for x in range(image.width())
         if image.pixelColor(x, y).alpha() > 0
     ]
-    assert min(x for x, _ in visible) <= 1
-    assert max(x for x, _ in visible) >= 14
+    assert min(x for x, _ in visible) <= 3
+    assert max(x for x, _ in visible) >= 12
     assert min(y for _, y in visible) <= 1
     assert max(y for _, y in visible) >= 14
 
     large_image = icon.pixmap(64, 64).toImage()
-    assert large_image.pixelColor(11, 32).name() == "#f05a24"
+    assert large_image.pixelColor(32, 20).name() == "#f05a24"
 
 
 def test_overlay_position_handles_displays_on_either_side() -> None:
@@ -313,7 +313,7 @@ def test_settings_actions_are_named_and_keyboard_operable(tmp_path: Path) -> Non
     assert window.model_panel.accessibleName() == "Local speech models"
     assert window.model_panel.model_combo.accessibleName() == "Speech model"
     assert window.model_panel.download_button.isEnabled() is False
-    assert window.windowTitle() == "Settings"
+    assert window.windowTitle() == "Skrivi Snakk · Dictation Settings"
     assert window.minimumWidth() <= 640
     assert window.minimumHeight() <= 520
     assert window.overlay_checkbox.focusPolicy() & Qt.FocusPolicy.TabFocus
@@ -494,7 +494,7 @@ def test_norwegian_interface_covers_settings_models_tray_and_overlay(
         indicator.post("transcribing")
         process_events_until(lambda: bool(statuses))
 
-        assert window.windowTitle() == "Innstillinger"
+        assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
         assert window.accessibleName() == "Skrivi Snakk-innstillinger"
         assert [window.tabs.tabText(index).replace("&", "") for index in range(4)] == [
             "Generelt",
@@ -541,7 +541,7 @@ def test_interface_language_previews_live_cancel_restores_and_save_persists(
     )
     window.interface_language_combo.setCurrentIndex(norwegian_index)
 
-    assert window.windowTitle() == "Innstillinger"
+    assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
     assert window._status.text() == "Klar. Hold Høyre Ctrl for å diktere"
     assert window.model_panel.download_button.text().replace("&", "") == (
         "Last ned modell"
@@ -551,7 +551,7 @@ def test_interface_language_previews_live_cancel_restores_and_save_persists(
 
     window.reject()
 
-    assert window.windowTitle() == "Settings"
+    assert window.windowTitle() == "Skrivi Snakk · Dictation Settings"
     assert window._status.text() == "Ready. Hold Right Ctrl to dictate"
     assert window.model_panel.download_button.text().replace("&", "") == (
         "Download model"
@@ -566,7 +566,7 @@ def test_interface_language_previews_live_cancel_restores_and_save_persists(
     assert (
         store.load().settings.interface_language is InterfaceLanguage.NORWEGIAN_BOKMAL
     )
-    assert window.windowTitle() == "Innstillinger"
+    assert window.windowTitle() == "Innstillinger for Skrivi Snakk · Diktering"
     set_interface_language(InterfaceLanguage.ENGLISH)
 
 
@@ -593,3 +593,30 @@ def test_model_download_progress_retranslates_while_active(tmp_path: Path) -> No
     assert panel.progress.format() == "Laster ned Base: 37 MB av 148 MB (25 %)"
     assert panel.cancel_button.text().replace("&", "") == "Avbryt nedlasting"
     set_interface_language(InterfaceLanguage.ENGLISH)
+
+
+def test_ecosystem_labels_translate_and_companion_link_is_explicit(
+    tmp_path, monkeypatch
+):
+    from whisper_dictate.settings_window import COMPANION_URL, QDesktopServices
+
+    application()
+    opened = []
+    monkeypatch.setattr(
+        QDesktopServices, "openUrl", lambda url: opened.append(url.toString())
+    )
+    window = SettingsWindow(SettingsStore(tmp_path / "settings.json"))
+    tray = TrayIcon(lambda: None, on_settings=lambda: None, title="Skrivi DEV test")
+    assert "Dictation" in tray._icon.toolTip()
+    assert "Avoid Left Ctrl" in window._hotkey_help.text()
+    assert opened == []
+    window.companion_button.click()
+    assert opened == [COMPANION_URL]
+    set_interface_language(InterfaceLanguage.NORWEGIAN_BOKMAL)
+    assert window._product_name.text() == "Skrivi Snakk · Diktering"
+    assert window._about_title.text() == "Skrivi Snakk · Diktering"
+    assert "Diktering" in tray._title_action.text()
+    assert "DEV test" in tray._icon.toolTip()
+    assert "Unngå venstre Ctrl" in window._hotkey_help.text()
+    assert "Utforsk" in window.companion_button.text()
+    window.close()

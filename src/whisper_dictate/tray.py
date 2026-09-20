@@ -62,8 +62,8 @@ class TrayIcon:
 
         self._menu = QMenu()
         self._menu.setAccessibleName(tr("Skrivi Snakk tray menu"))
-        title_action = self._menu.addAction(title)
-        title_action.setEnabled(False)
+        self._title_action = self._menu.addAction(self._display_title())
+        self._title_action.setEnabled(False)
         self._status_action = self._menu.addAction(
             tr("Status: {text}", text=tr("Starting"))
         )
@@ -103,10 +103,13 @@ class TrayIcon:
         self._menu.addAction(self.exit_action)
 
         self._icon = QSystemTrayIcon(skrivi_icon(), app)
-        self._icon.setToolTip(title)
+        self._icon.setToolTip(self._display_title())
         self._icon.setContextMenu(self._menu)
         self._icon.activated.connect(self._activated)
         add_interface_language_listener(self.retranslate_ui)
+
+    def _display_title(self) -> str:
+        return f"{self._title} · {tr('Dictation')}"
 
     @property
     def menu(self) -> QMenu:
@@ -122,12 +125,13 @@ class TrayIcon:
         self._status_state = state
         self._status_text = text
         self._status_action.setText(tr("Status: {text}", text=text))
-        self._icon.setToolTip(f"{self._title}\n{text}")
+        self._icon.setToolTip(f"{self._display_title()}\n{text}")
         self.retry_model_action.setVisible(
             state == "model_error" and self._on_retry_model is not None
         )
 
     def retranslate_ui(self) -> None:
+        self._title_action.setText(self._display_title())
         self._menu.setAccessibleName(tr("Skrivi Snakk tray menu"))
         self.settings_action.setText(f"&{tr('Settings')}…")
         self.settings_action.setToolTip(tr("Open Skrivi Snakk settings"))
