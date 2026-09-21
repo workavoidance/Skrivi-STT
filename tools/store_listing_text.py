@@ -9,6 +9,12 @@ from pathlib import Path
 PRODUCTS = {'snakk': ('9P42NBXD8W36', 'Skrivi.Skrivi'), 'lytt': ('9P1QJRTS5W3K', 'Skrivi.SkriviLytt')}
 BASE = 'https://manage.devcenter.microsoft.com/v1.0/my/'
 
+def packages_match(left, right):
+    def normalized(packages):
+        # Store PUT omits targetPlatform on unchanged packages; retain all other checks.
+        return [{k: v for k, v in p.items() if k != 'targetPlatform'} for p in packages]
+    return normalized(left) == normalized(right)
+
 def main():
     product = os.environ['PRODUCT']
     mode = os.environ['MODE']
@@ -44,8 +50,22 @@ def main():
             print(json.dumps({'publishedPackages': current['applicationPackages'], 'draftPackages': draft['applicationPackages']}, ensure_ascii=False))
         return
     assert mode == 'submit'
-    assert not pending.get('id'), 'Existing draft or submission: leave it untouched.'
     edits = json.loads(Path(f'store/listing/{product}-text.json').read_text(encoding='utf-8'))
+    if pending.get('id'):
+        # Resume only these two drafts created and saved by the authorized text update.
+        known_drafts = {'snakk': '1152921505701939985', 'lytt': '1152921505701939877'}
+        assert pending['id'] == known_drafts[product], 'Unrecognized draft: leave it untouched.'
+        sid = pending['id']
+        saved = api(f'{path}/submissions/{sid}')
+        assert saved['status'] == 'PendingCommit', 'Submission is already processing.'
+        for lang, fields in edits.items():
+            for key, value in fields.items():
+                assert saved['listings'][lang]['baseListing'][key] == value
+        assert packages_match(saved['applicationPackages'], current['applicationPackages'])
+        print(json.dumps({'submission': sid, 'textVerified': True, 'packagesUnchanged': True}), flush=True)
+        print(json.dumps(api(f'{path}/submissions/{sid}/commit', 'POST')))
+        print(json.dumps(api(f'{path}/submissions/{sid}/status')))
+        return
     draft = api(f'{path}/submissions', 'POST')
     sid = draft['id']
     print('Created text-only submission:', sid, flush=True)
@@ -68,7 +88,7 @@ def main():
     for lang, fields in edits.items():
         for key, value in fields.items():
             assert saved['listings'][lang]['baseListing'][key] == value, f'{lang} {key} did not save'
-    assert saved['applicationPackages'] == original['applicationPackages'], 'Packages unexpectedly changed'
+    assert packages_match(saved['applicationPackages'], original['applicationPackages']), 'Packages unexpectedly changed'
     print(json.dumps({'submission': sid, 'locales': list(edits), 'packagesUnchanged': True}))
     print(json.dumps(api(f'{path}/submissions/{sid}/commit', 'POST')))
     print(json.dumps(api(f'{path}/submissions/{sid}/status')))
