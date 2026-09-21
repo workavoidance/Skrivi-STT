@@ -39,6 +39,9 @@ def main():
     current = api(f'{path}/submissions/{published["id"]}')
     if mode == 'inspect':
         print(json.dumps(current['listings'], ensure_ascii=False, indent=2))
+        if pending.get('id'):
+            draft = api(f'{path}/submissions/{pending["id"]}')
+            print(json.dumps({'publishedPackages': current['applicationPackages'], 'draftPackages': draft['applicationPackages']}, ensure_ascii=False))
         return
     assert mode == 'submit'
     assert not pending.get('id'), 'Existing draft or submission: leave it untouched.'
