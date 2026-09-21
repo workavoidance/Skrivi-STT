@@ -1,0 +1,35 @@
+name: Microsoft Store listing text
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: App listing
+        type: choice
+        options: [snakk, lytt]
+        required: true
+      mode:
+        description: Inspect text, submit checked-in text, or check status
+        type: choice
+        options: [inspect, submit, status]
+        default: inspect
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: microsoft-store-listing-${{ inputs.product }}
+  cancel-in-progress: false
+jobs:
+  listing:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Manage listing text
+        env:
+          PRODUCT: ${{ inputs.product }}
+          MODE: ${{ inputs.mode }}
+          AZURE_AD_APPLICATION_CLIENT_ID: ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }}
+          AZURE_AD_APPLICATION_SECRET: ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
+          AZURE_AD_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        run: python tools/store_listing_text.py
