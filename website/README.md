@@ -31,7 +31,8 @@ use Test release (testutgave), independent version numbers and signed GitHub
 installers. Store submission packages are for the maintainer; publication there
 is a separate process. Lytt 0.4.3 includes local screen-region OCR.
 
-Lytt has no Microsoft Store listing yet. Keep its download, source and
+Both apps are published in Microsoft Store: Snakk (`9P42NBXD8W36`) and
+Lytt (`9P1QJRTS5W3K`). The homepage and product pages link to each listing. Keep its download, source and
 feedback links separate from Snakk. The EXE bundles the published 0.4.3 app,
 engines and voices; no cloud service or background update check is introduced.
 Verify the exact release asset before updating version-pinned download links.
@@ -40,7 +41,8 @@ It is intentionally a simple static site: plain HTML, CSS and a small language-s
 
 Download links remain measurable without adding browser tracking. Microsoft
 Store links use `skrivi-website-home`, `skrivi-website-dictation` and
-`skrivi-website-testing` campaign IDs; their results appear in Partner Center's
+`skrivi-website-testing`, `skrivi-website-read-aloud` and
+`skrivi-website-help` campaign IDs; their results appear in Partner Center's
 Acquisitions report. GitHub's
 release asset API supplies the cumulative `download_count` for each conventional
 installer file.
