@@ -25,7 +25,7 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Read and validate release version
         id: version
         shell: powershell
@@ -157,7 +157,7 @@ jobs:
     continue-on-error: true
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Read and validate release version
         id: version
         shell: powershell
@@ -192,7 +192,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.publish)
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/download-artifact@v4
         with:
           pattern: Skrivi-*-Microsoft-Store
